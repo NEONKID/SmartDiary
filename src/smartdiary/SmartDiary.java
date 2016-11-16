@@ -16,14 +16,19 @@ import javafx.stage.Stage;
  * @author wnsud
  */
 public class SmartDiary extends Application {
-    
+    private static Stage stage;
+
+    public static Stage getStage() {
+        return stage;
+    }
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
+    public void start(Stage LoginStage) throws Exception {
+        Parent loginView = FXMLLoader.load(getClass().getResource("Login.fxml"));
+
+        stage = LoginStage;
+        stage.setTitle("Welcome to SmartDiary !");
+        stage.setScene(new Scene(loginView));
+
         stage.show();
     }
 
@@ -33,5 +38,5 @@ public class SmartDiary extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
