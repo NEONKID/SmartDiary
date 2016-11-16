@@ -1,12 +1,12 @@
 package smartdiary;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -20,8 +20,6 @@ import java.util.ResourceBundle;
  */
 public class LoginController implements Initializable {
 
-    @FXML
-    private Text actiontarget;
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
 
@@ -29,21 +27,40 @@ public class LoginController implements Initializable {
     private final String flag_pw = "dlugdlug";
 
     @FXML protected void ClickAction(ActionEvent event) {
-        actiontarget.setText("ID: " + usernameField.getText() + "\t" +"PW: " + passwordField.getText());
-
         if(!flag_id.equals(usernameField.getText())) {
-            actiontarget.setText("Invalid ID !");
+            showError(0);
         } else {
             if(!flag_pw.equals(passwordField.getText())) {
-                actiontarget.setText("Invalid password !");
+                showError(1);
             } else {
                 try {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success !");
+                    alert.setHeaderText(usernameField.getText() + "님 환영합니다!");
+                    alert.setContentText("마지막 로그인 날짜: ");
+                    alert.showAndWait();
                     setScene();
                 } catch(Exception ex) {
                     ex.printStackTrace();
                 }
             }
         }
+    }
+
+    private void showError(int code) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error !");
+        switch(code) {
+            case 0:
+                alert.setHeaderText("ID가 일치하지 않습니다!");
+                alert.setContentText("사용자ID를 확인 후, 다시 입력해주세요.");
+                break;
+            case 1:
+                alert.setHeaderText("Password가 일치하지 않습니다!");
+                alert.setContentText("비밀번호를 확인 후, 다시 입력해주세요.");
+                break;
+        }
+        alert.showAndWait();
     }
 
     private void setScene() throws Exception {
@@ -53,7 +70,7 @@ public class LoginController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("SmartDiary");
         stage.show();
-        SmartDiary.getStage().hide();
+        Main.getStage().hide();
     }
 
     @Override
