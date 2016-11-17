@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -23,7 +22,7 @@ public class LoginController implements Initializable {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
 
-    private final String flag_id = "dlug1";
+    private final String flag_id = "dlug";
     private final String flag_pw = "dlugdlug";
 
     @FXML protected void ClickAction(ActionEvent event) {
@@ -59,6 +58,9 @@ public class LoginController implements Initializable {
                 alert.setHeaderText("Password가 일치하지 않습니다!");
                 alert.setContentText("비밀번호를 확인 후, 다시 입력해주세요.");
                 break;
+            default:
+                alert.setHeaderText("알 수 없는 오류");
+                alert.setContentText("프로그래에 문제가 발생했습니다. 개발자에게 문의하세요.");
         }
         alert.showAndWait();
     }

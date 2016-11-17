@@ -41,7 +41,7 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_RIGHT" spacing="100.0">
+            <HBox alignment="CENTER" spacing="100.0">
                <children>
                    <RadioButton fx:id="diaryButton" mnemonicParsing="false" selected="true" text="Diary">
                      <toggleGroup>
@@ -51,7 +51,7 @@
                    <RadioButton fx:id="moneyButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="223.0" text="Money Manager" toggleGroup="$radioGroups" />
                </children>
                <padding>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
                </padding>
             </HBox>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />

@@ -23,7 +23,6 @@ import javafx.scene.control.ToggleGroup;
  * @author wnsud
  */
 public class FXMLDocumentController implements Initializable {
-
     @FXML private ToggleGroup radioGroups;
     @FXML private RadioButton diaryButton;
     @FXML private RadioButton scheduleButton;
