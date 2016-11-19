@@ -5,18 +5,27 @@
  */
 package smartdiary;
 
+import com.sun.org.apache.xerces.internal.util.DOMUtil;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javax.swing.text.View;
 
 /**
  *
@@ -27,6 +36,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML private RadioButton diaryButton;
     @FXML private RadioButton scheduleButton;
     @FXML private RadioButton moneyButton;
+    @FXML private AnchorPane MoneyManager;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -49,15 +59,14 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void diaryLoad() {
-
+        MoneyManager.setVisible(false);
     }
 
     private void schedulerLoad() {
-
+        MoneyManager.setVisible(false);
     }
 
     private void moneyLoad() {
-
+        MoneyManager.setVisible(true);
     }
-
 }

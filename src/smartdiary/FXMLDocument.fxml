@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.FXMLDocumentController">
-   <top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.FXMLDocumentController">
+    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
@@ -54,7 +54,18 @@
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </padding>
             </HBox>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <AnchorPane fx:id="MoneyManager" prefHeight="283.0" prefWidth="600.0" visible="false">
+               <children>
+                  <TextField layoutX="403.0" layoutY="189.0" />
+                  <TextField layoutX="403.0" layoutY="224.0" />
+                  <TextField layoutX="403.0" layoutY="120.0" />
+                  <TextField layoutX="403.0" layoutY="155.0" />
+                  <Label layoutX="322.0" layoutY="124.0" text="이번 달 용돈 : " />
+                  <Label layoutX="322.0" layoutY="159.0" text="이번 달 수익 : " />
+                  <Label layoutX="322.0" layoutY="193.0" text="이번 달 지출 : " />
+                  <Label layoutX="322.0" layoutY="228.0" text="이번 달 결산 : " />
+               </children>
+            </AnchorPane>
          </children>
          <padding>
             <Insets bottom="20.0" />
@@ -64,4 +75,5 @@
    <bottom>
       <VBox BorderPane.alignment="CENTER" />
    </bottom>
+   
 </BorderPane>
