@@ -72,7 +72,7 @@ public class LoginController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("SmartDiary");
         stage.show();
-        SmartDiary.getStage().hide();
+        Main.getStage().hide();
     }
 
     @Override
