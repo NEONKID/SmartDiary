@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,6 +22,7 @@ public class LoginController implements Initializable {
 
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
+    private File logfile;
 
     private final String flag_id = "dlug";
     private final String flag_pw = "dlugdlug";
@@ -72,7 +74,7 @@ public class LoginController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("SmartDiary");
         stage.show();
-        Main.getStage().hide();
+        SmartDiary.getStage().hide();
     }
 
     @Override
