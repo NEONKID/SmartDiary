@@ -41,7 +41,7 @@ public class SmartDiary extends Application {
         System.out.println("Username: " + username);
         System.out.println("Used OS: " + osname);
         System.out.println("Directory: " + homedir);
-        checkOS(osname);
+        //checkOS(osname);
 
         stage = LoginStage;
         stage.setTitle("Welcome to SmartDiary !");

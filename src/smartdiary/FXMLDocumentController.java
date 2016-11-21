@@ -25,6 +25,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML private RadioButton diaryButton;
     @FXML private RadioButton scheduleButton;
     @FXML private RadioButton moneyButton;
+    @FXML private AnchorPane Diary;
+    @FXML private AnchorPane Schedule;
     @FXML private AnchorPane MoneyManager;
 
     @Override
@@ -45,14 +47,20 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void diaryLoad() {
+        Diary.setVisible(true);
+        Schedule.setVisible(false);
         MoneyManager.setVisible(false);
     }
 
     private void schedulerLoad() {
+        Schedule.setVisible(true);
+        Diary.setVisible(false);
         MoneyManager.setVisible(false);
     }
 
     private void moneyLoad() {
         MoneyManager.setVisible(true);
+        Diary.setVisible(false);
+        Schedule.setVisible(false);
     }
 }
