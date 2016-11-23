@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<HBox xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.select3_MoneyManager">
     <children>
       <VBox prefHeight="200.0" prefWidth="320.0">
          <children>
@@ -29,31 +29,30 @@
                   <HBox spacing="10.0">
                      <children>
                           <Label text="이번 달 용돈 : " />
-                          <TextField />
+                          <TextField fx:id="text1" />
                      </children>
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
                           <Label text="이번 달 수익 : " />
-                          <TextField />
+                          <TextField fx:id="text2" />
                      </children>
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
                           <Label text="이번 달 지출 : " />
-                          <TextField />
+                          <TextField fx:id="text3" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" spacing="20.0">
+                     <children>
+                        <Button fx:id="calc" mnemonicParsing="false" onAction="#calcMoney" text="결산!" />
                      </children>
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
                           <Label text="이번 달 결산 : " />
-                          <TextField />
-                     </children>
-                  </HBox>
-                  <HBox alignment="TOP_RIGHT" spacing="20.0">
-                     <children>
-                        <Button mnemonicParsing="false" text="확인" />
-                        <Button mnemonicParsing="false" text="취소" />
+                          <TextField fx:id="text4" />
                      </children>
                   </HBox>
                </children>
