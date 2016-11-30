@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -36,17 +37,23 @@ public class SmartDiary extends Application {
 
     @Override
     public void start(Stage LoginStage) throws Exception {
+        boolean flag = false;
         Parent loginView = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
         System.out.println("Username: " + username);
         System.out.println("Used OS: " + osname);
         System.out.println("Directory: " + homedir);
-        //checkOS(osname);
+        flag = checkOS(osname);
 
-        stage = LoginStage;
-        stage.setTitle("Welcome to SmartDiary !");
-        stage.setScene(new Scene(loginView));
-        stage.show();
+        if(flag != false) {
+            stage = LoginStage;
+            stage.setTitle("Welcome to SmartDiary !");
+            stage.setScene(new Scene(loginView));
+            stage.sizeToScene();
+            stage.show();
+        } else {
+            registerUser();
+        }
     }
 
     /**
@@ -56,24 +63,36 @@ public class SmartDiary extends Application {
         launch(args);
     }
 
-    private void checkOS(String name) {
+    private boolean checkOS(String name) {
+        String path = "";
         switch(name) {
             case "Linux":
-                file = new File(homedir + "/.smartDiary");
-                if(!file.exists()) {
+                path = homedir + "/.smartDiary";
+                file = new File(path);
+                if(!file.isDirectory()) {
                     showError(1);
+                    file.mkdirs();
+                    return false;
+                } else {
+                    file = new File(path);
+                    return true;
                 }
-                break;
             case "Windows":
-                file = new File(homedir + "\\.smartDiary");
+                path = homedir + "\\.smartDiary";
+                file = new File(path);
                 if(!file.exists()) {
                     showError(1);
+                    file.mkdirs();
+                    return false;
+                } else {
+                    file = new File(path);
+                    return true;
                 }
-                break;
             default:
                 showError(2);
                 break;
         }
+        return false;
     }
 
     private void showError(int code) {
@@ -83,8 +102,8 @@ public class SmartDiary extends Application {
             case 1:
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("프로그램 알림");
-                alert.setHeaderText("SmartDiary 파일 미존");
-                alert.setContentText("프로그램의 기존 정보가 존재하지 않습니다.\n기본 정보로 실행합니다.");
+                alert.setHeaderText("SmartDiary 초기 설정");
+                alert.setContentText("프로그램의 기존 정보가 존재하지 않습니다.\n초기 사용자 설정을 진행합니다.");
                 alert.showAndWait();
                 break;
             case 2:
@@ -95,6 +114,21 @@ public class SmartDiary extends Application {
                 alert.showAndWait();
                 System.exit(0);
                 break;
+        }
+    }
+
+    private void registerUser() {
+        try {
+            Parent registerView = FXMLLoader.load(getClass().getResource("registerUser.fxml"));
+
+            Scene scene = new Scene(registerView);
+            Stage registerStage = new Stage();
+
+            registerStage.setScene(scene);
+            registerStage.setTitle("사용자 등록");
+            registerStage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 

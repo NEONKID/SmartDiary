@@ -8,11 +8,11 @@ package smartdiary;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.calendarfx.view.CalendarView;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -27,8 +27,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML private RadioButton scheduleButton;
     @FXML private RadioButton moneyButton;
     @FXML private AnchorPane Diary;
-    @FXML private AnchorPane Schedule;
     @FXML private AnchorPane MoneyManager;
+    @FXML private AnchorPane Schedule;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,9 +48,9 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void diaryLoad() {
-        Diary.setVisible(true);
         Schedule.setVisible(false);
         MoneyManager.setVisible(false);
+        Diary.setVisible(true);
     }
 
     private void schedulerLoad() {
