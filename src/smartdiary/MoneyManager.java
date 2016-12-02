@@ -24,15 +24,15 @@ import javafx.stage.Stage;
  *
  * @author dell
  */
-public class select3_MoneyManager implements Initializable {
+public class MoneyManager implements Initializable {
 
     @FXML private TextField text1;
     @FXML private TextField text2;
     @FXML private TextField text3;
     @FXML private TextField text4;
 
-
-    @FXML protected void calcMoney(ActionEvent event) {
+    @FXML
+    protected void calcMoney(ActionEvent event) {
         int a = Integer.parseInt(text1.getText());
         int b = Integer.parseInt(text2.getText());
         int c = Integer.parseInt(text3.getText());

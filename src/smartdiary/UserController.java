@@ -37,12 +37,11 @@ public class UserController implements Initializable {
             alert.setHeaderText("비밀번호는 반드시 8자리여야 합니다.");
             alert.setContentText("다시 확인하고 입력해주시기 바랍니다.");
             alert.showAndWait();
-        }
-        else {
+        } else {
             try {
                 shadow = new File(SmartDiary.getFile().getPath() + "/shadow");
                 FileWriter fw = new FileWriter(shadow, true);
-                fw.write(field1.getText().toString());
+                fw.write(field1.getText());
                 fw.flush();
                 fw.close();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

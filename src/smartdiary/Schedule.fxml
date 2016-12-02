@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import jfxtras.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import jfxtras.scene.control.*?>
+<?import com.calendarfx.view.page.*?>
+<?import impl.org.controlsfx.skin.*?>
+<?import com.calendarfx.view.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.Scheduler">
+   <children>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <VBox alignment="TOP_CENTER" spacing="10.0">
+               <children>
+                  <CalendarPicker />
+                  <JFXTextField fx:id="newmemo" focusColor="#09b6bc" promptText="일정 제목" style="-fx-background-color: #ffffff;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXTextField>
+                  <HBox alignment="TOP_RIGHT" spacing="20.0">
+                     <children>
+                        <JFXButton buttonType="RAISED" onAction="#showDialog" ripplerFill="WHITE" style="-fx-background-color: #2196F3;" text="취소" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" onAction="#writeMemo" ripplerFill="WHITE" style="-fx-background-color: #2196F3;" text="저장" textFill="WHITE" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets bottom="20.0" />
+                     </opaqueInsets>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets bottom="20.0" top="20.0" />
+               </opaqueInsets>
+            </VBox>
+            <VBox alignment="CENTER" spacing="20.0">
+               <opaqueInsets>
+                  <Insets bottom="20.0" top="20.0" />
+               </opaqueInsets>
+            </VBox>
+            <JFXTreeTableView fx:id="treeview" stylesheets="@css/tableview.css" />
+         </children>
+         <opaqueInsets>
+            <Insets bottom="20.0" top="20.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</StackPane>

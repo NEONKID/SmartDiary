@@ -8,7 +8,6 @@ package smartdiary;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.calendarfx.view.CalendarView;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

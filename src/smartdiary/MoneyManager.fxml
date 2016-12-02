@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.MoneyManager">
     <children>
       <VBox prefHeight="200.0" prefWidth="320.0">
          <children>
@@ -27,32 +33,31 @@
                <children>
                   <HBox spacing="10.0">
                      <children>
-                          <Label text="이번 달 지출 : " />
-                          <TextField />
-                     </children>
-                  </HBox>
-                  <HBox spacing="10.0">
-                     <children>
                           <Label text="이번 달 용돈 : " />
-                          <TextField />
+                          <TextField fx:id="text1" />
                      </children>
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
                           <Label text="이번 달 수익 : " />
-                          <TextField />
+                          <TextField fx:id="text2" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="10.0">
+                     <children>
+                          <Label text="이번 달 지출 : " />
+                          <TextField fx:id="text3" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_RIGHT" spacing="20.0">
+                     <children>
+                        <Button fx:id="calc" mnemonicParsing="false" onAction="#calcMoney" text="결산!" />
                      </children>
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
                           <Label text="이번 달 결산 : " />
-                          <TextField />
-                     </children>
-                  </HBox>
-                  <HBox alignment="TOP_RIGHT" spacing="20.0">
-                     <children>
-                        <Button mnemonicParsing="false" text="확인" />
-                        <Button mnemonicParsing="false" text="취소" />
+                          <TextField fx:id="text4" />
                      </children>
                   </HBox>
                </children>
