@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.LoginController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.LoginController">
    <children>
-      <VBox>
+      <VBox alignment="CENTER" spacing="30.0" style="-fx-background-color: #ffffff;">
          <children>
             <Label maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="0.0" style="-fx-background-color: #4059a9;" text="Welcome to SmartDiary !" textFill="WHITE">
                <font>
@@ -22,14 +22,14 @@
                </padding>
             </Label>
             <Pane />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="200.0" fitWidth="200.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="300.0" fitWidth="300.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                      <cursor>
                         <Cursor fx:constant="WAIT" />
                      </cursor>
                      <image>
-                        <Image url="@../images/login.png" />
+                        <Image url="@../images/animated-submit-button.gif" />
                      </image>
                   </ImageView>
                   <GridPane alignment="center" vgap="20.0">
@@ -71,17 +71,25 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label text="ⓒ 2016 Smart Diary v1.0 ">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin></Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </HBox>
          </children>
+         <StackPane.margin>
+            <Insets bottom="10.0" />
+         </StackPane.margin>
       </VBox>
    </children>
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
-   <padding>
-      <Insets bottom="50.0" />
-   </padding>
 </StackPane>
