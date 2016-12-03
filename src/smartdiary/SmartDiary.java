@@ -38,7 +38,7 @@ public class SmartDiary extends Application {
     @Override
     public void start(Stage LoginStage) throws Exception {
         boolean flag = false;
-        Parent loginView = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent loginView = FXMLLoader.load(getClass().getResource("fxml/Login.fxml"));
 
         System.out.println("Username: " + username);
         System.out.println("Used OS: " + osname);
@@ -120,7 +120,7 @@ public class SmartDiary extends Application {
 
     private void registerUser() {
         try {
-            Parent registerView = FXMLLoader.load(getClass().getResource("registerUser.fxml"));
+            Parent registerView = FXMLLoader.load(getClass().getResource("fxml/registerUser.fxml"));
 
             Scene scene = new Scene(registerView);
             Stage registerStage = new Stage();

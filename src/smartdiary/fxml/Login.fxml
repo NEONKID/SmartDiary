@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.LoginController">
+   <children>
+      <VBox>
+         <children>
+            <Label maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="0.0" style="-fx-background-color: #4059a9;" text="Welcome to SmartDiary !" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <Pane />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <ImageView fitHeight="200.0" fitWidth="200.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <cursor>
+                        <Cursor fx:constant="WAIT" />
+                     </cursor>
+                     <image>
+                        <Image url="@../images/login.png" />
+                     </image>
+                  </ImageView>
+                  <GridPane alignment="center" vgap="20.0">
+                     <children>
+                        <Text text="Please Login" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <JFXTextField fx:id="usernameField" alignment="CENTER" editable="false" promptText="사용자 이름" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font></JFXTextField>
+                        <JFXPasswordField fx:id="passwordField" promptText="비밀번호" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font></JFXPasswordField>
+                        <HBox alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" GridPane.rowIndex="3">
+                           <children>
+                              <JFXButton buttonType="RAISED" onAction="#ClickAction" ripplerFill="WHITE" style="-fx-background-color: #4059a9;" text="SIGN IN" textFill="WHITE" />
+                           </children></HBox>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                     </columnConstraints>
+                     <padding>
+                        <Insets bottom="10" left="25" right="25" top="25" />
+                     </padding>
+                     <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                     </rowConstraints>
+                  </GridPane>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="50.0" />
+   </padding>
+</StackPane>

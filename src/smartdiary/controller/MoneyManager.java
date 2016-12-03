@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package smartdiary;
+package smartdiary.controller;
 
 import java.io.File;
 import java.net.URL;

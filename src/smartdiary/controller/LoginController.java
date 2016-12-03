@@ -1,5 +1,6 @@
-package smartdiary;
+package smartdiary.controller;
 
+import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import smartdiary.SmartDiary;
 
 import java.io.*;
 import java.net.URL;
@@ -22,8 +26,9 @@ import java.util.ResourceBundle;
  */
 public class LoginController implements Initializable {
 
-    @FXML private TextField usernameField;
-    @FXML private PasswordField passwordField;
+    @FXML private JFXTextField usernameField;
+    @FXML private JFXPasswordField passwordField;
+    @FXML private StackPane stackPane;
     private File logfile;
 
     private String flag_id = System.getProperty("user.name");
@@ -42,41 +47,52 @@ public class LoginController implements Initializable {
             if(!flag_pw.equals(passwordField.getText())) {
                 showError(1);
             } else {
-                try {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Success !");
-                    alert.setHeaderText(usernameField.getText() + "님 환영합니다!");
-                    alert.setContentText("로그인에 성공하셨습니다.");
-                    writeLog(0);
-                    alert.showAndWait();
-                    setScene();
-                } catch(Exception ex) {
-                    ex.printStackTrace();
-                }
+                JFXDialogLayout content = new JFXDialogLayout();
+                JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+                JFXButton button = new JFXButton("OKAY");
+
+                content.setHeading(new Text("로그인 성공"));
+                content.setBody(new Text(usernameField.getText() + "님 환영합니다!"));
+                writeLog(0);
+                button.setOnAction((ActionEvent e) -> {
+                    dialog.close();
+                    try {
+                        setScene();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                content.setActions(button);
+                dialog.show();
             }
         }
     }
 
     private void showError(int code) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error !");
+        JFXDialogLayout content = new JFXDialogLayout();
+        JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OKAY");
         switch(code) {
             case 0:
-                alert.setHeaderText("ID가 일치하지 않습니다!");
-                alert.setContentText("사용자ID를 확인 후, 다시 입력해주세요.");
+                content.setHeading(new Text("로그인 오류"));
+                content.setBody(new Text("사용자ID를 확인 후, 다시 입력해주세요."));
                 writeLog(2);
                 break;
             case 1:
-                alert.setHeaderText("Password가 일치하지 않습니다!");
-                alert.setContentText("비밀번호를 확인 후, 다시 입력해주세요.");
+                content.setHeading(new Text("로그인 오류"));
+                content.setBody(new Text("비밀번호를 확인 후, 다시 입력해주세요."));
                 writeLog(3);
                 break;
             default:
-                alert.setHeaderText("알 수 없는 오류");
-                alert.setContentText("프로그램에 문제가 발생했습니다. 개발자에게 문의하세요.");
+                content.setHeading(new Text("알 수 없는 오류"));
+                content.setBody(new Text("프로그램에 문제가 발생했습니다. 개발자에게 문의하세요."));
                 writeLog(-1);
         }
-        alert.showAndWait();
+        button.setOnAction((ActionEvent event) -> {
+            dialog.close();
+        });
+        content.setActions(button);
+        dialog.show();
     }
 
     private void writeLog(int code) {
@@ -108,7 +124,7 @@ public class LoginController implements Initializable {
     }
 
     private void setScene() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/FXMLDocument.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);

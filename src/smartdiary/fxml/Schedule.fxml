@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.text.*?>
+<?import jfxtras.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import jfxtras.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.Scheduler">
+   <children>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <VBox alignment="TOP_CENTER" spacing="10.0">
+               <children>
+                  <CalendarPicker fx:id="calendarPicker" />
+                  <CalendarTextField fx:id="lCalendarTextField" disable="true" pickerShowing="true">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="20.0" />
+                     </padding>
+                  </CalendarTextField>
+                  <JFXTextField fx:id="newmemo" focusColor="#09b6bc" promptText="일정 제목" style="-fx-background-color: #ffffff;">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXTextField>
+                  <HBox alignment="TOP_RIGHT" spacing="20.0">
+                     <children>
+                        <JFXButton buttonType="RAISED" onAction="#delMemo" ripplerFill="WHITE" style="-fx-background-color: #2196F3;" text="삭제" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" onAction="#writeMemo" ripplerFill="WHITE" style="-fx-background-color: #2196F3;" text="추가" textFill="WHITE" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets bottom="20.0" />
+                     </opaqueInsets>
+                  </HBox>
+               </children>
+               <opaqueInsets>
+                  <Insets bottom="20.0" top="20.0" />
+               </opaqueInsets>
+            </VBox>
+            <VBox alignment="CENTER" spacing="20.0">
+               <opaqueInsets>
+                  <Insets bottom="20.0" top="20.0" />
+               </opaqueInsets>
+               <children>
+                  <TableView fx:id="tableView" onMouseClicked="#getInformation" stylesheets="@../css/tableview.css">
+                     <columns>
+                        <TableColumn fx:id="date" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="150.0" resizable="false" text="날짜">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="date" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="memo" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="일정">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="memo" />
+                           </cellValueFactory>
+                        </TableColumn>
+                     </columns>
+                  </TableView>
+                  <JFXButton alignment="CENTER" buttonType="RAISED" onAction="#handleSave" ripplerFill="WHITE" style="-fx-background-color: #2196F3;" text="저장" textFill="WHITE" />
+               </children>
+            </VBox>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="20.0" top="20.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</StackPane>
