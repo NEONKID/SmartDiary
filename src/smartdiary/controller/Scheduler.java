@@ -20,6 +20,7 @@ import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 
 /**
  * Created by neonkid on 11/23/16.
@@ -31,6 +32,7 @@ public class Scheduler implements Initializable {
     @FXML private CalendarPicker calendarPicker;
     @FXML private CalendarTextField lCalendarTextField;
     private ObservableList<Schedule>data = FXCollections.observableArrayList();
+    private File file;
 
     @FXML
     private void getInformation(MouseEvent event) {
@@ -60,6 +62,8 @@ public class Scheduler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        file = new File(SmartDiary.getFile().getPath() + "/schedules");
+
         tableView.setItems(data);
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableView.setPlaceholder(new Label("새로운 일정을 추가해주세요."));
@@ -69,6 +73,7 @@ public class Scheduler implements Initializable {
             lCalendarTextField.setDateFormat(calendarPicker.getShowTime() ? SimpleDateFormat.getDateInstance() : SimpleDateFormat.getDateInstance());
         });
         lCalendarTextField.setDateFormat(calendarPicker.getShowTime() ? SimpleDateFormat.getDateTimeInstance() : SimpleDateFormat.getDateInstance());
+        lCalendarTextField.setPromptText("날짜를 선택해주세요. ");
     }
 
     @FXML
@@ -76,7 +81,6 @@ public class Scheduler implements Initializable {
         if(data.isEmpty()) {
             showDialog(3);
         } else {
-            File file = new File(SmartDiary.getFile().getPath() + "/schedules");
             if(file != null) {
                 saveFile(tableView.getItems(), file);
             }
@@ -86,8 +90,17 @@ public class Scheduler implements Initializable {
     private void readFile(File file) {
         try {
             BufferedReader inReader = new BufferedReader(new FileReader(file));
+            String string;
+            StringTokenizer token;
+            while((string = inReader.readLine()) != null) {
+                token = new StringTokenizer(string, "|");
+                for(int i = 0; token.hasMoreTokens(); i++) {
+                    
+                }
+            }
+            inReader.close();
         } catch(IOException ex) {
-
+            ex.printStackTrace();
         }
     }
 

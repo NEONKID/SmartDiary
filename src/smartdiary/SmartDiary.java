@@ -37,8 +37,9 @@ public class SmartDiary extends Application {
 
     @Override
     public void start(Stage LoginStage) throws Exception {
-        boolean flag = false;
+        LoginStage.resizableProperty().setValue(Boolean.FALSE);
         Parent loginView = FXMLLoader.load(getClass().getResource("fxml/Login.fxml"));
+        boolean flag = false;
 
         System.out.println("Username: " + username);
         System.out.println("Used OS: " + osname);
@@ -56,9 +57,6 @@ public class SmartDiary extends Application {
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         launch(args);
     }
@@ -125,6 +123,7 @@ public class SmartDiary extends Application {
             Scene scene = new Scene(registerView);
             Stage registerStage = new Stage();
 
+            registerStage.resizableProperty().setValue(Boolean.FALSE);
             registerStage.setScene(scene);
             registerStage.setTitle("사용자 등록");
             registerStage.show();

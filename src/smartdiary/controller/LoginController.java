@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import smartdiary.SmartDiary;
@@ -34,8 +35,10 @@ public class LoginController implements Initializable {
     private String flag_id = System.getProperty("user.name");
 
     @FXML protected void ClickAction(ActionEvent event) {
-        String path = SmartDiary.getFile().getPath() + "/shadow";
+        String path;
         String flag_pw = "";
+        path = SmartDiary.getFile().getPath() + "/shadow";
+
         try {
             flag_pw = readContentFrom(path);
         } catch (IOException ex) {
@@ -46,10 +49,15 @@ public class LoginController implements Initializable {
         } else {
             if(!flag_pw.equals(passwordField.getText())) {
                 showError(1);
+                passwordField.clear();
             } else {
                 JFXDialogLayout content = new JFXDialogLayout();
                 JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
                 JFXButton button = new JFXButton("OKAY");
+
+                button.setRipplerFill(Paint.valueOf("#ffffff"));
+                button.setTextFill(Paint.valueOf("#ffffff"));
+                button.setStyle("-fx-background-color: #4059a9");
 
                 content.setHeading(new Text("로그인 성공"));
                 content.setBody(new Text(usernameField.getText() + "님 환영합니다!"));
@@ -72,6 +80,11 @@ public class LoginController implements Initializable {
         JFXDialogLayout content = new JFXDialogLayout();
         JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
         JFXButton button = new JFXButton("OKAY");
+
+        button.setRipplerFill(Paint.valueOf("#ffffff"));
+        button.setTextFill(Paint.valueOf("#ffffff"));
+        button.setStyle("-fx-background-color: #4059a9");
+
         switch(code) {
             case 0:
                 content.setHeading(new Text("로그인 오류"));
@@ -97,6 +110,7 @@ public class LoginController implements Initializable {
 
     private void writeLog(int code) {
         logfile = new File(SmartDiary.getFile().getPath() + "/login.log");
+
         Date date = new Date();
         String out = "";
         switch(code) {

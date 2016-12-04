@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
 <?import jfxtras.scene.layout.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -22,21 +24,9 @@
    <children>
          <MenuBar BorderPane.alignment="CENTER">
            <menus>
-             <Menu mnemonicParsing="false" text="File">
-               <items>
-                   <MenuItem mnemonicParsing="false" text="Save" />
-                   <MenuItem mnemonicParsing="false" text="Load" />
-               </items>
-             </Menu>
-               <Menu mnemonicParsing="false" text="Mode">
-                  <items>
-                     <CheckMenuItem mnemonicParsing="false" text="View Mode" />
-                     <CheckMenuItem mnemonicParsing="false" text="Edit Mode" />
-                  </items>
-               </Menu>
-               <Menu mnemonicParsing="false" text="Help">
+               <Menu mnemonicParsing="false" text="Menu">
                    <items>
-                       <MenuItem mnemonicParsing="false" text="How to Use" />
+                       <MenuItem mnemonicParsing="false" text="비밀번호 변경" />
                        <MenuItem mnemonicParsing="false" text="About" />
                    </items>
                </Menu>
@@ -45,18 +35,30 @@
          <VBox alignment="CENTER" BorderPane.alignment="CENTER">
             <children>
                <HBox alignment="CENTER" fillHeight="false" spacing="100.0">
-                  <children>
-                      <RadioButton fx:id="diaryButton" mnemonicParsing="false" selected="true" text="Diary">
-                        <toggleGroup>
-                           <ToggleGroup fx:id="radioGroups" />
-                        </toggleGroup>
-                  </RadioButton>
-                      <RadioButton fx:id="scheduleButton" mnemonicParsing="false" text="Schedule" toggleGroup="$radioGroups" />
-                      <RadioButton fx:id="moneyButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="223.0" text="Money Manager" toggleGroup="$radioGroups" />
-                  </children>
                   <padding>
                      <Insets bottom="10.0" left="10.0" top="10.0" />
                   </padding>
+               <children>
+                  <JFXRadioButton fx:id="diaryButton" selected="true" text="Diary">
+                      <toggleGroup>
+                          <ToggleGroup fx:id="radioGroups" />
+                      </toggleGroup>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="scheduleButton" text="Schedule" toggleGroup="$radioGroups">
+                     <font>
+                        <Font size="15.0" />
+                     </font></JFXRadioButton>
+                  <JFXRadioButton fx:id="moneyButton" text="Money Manager" toggleGroup="$radioGroups">
+                     <font>
+                        <Font size="15.0" />
+                     </font></JFXRadioButton>
+               </children>
+               <VBox.margin>
+                  <Insets right="50.0" />
+               </VBox.margin>
                </HBox>
             </children>
             <padding>
@@ -64,21 +66,23 @@
             </padding>
          </VBox>
       <AnchorPane>
-          <AnchorPane fx:id="Diary" cacheShape="false" focusTraversable="true" layoutX="10.0" layoutY="10.0">
-              <children>
-                  <fx:include source="Diary.fxml" />
-              </children>
-          </AnchorPane>
-          <AnchorPane fx:id="Schedule" cacheShape="false" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" visible="false">
-              <children>
-                  <fx:include source="Schedule.fxml" />
-              </children>
-          </AnchorPane>
-          <AnchorPane fx:id="MoneyManager" cacheShape="false" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" visible="false">
-              <children>
-                  <fx:include source="MoneyManager.fxml" />
-              </children>
-          </AnchorPane>
+         <children>
+             <AnchorPane fx:id="Diary" cacheShape="false" focusTraversable="true" layoutX="10.0" layoutY="10.0">
+                 <children>
+                     <fx:include source="Diary.fxml" />
+                 </children>
+             </AnchorPane>
+             <AnchorPane fx:id="Schedule" cacheShape="false" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" visible="false">
+                 <children>
+                     <fx:include source="Schedule.fxml" />
+                 </children>
+             </AnchorPane>
+             <AnchorPane fx:id="MoneyManager" cacheShape="false" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" visible="false">
+                 <children>
+                     <fx:include source="MoneyManager.fxml" />
+                 </children>
+             </AnchorPane>
+         </children>
       </AnchorPane>
    </children>
 </VBox>

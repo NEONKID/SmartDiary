@@ -8,6 +8,7 @@ package smartdiary.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXRadioButton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -23,9 +24,9 @@ import javafx.scene.layout.AnchorPane;
  */
 public class FXMLDocumentController implements Initializable {
     @FXML private ToggleGroup radioGroups;
-    @FXML private RadioButton diaryButton;
-    @FXML private RadioButton scheduleButton;
-    @FXML private RadioButton moneyButton;
+    @FXML private JFXRadioButton diaryButton;
+    @FXML private JFXRadioButton scheduleButton;
+    @FXML private JFXRadioButton moneyButton;
     @FXML private AnchorPane Diary;
     @FXML private AnchorPane MoneyManager;
     @FXML private AnchorPane Schedule;

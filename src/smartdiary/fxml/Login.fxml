@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.LoginController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="700.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.LoginController">
    <children>
       <VBox alignment="CENTER" spacing="30.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -21,7 +21,6 @@
                   <Insets left="15.0" />
                </padding>
             </Label>
-            <Pane />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <ImageView fitHeight="300.0" fitWidth="300.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">

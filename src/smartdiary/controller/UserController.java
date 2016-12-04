@@ -1,5 +1,7 @@
 package smartdiary.controller;
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,9 +21,9 @@ import java.util.ResourceBundle;
  * Created by neonkid on 11/28/16.
  */
 public class UserController implements Initializable {
-    @FXML private TextField userid;
-    @FXML private PasswordField field1;
-    @FXML private PasswordField field2;
+    @FXML private JFXTextField userid;
+    @FXML private JFXPasswordField field1;
+    @FXML private JFXPasswordField field2;
     private File shadow;
 
     @FXML
