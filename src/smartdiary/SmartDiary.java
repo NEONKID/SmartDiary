@@ -63,7 +63,7 @@ public class SmartDiary extends Application {
 
     private boolean checkOS(String name) {
         String path = "";
-        int win_flag = name.indexOf("win");
+        int win_flag = name.indexOf("dow");
         int nux_flag = name.indexOf("nux");
 
         if(nux_flag > 0) {

@@ -64,7 +64,7 @@ public class UserController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("프로그램 종료");
         alert.setHeaderText("취소하겠습니까?");
-        alert.setContentText("취소할 경우, 푸로그램이 종료됩니다.");
+        alert.setContentText("취소할 경우, 프로그램이 종료됩니다.");
         alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> System.exit(0));
     }
 
