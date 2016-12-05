@@ -63,35 +63,16 @@ public class SmartDiary extends Application {
 
     private boolean checkOS(String name) {
         String path = "";
-        int win_flag = name.indexOf("dow");
-        int nux_flag = name.indexOf("nux");
-
-        if(nux_flag > 0) {
-            path = homedir + "/.smartDiary";
-            file = new File(path);
-            if(!file.isDirectory()) {
-                showError(1);
-                file.mkdirs();
-                return false;
-            } else {
-                file = new File(path);
-                return true;
-            }
-        } else if(win_flag > 0) {
-            path = homedir + "\\.smartDiary";
-            file = new File(path);
-            if(!file.exists()) {
-                showError(1);
-                file.mkdirs();
-                return false;
-            } else {
-                file = new File(path);
-                return true;
-            }
+        path = homedir + "/.smartdiary";
+        file = new File(path);
+        if(!file.isDirectory()) {
+            showError(1);
+            file.mkdirs();
+            return false;
         } else {
-            showError(2);
+            file = new File(path);
+            return true;
         }
-        return false;
     }
 
     private void showError(int code) {

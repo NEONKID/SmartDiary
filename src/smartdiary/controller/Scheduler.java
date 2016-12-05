@@ -21,6 +21,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
+import javafx.scene.paint.Paint;
 
 /**
  * Created by neonkid on 11/23/16.
@@ -105,6 +106,7 @@ public class Scheduler implements Initializable {
     }
 
     private void saveFile(ObservableList<Schedule> scheduleObservableList, File file) {
+        JFXSnackbar jFXSnackbar = new JFXSnackbar(stackPane);
         try {
             BufferedWriter outwriter = new BufferedWriter(new FileWriter(file));
             for(Schedule schedules : scheduleObservableList) {
@@ -113,24 +115,25 @@ public class Scheduler implements Initializable {
             }
             System.out.println(" :: " + scheduleObservableList.toString());
             outwriter.close();
+            jFXSnackbar.show("성공적으로 저장되었습니다.", 5000);
         } catch (IOException ex) {
-            Alert ioAlert = new Alert(Alert.AlertType.ERROR, "OOPS!", ButtonType.OK);
-            ioAlert.setContentText("죄송합니다. 오류가 발생했습니다.");
-            ioAlert.showAndWait();
-            if(ioAlert.getResult() == ButtonType.OK) {
-                ioAlert.close();
-            }
+            jFXSnackbar.show("죄송합니다. 오류가 발생했습니다.", 5000);
+            ex.printStackTrace();
         }
     }
 
     private void showDialog(int flag) {
         JFXDialogLayout content = new JFXDialogLayout();
         JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
-        JFXButton button = new JFXButton("OKAY");
+        JFXButton button = new JFXButton("확인");
         switch(flag) {
             case 1:
                 content.setHeading(new Text("일정 삭제"));
                 content.setBody(new Text("삭제되었습니다."));
+                
+                button.setRipplerFill(Paint.valueOf("#ffffff"));
+                button.setTextFill(Paint.valueOf("#ffffff"));
+                button.setStyle("-fx-background-color: #2196F3");
                 button.setOnAction((ActionEvent event) -> {
                     newmemo.setText("");
                     dialog.close();
@@ -141,6 +144,10 @@ public class Scheduler implements Initializable {
             case 2:
                 content.setHeading(new Text("값 없음!"));
                 content.setBody(new Text("값이 입력되지 않았습니다. 다시 입력해주세요."));
+                
+                button.setRipplerFill(Paint.valueOf("#ffffff"));
+                button.setTextFill(Paint.valueOf("#ffffff"));
+                button.setStyle("-fx-background-color: #2196F3");
                 button.setOnAction((ActionEvent event) -> {
                     dialog.close();
                 });
@@ -150,6 +157,10 @@ public class Scheduler implements Initializable {
             case 3:
                 content.setHeading(new Text("EMPTY TABLE"));
                 content.setBody(new Text("테이블이 비었습니다. 항목을 추가해주세요."));
+                
+                button.setRipplerFill(Paint.valueOf("#ffffff"));
+                button.setTextFill(Paint.valueOf("#ffffff"));
+                button.setStyle("-fx-background-color: #2196F3");
                 button.setOnAction((ActionEvent event) -> {
                     dialog.close();
                 });

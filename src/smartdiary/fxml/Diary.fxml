@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -10,57 +10,57 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.Diary">
+<VBox alignment="CENTER" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.Diary">
    <children>
-      <HBox prefHeight="40.0" prefWidth="600.0">
+      <HBox alignment="CENTER">
          <children>
-            <Label prefHeight="44.0" prefWidth="45.0" text="제목 : ">
+            <Label text="제목 : ">
                <HBox.margin>
                   <Insets top="5.0" />
                </HBox.margin></Label>
-            <TextField prefHeight="74.0" prefWidth="172.0">
+            <TextField>
                <HBox.margin>
                   <Insets right="10.0" top="5.0" />
                </HBox.margin>
             </TextField>
-            <Button fx:id="sunny" mnemonicParsing="false" onAction="#imgsun" prefHeight="60.0" prefWidth="50.0" text="맑음">
+            <Button fx:id="sunny" mnemonicParsing="false" onAction="#imgsun" text="맑음">
                <HBox.margin>
                   <Insets right="10.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="cloudy" mnemonicParsing="false" onAction="#imgcloud" prefHeight="75.0" prefWidth="50.0" text="흐림">
+            <Button fx:id="cloudy" mnemonicParsing="false" onAction="#imgcloud" text="흐림">
                <HBox.margin>
                   <Insets right="10.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="rainy" mnemonicParsing="false" onAction="#imgrain" prefHeight="91.0" prefWidth="35.0" text="비">
+            <Button fx:id="rainy" mnemonicParsing="false" onAction="#imgrain" text="비">
                <HBox.margin>
                   <Insets right="10.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="snowy" mnemonicParsing="false" onAction="#imgsnow" prefHeight="76.0" prefWidth="35.0" text="눈">
+            <Button fx:id="snowy" mnemonicParsing="false" onAction="#imgsnow" text="눈">
                <HBox.margin>
                   <Insets right="10.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <DatePicker prefHeight="29.0" prefWidth="153.0" fx:id="date">
-               <HBox.margin>
-                  <Insets top="5.0" />
-               </HBox.margin></DatePicker>
+            <JFXDatePicker promptText="날짜를 선택해주세요." />
          </children>
-      </HBox>
-      <TextArea>
          <VBox.margin>
-            <Insets bottom="10.0" top="10.0" />
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </HBox>
+      <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="내용을 입력해주세요.">
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
       </TextArea>
-      <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="123.0">
+      <HBox alignment="CENTER_RIGHT">
          <children>
             <ImageView fx:id="imgweather" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-            <HBox prefHeight="39.0" prefWidth="412.0" />
+            <HBox />
             <HBox prefHeight="39.0" prefWidth="121.0">
                <children>
-                  <Button fx:id="savediary" alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="50.0" text="저장" onAction="#save">
+                  <Button fx:id="savediary" alignment="CENTER" mnemonicParsing="false" onAction="#save" prefHeight="40.0" prefWidth="50.0" text="저장">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -68,10 +68,13 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="cleardiary" mnemonicParsing="false" prefHeight="40.0" prefWidth="50.0" text="취소" onAction="#clear" />
+                  <Button fx:id="cleardiary" mnemonicParsing="false" onAction="#clear" prefHeight="40.0" prefWidth="50.0" text="취소" />
                </children>
             </HBox>
          </children>
       </HBox>
    </children>
+   <padding>
+      <Insets bottom="10.0" top="10.0" />
+   </padding>
 </VBox>

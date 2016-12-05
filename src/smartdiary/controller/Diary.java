@@ -37,22 +37,22 @@ public class Diary implements Initializable {
     
     @FXML
     public void imgsun(ActionEvent event){
-        img = new Image(getClass().getResource("images/sunny.png").toString());
+        img = new Image(getClass().getResource("/smartdiary/images/sunny.png").toString());
         imgweather.setImage(img);
     }
     @FXML
     public void imgcloud(ActionEvent event){
-        img = new Image(getClass().getResource("images/cloudy.png").toString());
+        img = new Image(getClass().getResource("/smartdiary/images/cloudy.png").toString());
         imgweather.setImage(img);
     }
     @FXML
     public void imgrain(ActionEvent event){
-        img = new Image(getClass().getResource("images/rainy.png").toString());
+        img = new Image(getClass().getResource("/smartdiary/images/rainy.png").toString());
         imgweather.setImage(img);
     }
     @FXML
     public void imgsnow(ActionEvent event){
-        img = new Image(getClass().getResource("images/snowy.png").toString());
+        img = new Image(getClass().getResource("/smartdiary/images/snowy.png").toString());
         imgweather.setImage(img);
     }
     @FXML
