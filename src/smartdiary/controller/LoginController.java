@@ -7,9 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -18,7 +15,6 @@ import smartdiary.SmartDiary;
 
 import java.io.*;
 import java.net.URL;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -138,7 +134,7 @@ public class LoginController implements Initializable {
     }
 
     private void setScene() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/smartdiary/fxml/FXMLDocument.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
