@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
@@ -20,13 +21,16 @@
             <VBox alignment="TOP_CENTER" spacing="10.0">
                <children>
                   <CalendarPicker fx:id="calendarPicker" />
-                  <CalendarTextField fx:id="lCalendarTextField" disable="true" pickerShowing="true">
+                  <CalendarTextField fx:id="lCalendarTextField" allowNull="false" disable="true" pickerShowing="true">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <padding>
                         <Insets bottom="20.0" />
                      </padding>
+                     <cursor>
+                        <Cursor fx:constant="NONE" />
+                     </cursor>
                   </CalendarTextField>
                   <JFXTextField fx:id="newmemo" focusColor="#09b6bc" promptText="일정 제목" style="-fx-background-color: #ffffff;">
                      <font>

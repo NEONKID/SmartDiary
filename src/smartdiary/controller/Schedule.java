@@ -33,6 +33,6 @@ public class Schedule {
     }
 
     public String toString() {
-        return getDate() + "|" + getMemo();
+        return getDate() + "\t" + getMemo();
     }
 }

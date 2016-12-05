@@ -2,6 +2,7 @@ package smartdiary.controller;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.io.BufferedWriter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,19 +35,12 @@ public class UserController implements Initializable {
             alert.setHeaderText("비밀번호가 일치하지 않습니다.");
             alert.setContentText("다시 확인하고 입력해주시기 바랍니다.");
             alert.showAndWait();
-        } else if(field1.getLength() != 8 && field2.getLength() != 8) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("비밀번호 입력 수 제한");
-            alert.setHeaderText("비밀번호는 반드시 8자리여야 합니다.");
-            alert.setContentText("다시 확인하고 입력해주시기 바랍니다.");
-            alert.showAndWait();
         } else {
             try {
                 shadow = new File(SmartDiary.getFile().getPath() + "/shadow");
-                FileWriter fw = new FileWriter(shadow, true);
-                fw.write(field1.getText());
-                fw.flush();
-                fw.close();
+                BufferedWriter out = new BufferedWriter(new FileWriter(shadow, true));
+                out.write(field1.getText());
+                out.close();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("설정 완료");
                 alert.setHeaderText("비밀번호 설정이 완료되었습니다.");

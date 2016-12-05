@@ -30,7 +30,8 @@ public class LoginController implements Initializable {
 
     private String flag_id = System.getProperty("user.name");
 
-    @FXML protected void ClickAction(ActionEvent event) {
+    @FXML 
+    protected void ClickAction(ActionEvent event) {
         String path;
         String flag_pw = "";
         path = SmartDiary.getFile().getPath() + "/shadow";
@@ -136,6 +137,7 @@ public class LoginController implements Initializable {
     private void setScene() throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/smartdiary/fxml/FXMLDocument.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/smartdiary/css/main.css").toExternalForm());
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.sizeToScene();
@@ -144,15 +146,14 @@ public class LoginController implements Initializable {
         SmartDiary.getStage().hide();
     }
 
-    public static String readContentFrom(String textFileName) throws IOException {
+    public String readContentFrom(String textFileName) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(textFileName));
         StringBuilder builder = new StringBuilder();
-        char[] buf = new char[8];
+        String shadow;
 
-        while(bufferedReader.read(buf) > 0) {
-            builder.append(buf);
+        while((shadow = bufferedReader.readLine()) != null) {
+            builder.append(shadow);
         }
-        System.out.println(builder.toString());
         return builder.toString();
     }
     @Override

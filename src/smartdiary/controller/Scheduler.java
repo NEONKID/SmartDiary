@@ -75,6 +75,10 @@ public class Scheduler implements Initializable {
         });
         lCalendarTextField.setDateFormat(calendarPicker.getShowTime() ? SimpleDateFormat.getDateTimeInstance() : SimpleDateFormat.getDateInstance());
         lCalendarTextField.setPromptText("날짜를 선택해주세요. ");
+        
+        if(file != null) {
+            readFile(file);
+        }
     }
 
     @FXML
@@ -91,13 +95,14 @@ public class Scheduler implements Initializable {
     private void readFile(File file) {
         try {
             BufferedReader inReader = new BufferedReader(new FileReader(file));
-            String string;
-            StringTokenizer token;
-            while((string = inReader.readLine()) != null) {
-                token = new StringTokenizer(string, "|");
-                for(int i = 0; token.hasMoreTokens(); i++) {
-                    
+            String line = null;
+            String[] splited = null;
+            while((line = inReader.readLine()) != null) {
+                splited = line.split("\t");
+                for(int i = 0; i < splited.length; i++) {
+                    splited[i] = splited[i].trim();
                 }
+                data.add(new Schedule(splited[0], splited[1]));
             }
             inReader.close();
         } catch(IOException ex) {
