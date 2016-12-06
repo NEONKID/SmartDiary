@@ -1,7 +1,6 @@
 package smartdiary.controller;
 
 import com.jfoenix.controls.*;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +19,9 @@ import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
-import java.util.StringTokenizer;
+import java.util.Date;
+import javafx.event.Event;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.paint.Paint;
 
 /**
@@ -30,6 +31,8 @@ public class Scheduler implements Initializable {
     @FXML private StackPane stackPane;
     @FXML private TableView<Schedule> tableView;
     @FXML private JFXTextField newmemo;
+    @FXML private TableColumn<Schedule, String> dateCol;
+    @FXML private TableColumn<Schedule, String> memoCol;
     @FXML private CalendarPicker calendarPicker;
     @FXML private CalendarTextField lCalendarTextField;
     private ObservableList<Schedule>data = FXCollections.observableArrayList();
@@ -64,11 +67,11 @@ public class Scheduler implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         file = new File(SmartDiary.getFile().getPath() + "/schedules");
-
+        
         tableView.setItems(data);
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tableView.setPlaceholder(new Label("새로운 일정을 추가해주세요."));
-
+        
         lCalendarTextField.calendarProperty().bindBidirectional(calendarPicker.calendarProperty());
         calendarPicker.showTimeProperty().addListener((ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) -> {
             lCalendarTextField.setDateFormat(calendarPicker.getShowTime() ? SimpleDateFormat.getDateInstance() : SimpleDateFormat.getDateInstance());
@@ -76,9 +79,18 @@ public class Scheduler implements Initializable {
         lCalendarTextField.setDateFormat(calendarPicker.getShowTime() ? SimpleDateFormat.getDateTimeInstance() : SimpleDateFormat.getDateInstance());
         lCalendarTextField.setPromptText("날짜를 선택해주세요. ");
         
+        dateCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        memoCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        
         if(file != null) {
             readFile(file);
         }
+    }
+    
+    @FXML
+    public void dateCol_OnEditCommit(TableColumn.CellEditEvent<Schedule, String> event) {
+        Schedule schedule = event.getRowValue();
+        schedule.setDate(event.getNewValue());
     }
 
     @FXML

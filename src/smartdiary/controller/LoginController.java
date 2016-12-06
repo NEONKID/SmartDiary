@@ -28,7 +28,7 @@ public class LoginController implements Initializable {
     @FXML private StackPane stackPane;
     private File logfile;
 
-    private String flag_id = System.getProperty("user.name");
+    private final String flag_id = System.getProperty("user.name");
 
     @FXML 
     protected void ClickAction(ActionEvent event) {
@@ -156,6 +156,7 @@ public class LoginController implements Initializable {
         }
         return builder.toString();
     }
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usernameField.setText(System.getProperty("user.name"));
