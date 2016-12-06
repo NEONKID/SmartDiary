@@ -63,7 +63,7 @@
                               <PropertyValueFactory property="date" />
                            </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="memoCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="250.0" resizable="false" text="일정">
+                        <TableColumn fx:id="memoCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" onEditCommit="#memoCol_OnEditCommit" prefWidth="250.0" resizable="false" text="일정">
                            <cellValueFactory>
                               <PropertyValueFactory property="memo" />
                            </cellValueFactory>
@@ -75,6 +75,11 @@
                   </TableView>
                   <HBox alignment="BOTTOM_RIGHT">
                      <children>
+                        <JFXTextField fx:id="filterbox" focusColor="#09b6bc" promptText="Search...">
+                           <padding>
+                              <Insets right="200.0" />
+                           </padding>
+                        </JFXTextField>
                         <JFXButton alignment="CENTER" buttonType="RAISED" onAction="#handleSave" ripplerFill="WHITE" style="-fx-background-color: #2196F3;" text="저장" textFill="WHITE" />
                      </children>
                   </HBox>

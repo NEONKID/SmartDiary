@@ -18,9 +18,9 @@ import smartdiary.SmartDiary;
 import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.Date;
-import javafx.event.Event;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.paint.Paint;
 
@@ -35,9 +35,10 @@ public class Scheduler implements Initializable {
     @FXML private TableColumn<Schedule, String> memoCol;
     @FXML private CalendarPicker calendarPicker;
     @FXML private CalendarTextField lCalendarTextField;
-    private ObservableList<Schedule>data = FXCollections.observableArrayList();
+    @FXML private JFXTextField filterbox;
+    private final ObservableList<Schedule>data = FXCollections.observableArrayList();
     private File file;
-
+    
     @FXML
     private void getInformation(MouseEvent event) {
         lCalendarTextField.setText(tableView.getSelectionModel().getSelectedItem().getDate());
@@ -59,14 +60,24 @@ public class Scheduler implements Initializable {
 
     @FXML
     private void delMemo(ActionEvent event) {
-        Schedule currentSchedule = tableView.getSelectionModel().getSelectedItem();
-        data.removeAll(currentSchedule);
+        data.removeAll(tableView.getSelectionModel().getSelectedItems());
         tableView.getSelectionModel().clearSelection();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        file = new File(SmartDiary.getFile().getPath() + "/schedules");
+        file = new File(SmartDiary.getFile().getPath() + "/schedules.smd");
+        
+        if(file != null) {
+            readFile(file);
+        }
+        
+        filterbox.textProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                filterMemoList((String)oldValue, (String)newValue);
+            }
+        });
         
         tableView.setItems(data);
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -81,9 +92,22 @@ public class Scheduler implements Initializable {
         
         dateCol.setCellFactory(TextFieldTableCell.forTableColumn());
         memoCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        
-        if(file != null) {
-            readFile(file);
+    }
+    
+    public void filterMemoList(String oldValue, String newValue) {
+        ObservableList<Schedule> filteredList = FXCollections.observableArrayList();
+        if(filterbox == null || (newValue.length() < oldValue.length()) ) {
+            tableView.setItems(data);
+        } else {
+            newValue = newValue.toUpperCase();
+            for(Schedule schedules : tableView.getItems()) {
+                String filDate = schedules.getDate();
+                String filMemo = schedules.getMemo();
+                if(filDate.toUpperCase().contains(newValue) || filMemo.toUpperCase().contains(newValue)) {
+                    filteredList.add(schedules);
+                }
+            }
+            tableView.setItems(filteredList);
         }
     }
     
@@ -91,6 +115,12 @@ public class Scheduler implements Initializable {
     public void dateCol_OnEditCommit(TableColumn.CellEditEvent<Schedule, String> event) {
         Schedule schedule = event.getRowValue();
         schedule.setDate(event.getNewValue());
+    }
+    
+    @FXML
+    public void memoCol_OnEditCommit(TableColumn.CellEditEvent<Schedule, String> event) {
+        Schedule schedule = event.getRowValue();
+        schedule.setMemo(event.getNewValue());
     }
 
     @FXML

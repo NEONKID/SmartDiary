@@ -35,7 +35,7 @@ public class LoginController implements Initializable {
         String path;
         String flag_pw = "";
         path = SmartDiary.getFile().getPath() + "/shadow";
-
+        
         try {
             flag_pw = readContentFrom(path);
         } catch (IOException ex) {
@@ -107,21 +107,21 @@ public class LoginController implements Initializable {
 
     private void writeLog(int code) {
         logfile = new File(SmartDiary.getFile().getPath() + "/login.log");
-
         Date date = new Date();
         String out = "";
+        
         switch(code) {
             case 0:
-                out = "[Success] Login: " + date.toString() + "\n";
+                out = "[Success] Login: \t" + date.toString() + "\n";
                 break;
             case 2:
-                out = "[Fail] Invalid ID ! " + date.toString() + "\n";
+                out = "[Fail] Invalid ID ! \t" + date.toString() + "\n";
                 break;
             case 3:
-                out = "[Fail] Invalid Password ! " + date.toString() + "\n";
+                out = "[Fail] Invalid Password ! \t" + date.toString() + "\n";
                 break;
             default:
-                out = "[Crit] Unknwon Error" + date.toString() + "\n";
+                out = "[Crit] Unknwon Error \t" + date.toString() + "\n";
                 break;
         }
         try {

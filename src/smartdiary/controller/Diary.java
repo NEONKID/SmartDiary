@@ -5,7 +5,10 @@
  */
 package smartdiary.controller;
 
+import com.jfoenix.controls.JFXDatePicker;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.DatePicker;
 import java.util.ResourceBundle;
+import java.util.Date;
 import javafx.event.ActionEvent;
 /**
  *
@@ -28,9 +32,10 @@ public class Diary implements Initializable {
     @FXML private Button cleardiary;
     @FXML private ImageView imgweather;
     @FXML private Image img;
-    @FXML private DatePicker date;
+    @FXML private JFXDatePicker datePicker;
+    private Date today;
     
-    @FXML public void settoday(){
+    @FXML public void settoday() {
         
     }
     
@@ -64,7 +69,7 @@ public class Diary implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {      
-
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        datePicker.setValue(LocalDate.now());
     }
 }
