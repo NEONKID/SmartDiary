@@ -43,7 +43,10 @@
                   <Insets right="10.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <JFXDatePicker promptText="날짜를 선택해주세요." />
+            <JFXDatePicker promptText="날짜를 선택해주세요.">
+               <padding>
+                  <Insets top="10.0" />
+               </padding></JFXDatePicker>
          </children>
          <VBox.margin>
             <Insets left="20.0" right="20.0" />
@@ -56,8 +59,11 @@
       </TextArea>
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <ImageView fx:id="imgweather" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-            <HBox />
+            <VBox prefHeight="42.0" prefWidth="532.0">
+               <children>
+                  <ImageView fx:id="imgweather" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
             <HBox prefHeight="39.0" prefWidth="121.0">
                <children>
                   <Button fx:id="savediary" alignment="CENTER" mnemonicParsing="false" onAction="#save" prefHeight="40.0" prefWidth="50.0" text="저장">
