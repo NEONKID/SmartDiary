@@ -72,15 +72,15 @@ public class Diary implements Initializable {
         weather = "눈";
     }
     @FXML
-    public void save(ActionEvent event){
+    public void save(ActionEvent event) {
         String diaryDir = LocalDate.now().toString().substring(0, 7);
         String diaryFile = LocalDate.now().toString();
         
-        File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/" + diaryDir + "/");
+        File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/" + diaryDir);
         File fileofDiary = new File(dirOfDiary.getPath() + "/" + diaryFile + "_diary.smd");
         try {
             if(!dirOfDiary.isDirectory()) {
-                dirOfDiary.mkdir();
+                dirOfDiary.mkdirs();
             }
             String filePath = fileofDiary.getPath();
             PrintWriter out = new PrintWriter(new BufferedWriter(
@@ -100,11 +100,11 @@ public class Diary implements Initializable {
         String moneyDir = LocalDate.now().toString().substring(0, 7);
         String moneyFile = LocalDate.now().toString();
         
-        File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/" + moneyDir + "/");
+        File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + moneyDir);
         File fileofMoney = new File(dirOfMoney.getPath() + "/" + moneyFile + "_money.smd");
         try {
             if(!dirOfMoney.isDirectory()) {
-                dirOfMoney.mkdir();
+                dirOfMoney.mkdirs();
             }
             String filePath = fileofMoney.getPath();
             PrintWriter out = new PrintWriter(new BufferedWriter(
