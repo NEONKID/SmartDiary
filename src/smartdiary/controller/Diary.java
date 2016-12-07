@@ -5,27 +5,23 @@
  */
 package smartdiary.controller;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.DatePicker;
 import java.util.ResourceBundle;
 import java.util.Date;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import smartdiary.SmartDiary;
 /**
  *
@@ -33,21 +29,27 @@ import smartdiary.SmartDiary;
  */
 public class Diary implements Initializable {
     
+    @FXML private Button sunny;
+    @FXML private Button snowy;
+    @FXML private Button rainy;
+    @FXML private Button cloudy;
     @FXML private Button savediary;
     @FXML private Button cleardiary;
     @FXML private ImageView imgweather;
     @FXML private Image img;
     @FXML private JFXDatePicker datePicker;
-    @FXML private TextField dtitle;
-    @FXML private TextArea context;
+    @FXML private TextField jaemok;
+    @FXML private TextArea naeyong;
     @FXML private TextField plus;
     @FXML private TextField minus;
-    @FXML private StackPane stackPane;
     private File file;
     private File file2;
     private Date today;
-    
     String weather = "맑음";
+    
+    @FXML public void settoday() {
+        
+    }
     
     @FXML
     public void imgsun(ActionEvent event){
@@ -74,104 +76,149 @@ public class Diary implements Initializable {
         weather = "눈";
     }
     @FXML
-    public void save(ActionEvent event) {
-        String diaryDir = LocalDate.now().toString().substring(0, 7);
-        String diaryFile = LocalDate.now().toString();
+    public void save(ActionEvent event){
+        //String fileName =datePicker.getValue().getYear() + "_" + datePicker.getValue().getMonth().toString().substring(0, 3);
+        //file = new File(SmartDiary.getFile().getPath() + "/" + fileName + "_diary.smd");
+        //try {
+        //    String filePath = file.getPath();
+            
+        String diaryDir = datePicker.getValue().toString().substring(0, 4);
+        String diaryDir2 = datePicker.getValue().toString().substring(5, 7);
+        String diaryFile = datePicker.getValue().toString();
         
-        File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/" + diaryDir);
-        File fileofDiary = new File(dirOfDiary.getPath() + "/" + diaryFile + "_diary.smd");
+        File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/"+"/Diary/"+ diaryDir + "/" + diaryDir2);
+        File fileofDiary = new File(dirOfDiary.getPath() + "/" + diaryDir2 + ".smd");
         try {
             if(!dirOfDiary.isDirectory()) {
                 dirOfDiary.mkdirs();
             }
-            String filePath = fileofDiary.getPath();
+            String filePath = fileofDiary.getPath();    
+            
             PrintWriter out = new PrintWriter(new BufferedWriter(
             new FileWriter(filePath, true))); // append = false
-            out.print(datePicker.getValue());
-            out.print("   ");   // 빈칸 3개
+            out.println(datePicker.getValue());
             out.println(weather);
-            out.println(dtitle.getText());
-            out.println(context.getText());
-            out.println("------------------------------");
+            out.println(jaemok.getText());
+            out.println(naeyong.getText());
+            out.println("------------------------------------------------------------");
             out.close();
         }
         catch (IOException ex) {
-            System.err.println(ex);
+            ex.printStackTrace();
         }
         
-        String moneyDir = LocalDate.now().toString().substring(0, 7);
-        String moneyFile = LocalDate.now().toString();
+        //String fileName2 = datePicker.getValue().getYear() + "_" + datePicker.getValue().getMonth().toString().substring(0, 3);
+        //file2 = new File(SmartDiary.getFile().getPath() + "/" + fileName2 + "_money.smd");
+        //try {
+        //    String filePath2 = file2.getPath();
+            
         
-        File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + moneyDir);
-        File fileofMoney = new File(dirOfMoney.getPath() + "/" + moneyFile + "_money.smd");
+        String moneyDir = datePicker.getValue().toString().substring(0, 4);
+        String moneyDir2 = datePicker.getValue().toString().substring(5, 7);
+        String moneyFile = datePicker.getValue().toString();
+        
+        File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/"+"/Money/"+ moneyDir + "/" + moneyDir2);
+        File fileofMoney = new File(dirOfMoney.getPath() + "/" + diaryDir2 + ".smd");
         try {
             if(!dirOfMoney.isDirectory()) {
                 dirOfMoney.mkdirs();
             }
-            String filePath = fileofMoney.getPath();
+            String filePath2 = fileofMoney.getPath();
+        
             PrintWriter out = new PrintWriter(new BufferedWriter(
-            new FileWriter(filePath, true))); // append = false
+            new FileWriter(filePath2, true))); // append = false
             out.println(datePicker.getValue());
             out.println(plus.getText());
             out.println(minus.getText());
-            out.println("------------------------------");
+            out.println("------------------------------------------------------------");
             out.close();
         }
         catch (IOException ex) {
-            System.err.println(ex);
+            ex.printStackTrace();
         }
     }
     @FXML
     public void clear(ActionEvent event){
         //clear the textarea after checked by user
-        JFXDialogLayout checkClear = new JFXDialogLayout();
-                JFXDialog checkMessage = new JFXDialog(stackPane, checkClear, JFXDialog.DialogTransition.CENTER);
-                JFXButton clearAgree = new JFXButton("Yes");
-                JFXButton clearCancel = new JFXButton("No");
-
-                clearAgree.setRipplerFill(Paint.valueOf("#ffffff"));
-                clearAgree.setTextFill(Paint.valueOf("#ffffff"));
-                clearAgree.setStyle("-fx-background-color: #4059a9");
-                clearCancel.setRipplerFill(Paint.valueOf("#ffffff"));
-                clearCancel.setTextFill(Paint.valueOf("#ffffff"));
-                clearCancel.setStyle("-fx-background-color: #4059a9");
-
-                checkClear.setHeading(new Text(""));
-                checkClear.setBody(new Text("저장되지 않은 모든 내용이 사라집니다. \n 지우시겠습니까?"));
-                clearAgree.setOnAction((ActionEvent e) -> {
-                    checkMessage.close();
-                    try {
-                        //Delete what user writed context
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                });
-                clearCancel.setOnAction((ActionEvent e) -> {
-                    checkMessage.close();
-                });
-                checkClear.setActions(clearAgree,clearCancel);
-                checkMessage.show();
     }
     
-    private void saveFile(File file) {
+    //String baseDir = "C:\\Temp";    //검색할 디렉토리
+    
+    
+    @FXML
+    public void TextReader() throws IOException {
+    jaemok.setText("");
+    naeyong.setText("");
+    String baseDir = SmartDiary.getFile().getPath() + "/Contents"+"/Diary/"+ datePicker.getValue().toString().substring(0, 4) + "/" + datePicker.getValue().toString().substring(5, 7);
+    String word = datePicker.getValue().toString();         //검색할 단어
+    String save = datePicker.getValue().toString().substring(5, 7)+".smd";       //검색결과가 저장된 파일명
+        //읽어들일 디렉토리의 객체
+        File dir = new File(baseDir);
+        
+        if(!dir.isDirectory()) {
+            //디렉토리가 아니거나 없으면 종료
+            System.out.println(baseDir + " is not directory or exist ");
+            //System.exit(0);
+        }
+        //System.out.println(baseDir);
+        //System.out.println(word);
+        //System.out.println(save);
+    
+        FileReader frd = null;
+        BufferedReader brd = null;
+
+        // 내용 저장을 위한 ArrayList 정의
+        ArrayList<String> lineList = new ArrayList<String>();
+
+        // 라인 단위 저장 및 카운트를 위한 변수 정의
+        String rLine = null;
+        int lineNum = 0;
+        boolean hasMore = true;
+
         try {
-            String filePath = file.getPath();
-            PrintWriter out = new PrintWriter(new BufferedWriter(
-            new FileWriter(filePath, true))); // append = false
-            out.print(datePicker.getValue());
-            out.print("   ");   // 빈칸 3개
-            out.println(weather);
-            out.println(dtitle.getText());
-            out.println(context.getText());
-            out.println("------------------------------");
-            out.close();
+             frd = new FileReader(baseDir+"/"+save);
+             brd = new BufferedReader(frd);  
+
+             while (hasMore) {
+                    if((rLine = brd.readLine())!= null){
+                          // ArrayList에 읽은 라인 추가
+                          lineList.add(rLine);
+                          lineNum++;
+                          hasMore = true;
+                    } else
+                          hasMore = false;                       
+             }
+             frd.close();
+             brd.close();
+        } catch (IOException e) {
+             e.printStackTrace();
         }
-        catch (IOException ex) {
-            System.err.println(ex);
+        // 라인단위 출력(for loop)
+        lineNum = lineList.size();
+        int i = 0;
+        int j = 0;
+        String a = "";
+        String b = "";
+        while(i<lineNum) {
+            a = datePicker.getValue().toString();
+            //String b = lineList.get(i).toString().substring(1, lineList.get(i).length());
+            if(lineList.get(i).length() != 0) {
+                b = lineList.get(i).toString().substring(0, lineList.get(i).length());
+            }
+            if(a.equals(b))
+            {
+                jaemok.setText(lineList.get(i+2));
+                j=i+3;
+                while(lineList.get(j).toString().length() < 60)
+                {
+                    naeyong.setText(naeyong.getText()+"\n"+lineList.get(j));
+                    j++;
+                }
+                break;
+            }
+            else {i++; continue;}
         }
     }
-    
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         datePicker.setValue(LocalDate.now());
