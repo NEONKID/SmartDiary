@@ -20,13 +20,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.FXMLDocumentController">
+<VBox fx:id="mainWindow" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.FXMLDocumentController">
    <children>
          <MenuBar BorderPane.alignment="CENTER">
            <menus>
                <Menu mnemonicParsing="false" text="Menu">
                    <items>
-                       <MenuItem mnemonicParsing="false" text="비밀번호 변경" />
+                       <MenuItem mnemonicParsing="false" text="비밀번호 변경" onAction="#loadUserController"/>
                        <MenuItem mnemonicParsing="false" text="About" />
                    </items>
                </Menu>

@@ -18,7 +18,6 @@ import smartdiary.SmartDiary;
 import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -66,23 +65,21 @@ public class Scheduler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String fileName = LocalDate.now().getYear() + "_" + LocalDate.now().getMonth().toString().substring(0, 3);
-        file = new File(SmartDiary.getFile().getPath() + "/" + fileName + "_schedules.smd");
+        // String fileName = LocalDate.now().getYear() + "_" + LocalDate.now().getMonth().toString().substring(0, 3);
+        file = new File(SmartDiary.getFile().getPath() + "/schedules.smd");
         
-        if(file != null) {
-            readFile(file);
-        }
+        readFile(file);
         
         filterbox.textProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                filterMemoList((String)oldValue, (String)newValue);
+                filterScheduleList((String)oldValue, (String)newValue);
             }
         });
         
         tableView.setItems(data);
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tableView.setPlaceholder(new Label("새로운 일정을 추가해주세요."));
+        tableView.setPlaceholder(new Label("일정이 없습니다."));
         
         lCalendarTextField.calendarProperty().bindBidirectional(calendarPicker.calendarProperty());
         calendarPicker.showTimeProperty().addListener((ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) -> {
@@ -95,7 +92,7 @@ public class Scheduler implements Initializable {
         memoCol.setCellFactory(TextFieldTableCell.forTableColumn());
     }
     
-    public void filterMemoList(String oldValue, String newValue) {
+    public void filterScheduleList(String oldValue, String newValue) {
         ObservableList<Schedule> filteredList = FXCollections.observableArrayList();
         if(filterbox == null || (newValue.length() < oldValue.length()) ) {
             tableView.setItems(data);

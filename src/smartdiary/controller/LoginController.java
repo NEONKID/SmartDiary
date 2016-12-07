@@ -146,7 +146,7 @@ public class LoginController implements Initializable {
         SmartDiary.getStage().hide();
     }
 
-    public String readContentFrom(String textFileName) throws IOException {
+    public static String readContentFrom(String textFileName) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(textFileName));
         StringBuilder builder = new StringBuilder();
         String shadow;

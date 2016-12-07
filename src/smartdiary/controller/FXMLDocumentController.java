@@ -9,12 +9,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXRadioButton;
+import java.io.IOException;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  *
@@ -28,6 +34,28 @@ public class FXMLDocumentController implements Initializable {
     @FXML private AnchorPane Diary;
     @FXML private AnchorPane MoneyManager;
     @FXML private AnchorPane Schedule;
+    private static Stage stage;
+    
+    public static Stage getStage() {
+        return stage;
+    }
+    
+    
+    @FXML
+    public void loadUserController() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/fxml/UserController.fxml"));
+        StackPane newWindow = (StackPane)loader.load();
+        UserController controller = loader.getController();
+        controller.setMainWindow(this);
+        
+        stage = new Stage();
+        stage.setTitle("비밀번호 변경");
+        stage.initModality(Modality.NONE);
+        
+        Scene scene = new Scene(newWindow);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
