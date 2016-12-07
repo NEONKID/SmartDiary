@@ -46,6 +46,7 @@ public class Diary implements Initializable {
     private File file;
     private File file2;
     private Date today;
+    
     String weather = "맑음";
     
     @FXML
@@ -73,12 +74,17 @@ public class Diary implements Initializable {
         weather = "눈";
     }
     @FXML
-    public void save(ActionEvent event){
-        String fileName = LocalDate.now().getYear() + "_" + LocalDate.now().getMonth().toString().substring(0, 3);
-        file = new File(SmartDiary.getFile().getPath() + "/" + fileName + "_diary.smd");
-        //saveFile(file);
+    public void save(ActionEvent event) {
+        String diaryDir = LocalDate.now().toString().substring(0, 7);
+        String diaryFile = LocalDate.now().toString();
+        
+        File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/" + diaryDir);
+        File fileofDiary = new File(dirOfDiary.getPath() + "/" + diaryFile + "_diary.smd");
         try {
-            String filePath = file.getPath();
+            if(!dirOfDiary.isDirectory()) {
+                dirOfDiary.mkdirs();
+            }
+            String filePath = fileofDiary.getPath();
             PrintWriter out = new PrintWriter(new BufferedWriter(
             new FileWriter(filePath, true))); // append = false
             out.print(datePicker.getValue());
@@ -93,13 +99,18 @@ public class Diary implements Initializable {
             System.err.println(ex);
         }
         
-        String fileName2 = LocalDate.now().getYear() + "_" + LocalDate.now().getMonth().toString().substring(0, 3);
-        file2 = new File(SmartDiary.getFile().getPath() + "/" + fileName2 + "_money.smd");
-        //saveFile(file);
+        String moneyDir = LocalDate.now().toString().substring(0, 7);
+        String moneyFile = LocalDate.now().toString();
+        
+        File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + moneyDir);
+        File fileofMoney = new File(dirOfMoney.getPath() + "/" + moneyFile + "_money.smd");
         try {
-            String filePath2 = file2.getPath();
+            if(!dirOfMoney.isDirectory()) {
+                dirOfMoney.mkdirs();
+            }
+            String filePath = fileofMoney.getPath();
             PrintWriter out = new PrintWriter(new BufferedWriter(
-            new FileWriter(filePath2, true))); // append = false
+            new FileWriter(filePath, true))); // append = false
             out.println(datePicker.getValue());
             out.println(plus.getText());
             out.println(minus.getText());
