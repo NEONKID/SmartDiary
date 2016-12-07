@@ -9,6 +9,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox alignment="CENTER" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.Diary">
    <children>
@@ -18,7 +20,7 @@
                <HBox.margin>
                   <Insets top="5.0" />
                </HBox.margin></Label>
-            <TextField>
+            <TextField fx:id="jaemok">
                <HBox.margin>
                   <Insets right="10.0" top="5.0" />
                </HBox.margin>
@@ -52,7 +54,7 @@
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
       </HBox>
-      <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="내용을 입력해주세요.">
+      <TextArea fx:id="naeyong" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="내용을 입력해주세요.">
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
@@ -61,6 +63,39 @@
          <children>
             <VBox prefHeight="42.0" prefWidth="532.0">
                <children>
+                  <HBox alignment="CENTER_RIGHT">
+                     <children>
+                        <HBox prefHeight="23.0" prefWidth="388.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="수 입 : ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Text>
+                              <TextField fx:id="plus" prefHeight="23.0" prefWidth="150.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="지 출 : ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Text>
+                              <TextField fx:id="minus" prefHeight="23.0" prefWidth="156.0">
+                                 <HBox.margin>
+                                    <Insets right="30.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                  </HBox>
                   <ImageView fx:id="imgweather" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </VBox>
