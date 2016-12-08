@@ -67,12 +67,7 @@ public class SmartDiary extends Application {
         String path = "";
         path = homedir + "/.smartdiary";
         file = new File(path);
-        File shadowfile = new File(path + "/shadow");
         if(!file.isDirectory()) {
-            showError(1);
-            file.mkdirs();
-            return false;
-        } else if(!shadowfile.isFile()) {
             showError(1);
             return false;
         } else {

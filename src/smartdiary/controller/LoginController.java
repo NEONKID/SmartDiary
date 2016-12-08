@@ -34,7 +34,7 @@ public class LoginController implements Initializable {
         String path;
         String flag_pw = "";
         path = SmartDiary.getFile().getPath() + "/shadow";
-        
+       
         try {
             flag_pw = readContentFrom(path);
         } catch (IOException ex) {

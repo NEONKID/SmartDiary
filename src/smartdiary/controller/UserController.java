@@ -138,6 +138,10 @@ public class UserController implements Initializable {
     private void setPassword(String password) throws IOException {
         File shadow = new File(SmartDiary.getFile().getPath() + "/shadow");
         String enc = "";
+        
+        if(!SmartDiary.getFile().isDirectory()) {
+            SmartDiary.getFile().mkdirs();
+        }
 
         AESHelper aesHelper = new AESHelper(AESKey);
         try {
