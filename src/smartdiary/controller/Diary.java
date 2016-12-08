@@ -72,52 +72,65 @@ public class Diary implements Initializable {
         imgweather.setImage(img);
         weather = "눈";
     }
-    @FXML
-    public void save(ActionEvent event){
-        String diaryDir = datePicker.getValue().toString().substring(0, 4);
-        String diaryFile = datePicker.getValue().toString().substring(0, 7);
 
-        File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/"+"/Diary/"+ diaryDir);
-        File fileofDiary = new File(dirOfDiary.getPath() + "/" + diaryFile + ".smd");
+    @FXML
+    public void saveFile(ActionEvent event){
         try {
+            String diaryDir = datePicker.getValue().toString().substring(0, 4);
+            String diaryFile = datePicker.getValue().toString().substring(0, 7);
+
+            File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/"+"/Diary/"+ diaryDir);
+            File fileofDiary = new File(dirOfDiary.getPath() + "/" + diaryFile + ".smd");
+            String filePath = fileofDiary.getPath();
+
+            AESHelper aesHelper = new AESHelper(UserController.getAESKey());
+
             if(!dirOfDiary.isDirectory()) {
                 dirOfDiary.mkdirs();
             }
-            String filePath = fileofDiary.getPath();
 
-            PrintWriter out = new PrintWriter(new BufferedWriter(
-                    new FileWriter(filePath, true))); // append = false
-            out.println(datePicker.getValue());
-            out.println(weather);
-            out.println(jaemok.getText());
-            out.println(naeyong.getText());
-            out.println("------------------------------------------------------------");
-            out.close();
-        }
-        catch (IOException ex) {
+            try {
+                PrintWriter out = new PrintWriter(new BufferedWriter(
+                        new FileWriter(filePath, true))); // append = false
+                out.println(aesHelper.aesEncode(datePicker.getValue().toString()));
+                out.println(aesHelper.aesEncode(weather));
+                out.println(aesHelper.aesEncode(jaemok.getText()));
+                out.println(aesHelper.aesEncode(naeyong.getText()));
+                out.println(aesHelper.aesEncode("------------------------------------------------------------"));
+                out.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        String moneyDir = datePicker.getValue().toString().substring(0, 4);
-        String moneyFile = datePicker.getValue().toString().substring(0, 7);
-        // String moneyFile = datePicker.getValue().toString();
-
-        File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Money/" + moneyDir);
-        File fileofMoney = new File(dirOfMoney.getPath() + "/" + moneyFile + ".smd");
         try {
+            String moneyDir = datePicker.getValue().toString().substring(0, 4);
+            String moneyFile = datePicker.getValue().toString().substring(0, 7);
+
+            File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Money/" + moneyDir);
+            File fileofMoney = new File(dirOfMoney.getPath() + "/" + moneyFile + ".smd");
+            String filePath2 = fileofMoney.getPath();
+
+            AESHelper aesHelper = new AESHelper(UserController.getAESKey());
+
             if(!dirOfMoney.isDirectory()) {
                 dirOfMoney.mkdirs();
             }
-            String filePath2 = fileofMoney.getPath();
 
-            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filePath2, true))); // append = false
-            out.println(datePicker.getValue());
-            out.println(plus.getText());
-            out.println(minus.getText());
-            out.println("------------------------------------------------------------");
-            out.close();
-        }
-        catch (IOException ex) {
+            try {
+                PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filePath2, true))); // append = false
+                out.println(aesHelper.aesEncode(datePicker.getValue().toString()));
+                out.println(aesHelper.aesEncode(plus.getText()));
+                out.println(aesHelper.aesEncode(minus.getText()));
+                out.println(aesHelper.aesEncode("------------------------------------------------------------"));
+                out.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -125,46 +138,28 @@ public class Diary implements Initializable {
     public void clear(ActionEvent event){
         //  clear the textarea after checked by user
     }
-    
 
     @FXML
     public void TextReader() throws IOException {
         String baseDir = SmartDiary.getFile().getPath() + "/Contents" + "/Diary/" + datePicker.getValue().toString().substring(0, 4);
         String save = datePicker.getValue().toString().substring(0, 7)+".smd";       //검색결과가 저장된 파일명
         File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
-        int i = 0;
-        int j = 0;
-
-        jaemok.setText("");
-        naeyong.setText("");
+        DiaryFileReader diaryFileReader = new DiaryFileReader();
+        ArrayList<String> lineList = new ArrayList<String>();   // 내용 저장을 위한 ArrayList 정의
 
         if(!dir.isDirectory()) {
             // 디렉토리가 아니거나 없으면 종료
             System.out.println(baseDir + " is not directory or exist ");
         }
+        diaryFileReader.readFile(baseDir + "/" + save);
+        lineList = diaryFileReader.getList();
 
-        // 내용 저장을 위한 ArrayList 정의
-        ArrayList<String> lineList = new ArrayList<String>();
-
-        // 라인 단위 저장 및 카운트를 위한 변수 정의
-        String rLine = null;
-        int lineNum = 0;
-        try {
-            FileReader frd = new FileReader(baseDir + "/" + save);
-            BufferedReader brd = new BufferedReader(frd);
-            while ((rLine = brd.readLine()) != null) {
-                // ArrayList에 읽은 라인 추가
-                lineList.add(rLine);
-                lineNum++;
-            }
-            frd.close();
-            brd.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        jaemok.setText("");
+        naeyong.setText("");
 
         // 라인단위 출력(for loop)
-        lineNum = lineList.size();
+        int lineNum = lineList.size();
+        int i = 0, j;
         while(i < lineNum) {
             String a = datePicker.getValue().toString();
             String b = null;
@@ -177,7 +172,7 @@ public class Diary implements Initializable {
                 j = i + 3;
                 while(lineList.get(j).length() < 60)
                 {
-                    naeyong.setText(naeyong.getText()+"\n"+lineList.get(j));
+                    naeyong.setText(naeyong.getText()+"\n" + lineList.get(j));
                     j++;
                 }
                 break;

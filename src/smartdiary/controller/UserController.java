@@ -33,9 +33,8 @@ public class UserController implements Initializable {
     @FXML private JFXPasswordField new_field;
     @FXML private JFXPasswordField check_field;
     @FXML private StackPane userPane;
-    private File shadow;
     private FXMLDocumentController mainWindow;
-    private static String AESKey = "DLUGFOREVER in SmartDiary";
+    private static String AESKey = "SDiary of" + System.getProperty("user.name");
 
     public static String getAESKey() {
         return AESKey;
@@ -64,7 +63,7 @@ public class UserController implements Initializable {
                 });
                 content.setActions(button);
                 dialog.show();
-            } else if(!new_field.getText().equals(check_field.getText())) {
+            } else if(!new_field.getText().equals(check_field.getText()) || new_field.getText().equals("")) {
                 content.setHeading(new Text("변경 실패"));
                 content.setBody(new Text("새로이 설정한 패스워드가 올바르지 않습니다. \n다시 입력해주세요."));
                 button.setOnAction((ActionEvent e) -> {
@@ -91,6 +90,11 @@ public class UserController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    public void changeCancel(ActionEvent event) {
+        FXMLDocumentController.getStage().close();
     }
 
     @FXML
@@ -132,7 +136,7 @@ public class UserController implements Initializable {
     }
     
     private void setPassword(String password) throws IOException {
-        shadow = new File(SmartDiary.getFile().getPath() + "/shadow");
+        File shadow = new File(SmartDiary.getFile().getPath() + "/shadow");
         String enc = "";
 
         AESHelper aesHelper = new AESHelper(AESKey);
