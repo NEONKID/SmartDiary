@@ -51,7 +51,9 @@ public class SmartDiary extends Application {
             stage.setTitle("Welcome to SmartDiary !");
             stage.setScene(new Scene(loginView));
             stage.sizeToScene();
+            stage.setResizable(false);
             stage.show();
+            
         } else {
             registerUser();
         }

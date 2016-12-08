@@ -141,6 +141,7 @@ public class LoginController implements Initializable {
         stage.setScene(scene);
         stage.sizeToScene();
         stage.setTitle("SmartDiary");
+        stage.setResizable(false);
         stage.show();
         SmartDiary.getStage().hide();
     }
