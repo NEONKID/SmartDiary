@@ -5,9 +5,7 @@
  */
 package smartdiary.controller;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -38,36 +36,18 @@ public class MoneyManager implements Initializable {
         String baseDir = SmartDiary.getFile().getPath() + "/Contents" + "/Money/" + today.substring(0,4);
         String save = today.substring(0, 7)+".smd";       //검색결과가 저장된 파일명
         File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
+        DiaryFileReader diaryFileReader = new DiaryFileReader();
+        ArrayList<String> lineList; // 내용 저장을 위한 ArrayList 정의
         int plus = 0, minus = 0, i = 0;
         
-        if(!dir.isDirectory()) {
-            //디렉토리가 아니거나 없으면 종료
+        if(!dir.isDirectory()) {    // 디렉토리가 아니거나 없으면...
             System.out.println(baseDir + " is not directory or exist ");
             dir.mkdirs();
         }
+        diaryFileReader.readFile(baseDir + "/" + save);
+        lineList = diaryFileReader.getList();
 
-        // 내용 저장을 위한 ArrayList 정의
-        ArrayList<String> lineList = new ArrayList<String>();
-
-        // 라인 단위 저장 및 카운트를 위한 변수 정의
-        String rLine = null;
-        int lineNum = 0;
-
-        try {
-             FileReader frd = new FileReader(baseDir + "/" + save);
-             BufferedReader brd = new BufferedReader(frd);
-             while ((rLine = brd.readLine())!= null) {
-                 // ArrayList에 읽은 라인 추가
-                 lineList.add(rLine);
-                 lineNum++;
-             }
-             frd.close();
-             brd.close();
-        } catch (IOException e) {
-             e.printStackTrace();
-        }
-        // 라인단위 출력(for loop)
-        lineNum = lineList.size();
+        int lineNum = lineList.size();  // 라인 단위 저장 및 카운트를 위한 변수 정의
         while(i < lineNum) {
             String a = today.substring(0, 7);
             String b = null;

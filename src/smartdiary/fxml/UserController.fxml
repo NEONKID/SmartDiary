@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="userPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.UserController">
+<StackPane fx:id="userPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.UserController">
    <children>
       <VBox alignment="CENTER">
          <children>
@@ -20,8 +20,8 @@
                         <JFXPasswordField fx:id="check_field" promptText="비밀번호 확인" />
                         <HBox alignment="CENTER_RIGHT" spacing="20.0">
                            <children>
-                              <JFXButton buttonType="RAISED" ripplerFill="WHITE" style="-fx-background-color: #4059a9;" text="취소" textFill="WHITE" />
-                              <JFXButton buttonType="RAISED" ripplerFill="WHITE" style="-fx-background-color: #4059a9;" text="변경" textFill="WHITE" onAction="#clickSubmit" />
+                              <JFXButton buttonType="RAISED" onAction="#changeCancel" ripplerFill="WHITE" style="-fx-background-color: #4059a9;" text="취소" textFill="WHITE" />
+                              <JFXButton buttonType="RAISED" onAction="#clickSubmit" ripplerFill="WHITE" style="-fx-background-color: #4059a9;" text="변경" textFill="WHITE" />
                            </children>
                         </HBox>
                      </children>

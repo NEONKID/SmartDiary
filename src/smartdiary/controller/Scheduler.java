@@ -136,9 +136,15 @@ public class Scheduler implements Initializable {
     private void readFile(File file) {
         try {
             BufferedReader inReader = new BufferedReader(new FileReader(file));
+            AESHelper aesHelper = new AESHelper(UserController.getAESKey());
             String line = null;
             String[] splited = null;
             while((line = inReader.readLine()) != null) {
+                try {
+                    line = aesHelper.aesDecode(line);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 splited = line.split("\t");
                 for(int i = 0; i < splited.length; i++) {
                     splited[i] = splited[i].trim();
@@ -155,15 +161,20 @@ public class Scheduler implements Initializable {
         JFXSnackbar jFXSnackbar = new JFXSnackbar(stackPane);
         try {
             BufferedWriter outwriter = new BufferedWriter(new FileWriter(file));
+            AESHelper aesHelper = new AESHelper(UserController.getAESKey());
             for(Schedule schedules : scheduleObservableList) {
-                outwriter.write(schedules.toString());
-                outwriter.newLine();
+                try {
+                    outwriter.write(aesHelper.aesEncode(schedules.toString()));
+                    outwriter.newLine();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
             System.out.println(" :: " + scheduleObservableList.toString());
             outwriter.close();
-            jFXSnackbar.show("성공적으로 저장되었습니다.", 5000);
+            jFXSnackbar.show("성공적으로 저장되었습니다.", 3000);
         } catch (IOException ex) {
-            jFXSnackbar.show("죄송합니다. 오류가 발생했습니다.", 5000);
+            jFXSnackbar.show("죄송합니다. 오류가 발생했습니다.", 3000);
             ex.printStackTrace();
         }
     }

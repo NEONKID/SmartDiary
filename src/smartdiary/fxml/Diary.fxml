@@ -118,6 +118,24 @@
                         <Button fx:id="cleardiary" mnemonicParsing="false" onAction="#clear" prefHeight="40.0" prefWidth="50.0" text="취소" />
                      </children>
                   </HBox>
+<<<<<<< HEAD
+=======
+                  <ImageView fx:id="imgweather" fitHeight="42.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+            <HBox prefHeight="81.0" prefWidth="139.0">
+               <children>
+                  <Button fx:id="savediary" alignment="CENTER" mnemonicParsing="false" onAction="#saveFile" prefHeight="40.0" prefWidth="50.0" text="저장">
+                   <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="cleardiary" mnemonicParsing="false" onAction="#clear" prefHeight="40.0" prefWidth="50.0" text="취소" />
+                    
+>>>>>>> bdc3c5fb6839f0bcdeb60e40a561944ce088a8dc
                </children>
             </HBox>
          </children>
