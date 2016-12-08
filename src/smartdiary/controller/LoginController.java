@@ -154,7 +154,15 @@ public class LoginController implements Initializable {
         while((shadow = bufferedReader.readLine()) != null) {
             builder.append(shadow);
         }
-        return builder.toString();
+
+        AESHelper aesHelper = new AESHelper(UserController.getAESKey());
+        try {
+            shadow = aesHelper.aesDecode(builder.toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return shadow;
     }
     
     @Override

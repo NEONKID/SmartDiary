@@ -35,6 +35,11 @@ public class UserController implements Initializable {
     @FXML private StackPane userPane;
     private File shadow;
     private FXMLDocumentController mainWindow;
+    private static String AESKey = "DLUGFOREVER in SmartDiary";
+
+    public static String getAESKey() {
+        return AESKey;
+    }
     
     @FXML
     public void clickSubmit(ActionEvent event) {
@@ -128,8 +133,17 @@ public class UserController implements Initializable {
     
     private void setPassword(String password) throws IOException {
         shadow = new File(SmartDiary.getFile().getPath() + "/shadow");
+        String enc = "";
+
+        AESHelper aesHelper = new AESHelper(AESKey);
+        try {
+            enc = aesHelper.aesEncode(password);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         BufferedWriter out = new BufferedWriter(new FileWriter(shadow));
-        out.write(password);
+        out.write(enc);
         out.close();
     }
     
