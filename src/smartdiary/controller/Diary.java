@@ -5,7 +5,10 @@
  */
 package smartdiary.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
@@ -22,6 +25,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import smartdiary.SmartDiary;
 /**
  *
@@ -29,10 +35,6 @@ import smartdiary.SmartDiary;
  */
 public class Diary implements Initializable {
     
-    @FXML private Button sunny;
-    @FXML private Button snowy;
-    @FXML private Button rainy;
-    @FXML private Button cloudy;
     @FXML private Button savediary;
     @FXML private Button cleardiary;
     @FXML private ImageView imgweather;
@@ -42,6 +44,7 @@ public class Diary implements Initializable {
     @FXML private TextArea naeyong;
     @FXML private TextField plus;
     @FXML private TextField minus;
+    @FXML private StackPane stackPane;
     private String weather = "맑음";
 
     @FXML public void settoday() {
@@ -124,6 +127,38 @@ public class Diary implements Initializable {
     @FXML
     public void clear(ActionEvent event){
         //  clear the textarea after checked by user
+        JFXDialogLayout base = new JFXDialogLayout();
+                JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
+                JFXButton clearAgree = new JFXButton("Yes");
+                JFXButton clearCancel = new JFXButton("No");
+
+                clearAgree.setRipplerFill(Paint.valueOf("#ffffff"));
+                clearAgree.setTextFill(Paint.valueOf("#ffffff"));
+                clearAgree.setStyle("-fx-background-color: #4059a9");
+                clearCancel.setRipplerFill(Paint.valueOf("#ffffff"));
+                clearCancel.setTextFill(Paint.valueOf("#ffffff"));
+                clearCancel.setStyle("-fx-background-color: #4059a9");
+                
+                base.setHeading(new Text("null"));
+                base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
+                clearAgree.setOnAction((ActionEvent e) -> {
+                    checkClear.close();
+                    try {
+                        //Clear the textfield,area
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                clearCancel.setOnAction((ActionEvent e) -> {
+                    checkClear.close();
+                    try {
+                        //Clear the textfield,area
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                base.setActions(clearAgree, clearCancel);
+                checkClear.show();
     }
     
 
