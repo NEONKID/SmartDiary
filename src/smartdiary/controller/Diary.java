@@ -44,7 +44,6 @@ public class Diary implements Initializable {
     @FXML private TextField minus;
     private String weather = "맑음";
 
-    
     @FXML public void settoday() {
         
     }

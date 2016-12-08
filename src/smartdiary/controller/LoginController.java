@@ -26,7 +26,6 @@ public class LoginController implements Initializable {
     @FXML private JFXTextField usernameField;
     @FXML private JFXPasswordField passwordField;
     @FXML private StackPane stackPane;
-    private File logfile;
 
     private final String flag_id = System.getProperty("user.name");
 
@@ -106,7 +105,7 @@ public class LoginController implements Initializable {
     }
 
     private void writeLog(int code) {
-        logfile = new File(SmartDiary.getFile().getPath() + "/login.log");
+        File logfile = new File(SmartDiary.getFile().getPath() + "/login.log");
         Date date = new Date();
         String out = "";
         

@@ -29,17 +29,16 @@ public class MoneyManager implements Initializable {
     @FXML private TextField text2;
     @FXML private TextField text3;
     @FXML private TextField text4;
-    private int plus, minus, i;
 
     @FXML
     public void TextReader() throws IOException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String today = sdf.format(new Date());
     
-        String baseDir = SmartDiary.getFile().getPath() + "/Contents"+"/Money/"+ today.substring(0,4);
+        String baseDir = SmartDiary.getFile().getPath() + "/Contents" + "/Money/" + today.substring(0,4);
         String save = today.substring(0, 7)+".smd";       //검색결과가 저장된 파일명
-        // 읽어들일 디렉토리의 객체
-        File dir = new File(baseDir);
+        File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
+        int plus = 0, minus = 0, i = 0;
         
         if(!dir.isDirectory()) {
             //디렉토리가 아니거나 없으면 종료
@@ -53,19 +52,14 @@ public class MoneyManager implements Initializable {
         // 라인 단위 저장 및 카운트를 위한 변수 정의
         String rLine = null;
         int lineNum = 0;
-        boolean hasMore = true;
 
         try {
-             FileReader frd = new FileReader(baseDir+"/"+save);
+             FileReader frd = new FileReader(baseDir + "/" + save);
              BufferedReader brd = new BufferedReader(frd);
-             while (hasMore) {
-                 if((rLine = brd.readLine())!= null){
-                     // ArrayList에 읽은 라인 추가
-                     lineList.add(rLine);
-                     lineNum++;
-                     hasMore = true;
-                 } else
-                     hasMore = false;
+             while ((rLine = brd.readLine())!= null) {
+                 // ArrayList에 읽은 라인 추가
+                 lineList.add(rLine);
+                 lineNum++;
              }
              frd.close();
              brd.close();
