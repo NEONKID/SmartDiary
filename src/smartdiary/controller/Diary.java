@@ -137,7 +137,6 @@ public class Diary implements Initializable {
     public void clear(ActionEvent event){
         //  clear the textarea after checked by user
         JFXDialogLayout base = new JFXDialogLayout();
-<<<<<<< HEAD
                 JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
                 JFXButton clearAgree = new JFXButton("Yes");
                 JFXButton clearCancel = new JFXButton("No");
@@ -166,35 +165,6 @@ public class Diary implements Initializable {
                 });
                 base.setActions(clearAgree, clearCancel);
                 checkClear.show();
-=======
-        JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
-        JFXButton clearAgree = new JFXButton("Yes");
-        JFXButton clearCancel = new JFXButton("No");
-
-        clearAgree.setId("left-button");
-        clearCancel.setId("right-button");
-                
-        base.setHeading(new Text("null"));
-        base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
-        clearAgree.setOnAction((ActionEvent e) -> {
-            checkClear.close();
-            try {
-                            //Clear the textfield,area
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-        clearCancel.setOnAction((ActionEvent e) -> {
-            checkClear.close();
-            try {
-                //Clear the textfield,area
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-        base.setActions(clearAgree, clearCancel);
-        checkClear.show();
->>>>>>> 60a7c0055525fcca4aebbcb2ff4be414a6ee6994
     }
 
     @FXML
@@ -252,17 +222,14 @@ public class Diary implements Initializable {
             public void changed(ObservableValue<? extends LocalDate> observableValue, LocalDate oldDate, LocalDate newDate) {
                 try {
                     TextReader();
-                    plus.setText("0");
-                    minus.setText("0");
+                    income.setText("0");
+                    expense.setText("0");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             }
         });
-<<<<<<< HEAD
         income.setText("0");
         expense.setText("0");
-=======
->>>>>>> 60a7c0055525fcca4aebbcb2ff4be414a6ee6994
     }
 }
