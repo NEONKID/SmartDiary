@@ -34,7 +34,7 @@ public class UserController implements Initializable {
     @FXML private JFXPasswordField check_field;
     @FXML private StackPane userPane;
     private FXMLDocumentController mainWindow;
-    private static String AESKey = "SDiary of" + System.getProperty("user.name");
+    private static String AESKey = "SDiary of" + System.getProperty("user.name") + " user";
 
     public static String getAESKey() {
         return AESKey;
