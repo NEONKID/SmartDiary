@@ -39,8 +39,7 @@ public class FXMLDocumentController implements Initializable {
     public static Stage getStage() {
         return stage;
     }
-    
-    
+
     @FXML
     public void loadUserController() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/fxml/UserController.fxml"));

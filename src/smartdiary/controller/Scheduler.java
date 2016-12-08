@@ -65,7 +65,6 @@ public class Scheduler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // String fileName = LocalDate.now().getYear() + "_" + LocalDate.now().getMonth().toString().substring(0, 3);
         file = new File(SmartDiary.getFile().getPath() + "/schedules.smd");
         
         readFile(file);

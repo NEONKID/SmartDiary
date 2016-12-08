@@ -17,6 +17,7 @@ public class Day_Diary {
     private final SimpleStringProperty title = new SimpleStringProperty("");
     private final SimpleStringProperty context = new SimpleStringProperty("");
     private final SimpleStringProperty weather = new SimpleStringProperty("");
+
     public Day_Diary(){
         this("","","","");
     }
@@ -26,7 +27,7 @@ public class Day_Diary {
         setTitle(title);
         setContext(context);
         setWeather(weather);
-    }//Data for diary setting
+    } // Data for diary setting
     
     public String getDate() {
         return date.get();
