@@ -23,6 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
@@ -135,36 +136,37 @@ public class Diary implements Initializable {
     }
     @FXML
     public void clear(ActionEvent event){
-        //  clear the textarea after checked by user
+        //  Clear the textarea after checked by user
         JFXDialogLayout base = new JFXDialogLayout();
-                JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
-                JFXButton clearAgree = new JFXButton("Yes");
-                JFXButton clearCancel = new JFXButton("No");
+        JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
+        JFXButton clearAgree = new JFXButton("Yes");
+        JFXButton clearCancel = new JFXButton("No");
 
-                clearAgree.setId("left-button");
-                clearCancel.setId("right-button");
-                
-                base.setHeading(new Text(null));
-                base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
-                clearAgree.setOnAction((ActionEvent e) -> {
-                    checkClear.close();
-                    try {
-                         //Clear the Diary
-                        title.clear();
-                        content.clear();
-                        income.clear();
-                        expense.clear();
-                        img = new Image(getClass().getResource("/smartdiary/images/sunny.png").toString());
-                        imgweather.setImage(img);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                });
-                clearCancel.setOnAction((ActionEvent e) -> {
-                    checkClear.close();
-                });
-                base.setActions(clearAgree, clearCancel);
-                checkClear.show();
+        clearAgree.setId("left-button");
+        clearCancel.setId("right-button");
+        
+        base.setHeading(new Text(null));
+        base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
+        
+        clearAgree.setOnAction((ActionEvent e) -> {
+            checkClear.close();
+            try {
+                 //Clear the Diary
+                title.clear();
+                content.clear();
+                income.clear();
+                expense.clear();
+                img = new Image(getClass().getResource("/smartdiary/images/sunny.png").toString());
+                imgweather.setImage(img);//Default <<sunny
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        clearCancel.setOnAction((ActionEvent e) -> {
+            checkClear.close(); //Cancel. no action
+        });
+        base.setActions(clearAgree, clearCancel);
+        checkClear.show();
     }
 
     @FXML
