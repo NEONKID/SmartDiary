@@ -50,9 +50,7 @@ public class UserController implements Initializable {
             JFXDialog dialog = new JFXDialog(userPane, content, JFXDialog.DialogTransition.CENTER);
             JFXButton button = new JFXButton("OKAY");
                 
-            button.setRipplerFill(Paint.valueOf("#ffffff"));
-            button.setTextFill(Paint.valueOf("#ffffff"));
-            button.setStyle("-fx-background-color: #4059a9");
+            button.setId("right-button");
             
             if(!old_field.getText().equals(old_pw)) {
                 content.setHeading(new Text("변경 실패"));

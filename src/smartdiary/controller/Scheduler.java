@@ -66,8 +66,12 @@ public class Scheduler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String fileName = LocalDate.now().getYear() + "_" + LocalDate.now().getMonth().toString().substring(0, 3);
-        file = new File(SmartDiary.getFile().getPath() + "/schedules.smd");
+        File dirPath = new File(SmartDiary.getFile().getPath() + "/Schedules");
+        file = new File(dirPath.getPath() +  "schedules.smd");
+        
+        if(!dirPath.isDirectory()) {
+            dirPath.mkdirs();
+        }
         
         readFile(file);
         
@@ -188,9 +192,7 @@ public class Scheduler implements Initializable {
                 content.setHeading(new Text("일정 삭제"));
                 content.setBody(new Text("삭제되었습니다."));
                 
-                button.setRipplerFill(Paint.valueOf("#ffffff"));
-                button.setTextFill(Paint.valueOf("#ffffff"));
-                button.setStyle("-fx-background-color: #2196F3");
+                button.setId("blue-button");
                 button.setOnAction((ActionEvent event) -> {
                     newmemo.setText("");
                     dialog.close();
@@ -202,9 +204,7 @@ public class Scheduler implements Initializable {
                 content.setHeading(new Text("값 없음!"));
                 content.setBody(new Text("값이 입력되지 않았습니다. 다시 입력해주세요."));
                 
-                button.setRipplerFill(Paint.valueOf("#ffffff"));
-                button.setTextFill(Paint.valueOf("#ffffff"));
-                button.setStyle("-fx-background-color: #2196F3");
+                button.setId("blue-button");
                 button.setOnAction((ActionEvent event) -> {
                     dialog.close();
                 });
@@ -215,9 +215,7 @@ public class Scheduler implements Initializable {
                 content.setHeading(new Text("EMPTY TABLE"));
                 content.setBody(new Text("테이블이 비었습니다. 항목을 추가해주세요."));
                 
-                button.setRipplerFill(Paint.valueOf("#ffffff"));
-                button.setTextFill(Paint.valueOf("#ffffff"));
-                button.setStyle("-fx-background-color: #2196F3");
+                button.setId("blue-button");
                 button.setOnAction((ActionEvent event) -> {
                     dialog.close();
                 });
