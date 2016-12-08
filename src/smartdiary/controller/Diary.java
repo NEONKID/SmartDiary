@@ -137,6 +137,7 @@ public class Diary implements Initializable {
     public void clear(ActionEvent event){
         //  clear the textarea after checked by user
         JFXDialogLayout base = new JFXDialogLayout();
+<<<<<<< HEAD
                 JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
                 JFXButton clearAgree = new JFXButton("Yes");
                 JFXButton clearCancel = new JFXButton("No");
@@ -165,6 +166,35 @@ public class Diary implements Initializable {
                 });
                 base.setActions(clearAgree, clearCancel);
                 checkClear.show();
+=======
+        JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
+        JFXButton clearAgree = new JFXButton("Yes");
+        JFXButton clearCancel = new JFXButton("No");
+
+        clearAgree.setId("left-button");
+        clearCancel.setId("right-button");
+                
+        base.setHeading(new Text("null"));
+        base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
+        clearAgree.setOnAction((ActionEvent e) -> {
+            checkClear.close();
+            try {
+                            //Clear the textfield,area
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        clearCancel.setOnAction((ActionEvent e) -> {
+            checkClear.close();
+            try {
+                //Clear the textfield,area
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        base.setActions(clearAgree, clearCancel);
+        checkClear.show();
+>>>>>>> 60a7c0055525fcca4aebbcb2ff4be414a6ee6994
     }
 
     @FXML
@@ -173,7 +203,7 @@ public class Diary implements Initializable {
         String save = datePicker.getValue().toString().substring(0, 7)+".smd";       //검색결과가 저장된 파일명
         File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
         DiaryFileReader diaryFileReader = new DiaryFileReader();
-        ArrayList<String> lineList = new ArrayList<String>();   // 내용 저장을 위한 ArrayList 정의
+        ArrayList<String> lineList;   // 내용 저장을 위한 ArrayList 정의
 
         if(!dir.isDirectory()) {
             // 디렉토리가 아니거나 없으면 종료
@@ -222,12 +252,17 @@ public class Diary implements Initializable {
             public void changed(ObservableValue<? extends LocalDate> observableValue, LocalDate oldDate, LocalDate newDate) {
                 try {
                     TextReader();
+                    plus.setText("0");
+                    minus.setText("0");
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             }
         });
+<<<<<<< HEAD
         income.setText("0");
         expense.setText("0");
+=======
+>>>>>>> 60a7c0055525fcca4aebbcb2ff4be414a6ee6994
     }
 }

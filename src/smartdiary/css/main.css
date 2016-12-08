@@ -10,3 +10,21 @@
     -fx-opacity: 1.0;
 }
 
+#left-button {
+    -fx-background-color: #4059a9;
+    -fx-text-fill: #FFFFFF;
+    -fx-ripppler-fill: #FFFFFF;
+}
+
+#right-button {
+    -fx-background-color: #4059a9;
+    -fx-text-fill: #FFFFFF;
+    -fx-ripppler-fill: #FFFFFF;
+}
+
+#blue-button {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: #FFFFFF;
+    -fx-ripppler-fill: #FFFFFF;
+}
+
