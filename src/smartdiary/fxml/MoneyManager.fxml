@@ -51,7 +51,7 @@
                   </HBox>
                   <HBox alignment="TOP_RIGHT" spacing="20.0">
                      <children>
-                        <Button fx:id="calc" mnemonicParsing="false" onAction="#calcMoney" text="결산!" />
+                        <Button fx:id="calc" mnemonicParsing="false" onAction="#TextReader" text="결산!" />
                      </children>
                   </HBox>
                   <HBox spacing="10.0">

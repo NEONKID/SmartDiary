@@ -18,6 +18,7 @@ import smartdiary.SmartDiary;
 import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -65,6 +66,7 @@ public class Scheduler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String fileName = LocalDate.now().getYear() + "_" + LocalDate.now().getMonth().toString().substring(0, 3);
         file = new File(SmartDiary.getFile().getPath() + "/schedules.smd");
         
         readFile(file);

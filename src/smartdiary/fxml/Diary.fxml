@@ -110,6 +110,10 @@
                      </HBox.margin>
                   </Button>
                   <Button fx:id="cleardiary" mnemonicParsing="false" onAction="#clear" prefHeight="40.0" prefWidth="50.0" text="취소" />
+                  <Button fx:id="load" alignment="CENTER" mnemonicParsing="false" onAction="#TextReader" prefHeight="40.0" prefWidth="78.0" text="불러오기">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></Button>
                     
                </children>
             </HBox>

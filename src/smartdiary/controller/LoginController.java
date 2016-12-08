@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -155,15 +154,7 @@ public class LoginController implements Initializable {
         while((shadow = bufferedReader.readLine()) != null) {
             builder.append(shadow);
         }
-
-        AESHelper aesHelper = new AESHelper(UserController.getAESKey());
-        try {
-            shadow = aesHelper.aesDecode(builder.toString());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        return shadow;
+        return builder.toString();
     }
     
     @Override
