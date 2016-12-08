@@ -40,16 +40,12 @@ public class Diary implements Initializable {
     @FXML private ImageView imgweather;
     @FXML private Image img;
     @FXML private JFXDatePicker datePicker;
-    @FXML private TextField jaemok;
-    @FXML private TextArea naeyong;
-    @FXML private TextField plus;
-    @FXML private TextField minus;
+    @FXML private TextField title;
+    @FXML private TextArea content;
+    @FXML private TextField income;
+    @FXML private TextField expense;
     @FXML private StackPane stackPane;
     private String weather = "맑음";
-
-    @FXML public void settoday() {
-        
-    }
     
     @FXML
     public void imgsun(ActionEvent event){
@@ -97,8 +93,8 @@ public class Diary implements Initializable {
                         new FileWriter(filePath, true))); // append = false
                 out.println(aesHelper.aesEncode(datePicker.getValue().toString()));
                 out.println(aesHelper.aesEncode(weather));
-                out.println(aesHelper.aesEncode(jaemok.getText()));
-                out.println(aesHelper.aesEncode(naeyong.getText()));
+                out.println(aesHelper.aesEncode(title.getText()));
+                out.println(aesHelper.aesEncode(content.getText()));
                 out.println(aesHelper.aesEncode("------------------------------------------------------------"));
                 out.close();
             } catch (Exception ex) {
@@ -125,8 +121,8 @@ public class Diary implements Initializable {
             try {
                 PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filePath2, true))); // append = false
                 out.println(aesHelper.aesEncode(datePicker.getValue().toString()));
-                out.println(aesHelper.aesEncode(plus.getText()));
-                out.println(aesHelper.aesEncode(minus.getText()));
+                out.println(aesHelper.aesEncode(income.getText()));
+                out.println(aesHelper.aesEncode(expense.getText()));
                 out.println(aesHelper.aesEncode("------------------------------------------------------------"));
                 out.close();
             } catch (Exception ex) {
@@ -145,30 +141,27 @@ public class Diary implements Initializable {
                 JFXButton clearAgree = new JFXButton("Yes");
                 JFXButton clearCancel = new JFXButton("No");
 
-                clearAgree.setRipplerFill(Paint.valueOf("#ffffff"));
-                clearAgree.setTextFill(Paint.valueOf("#ffffff"));
-                clearAgree.setStyle("-fx-background-color: #4059a9");
-                clearCancel.setRipplerFill(Paint.valueOf("#ffffff"));
-                clearCancel.setTextFill(Paint.valueOf("#ffffff"));
-                clearCancel.setStyle("-fx-background-color: #4059a9");
+                clearAgree.setId("left-button");
+                clearCancel.setId("right-button");
                 
-                base.setHeading(new Text("null"));
+                base.setHeading(new Text(null));
                 base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
                 clearAgree.setOnAction((ActionEvent e) -> {
                     checkClear.close();
                     try {
-                        //Clear the textfield,area
+                         //Clear the Diary
+                        title.clear();
+                        content.clear();
+                        income.clear();
+                        expense.clear();
+                        img = new Image(getClass().getResource("/smartdiary/images/sunny.png").toString());
+                        imgweather.setImage(img);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 });
                 clearCancel.setOnAction((ActionEvent e) -> {
                     checkClear.close();
-                    try {
-                        //Clear the textfield,area
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
                 });
                 base.setActions(clearAgree, clearCancel);
                 checkClear.show();
@@ -189,8 +182,8 @@ public class Diary implements Initializable {
         diaryFileReader.readFile(baseDir + "/" + save);
         lineList = diaryFileReader.getList();
 
-        jaemok.setText("");
-        naeyong.setText("");
+        title.setText("");
+        content.setText("");
 
         // 라인단위 출력(for loop)
         int lineNum = lineList.size();
@@ -203,11 +196,11 @@ public class Diary implements Initializable {
             }
             if(a.equals(b))
             {
-                jaemok.setText(lineList.get(i + 2));
+                title.setText(lineList.get(i + 2));
                 j = i + 3;
                 while(lineList.get(j).length() < 60)
                 {
-                    naeyong.setText(naeyong.getText()+"\n" + lineList.get(j));
+                    content.setText(content.getText()+"\n" + lineList.get(j));
                     j++;
                 }
                 break;
@@ -234,7 +227,7 @@ public class Diary implements Initializable {
                 }
             }
         });
-        plus.setText("0");
-        minus.setText("0");
+        income.setText("0");
+        expense.setText("0");
     }
 }
