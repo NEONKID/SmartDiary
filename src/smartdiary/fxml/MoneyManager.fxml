@@ -11,9 +11,9 @@
 
 <HBox alignment="CENTER" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.MoneyManager">
     <children>
-      <VBox prefHeight="200.0" prefWidth="320.0">
+      <VBox prefHeight="480.0" prefWidth="358.0">
          <children>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView>
               <columns>
                 <TableColumn minWidth="-1.0" prefWidth="-1.0" text="지출 내역" />
                 <TableColumn minWidth="-1.0" prefWidth="-1.0" text="용돈 내역" />
@@ -22,46 +22,85 @@
               </columns>
             </TableView>
          </children></VBox>
-      <HBox>
+      <VBox prefHeight="480.0" prefWidth="378.0">
          <children>
             <VBox alignment="CENTER_RIGHT" spacing="10.0">
                <children>
                   <HBox spacing="10.0">
                      <children>
-                          <Label text="이번 달 용돈 : " />
-                          <TextField fx:id="text1" />
+                        <Label text="오늘 잔고" />
+                        <TextField fx:id="text11" />
                      </children>
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
-                          <Label text="이번 달 수익 : " />
-                          <TextField fx:id="text2" />
+                        <Label text="오늘 수익" />
+                        <TextField fx:id="text21" />
                      </children>
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
-                          <Label text="이번 달 지출 : " />
-                          <TextField fx:id="text3" />
+                        <Label text="오늘 지출" />
+                        <TextField fx:id="text31" />
                      </children>
                   </HBox>
-                  <HBox alignment="TOP_RIGHT" spacing="20.0">
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Button fx:id="calc1" mnemonicParsing="false" onAction="#TextReader" text="결산!" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="10.0">
+                     <children>
+                        <Label text="오늘 결산" />
+                        <TextField fx:id="text41" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER_RIGHT" prefHeight="185.0" prefWidth="330.0" spacing="10.0">
+               <children>
+                  <HBox spacing="10.0">
+                     <children>
+                        <Label text="이번 달 잔고 : " />
+                        <TextField fx:id="text1" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="10.0">
+                     <children>
+                        <Label text="이번 달 수익 : " />
+                        <TextField fx:id="text2" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="10.0">
+                     <children>
+                        <Label text="이번 달 지출 : " />
+                        <TextField fx:id="text3" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="20.0">
                      <children>
                         <Button fx:id="calc" mnemonicParsing="false" onAction="#TextReader" text="결산!" />
                      </children>
                   </HBox>
                   <HBox spacing="10.0">
                      <children>
-                          <Label text="이번 달 결산 : " />
-                          <TextField fx:id="text4" />
+                        <Label text="이번 달 결산 : " />
+                        <TextField fx:id="text4" />
                      </children>
                   </HBox>
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" top="20.0" />
+               </padding>
             </VBox>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </HBox>
+      </VBox>
     </children>
    <opaqueInsets>
       <Insets />
