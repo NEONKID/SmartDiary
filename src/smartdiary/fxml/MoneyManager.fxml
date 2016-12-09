@@ -1,94 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="bgimage" alignment="CENTER" prefHeight="500.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.MoneyManager">
-    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="275.0" prefWidth="320.0">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.MoneyController">
+   <children>
+      <HBox fx:id="bgimage" alignment="CENTER" prefHeight="500.0" prefWidth="770.0">
          <children>
-            <TableView fx:id="tableView" minHeight="-Infinity" prefHeight="386.0" prefWidth="320.0">
-              <columns>
-                <TableColumn fx:id="Date" prefWidth="140.0" text="날  짜">
-                <cellValueFactory>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="275.0" prefWidth="320.0">
+               <children>
+                  <TableView fx:id="tableView" minHeight="-Infinity" prefHeight="386.0" prefWidth="320.0" stylesheets="@../css/tableview.css">
+                     <columns>
+                        <TableColumn fx:id="Date" prefWidth="140.0" text="날  짜">
+                           <cellValueFactory>
                               <PropertyValueFactory property="Date" />
                            </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="plus" prefWidth="90.0" text="수  입">
-                <cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="plus" prefWidth="90.0" text="수  입">
+                           <cellValueFactory>
                               <PropertyValueFactory property="plus" />
                            </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="minus" prefWidth="90.0" text="지  출">
-                <cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="minus" prefWidth="90.0" text="지  출">
+                           <cellValueFactory>
                               <PropertyValueFactory property="minus" />
                            </cellValueFactory>
-                </TableColumn>
-              </columns>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </TableView>
-         </children></VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="48.0" />
-      <HBox>
-         <children>
-            <VBox alignment="CENTER_RIGHT" spacing="10.0">
-               <children>
-                  <DatePicker fx:id="datepicker" promptText="다른 달 결산">
+                        </TableColumn>
+                     </columns>
                      <VBox.margin>
-                        <Insets bottom="100.0" />
+                        <Insets />
                      </VBox.margin>
-                  </DatePicker>
-                  <HBox spacing="10.0">
-                     <children>
-                          <Label text="이번 달 용돈 : " />
-                          <TextField fx:id="text1" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="10.0">
-                     <children>
-                          <Label text="이번 달 수익 : " />
-                          <TextField fx:id="text2" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="10.0">
-                     <children>
-                          <Label text="이번 달 지출 : " />
-                          <TextField fx:id="text3" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="TOP_RIGHT" spacing="20.0">
-                     <children>
-                        <Button fx:id="calc" mnemonicParsing="false" onAction="#TextReader" text="결산!" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="10.0">
-                     <children>
-                          <Label text="이번 달 결산 : " />
-                          <TextField fx:id="text4" />
-                     </children>
-                  </HBox>
+                  </TableView>
                </children>
             </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="48.0" />
+            <HBox>
+               <children>
+                  <VBox alignment="CENTER_RIGHT" spacing="10.0">
+                     <children>
+                        <JFXDatePicker fx:id="datepicker" defaultColor="#1a64ae" promptText="다른 달 결산">
+                           <VBox.margin>
+                              <Insets bottom="100.0" />
+                           </VBox.margin>
+                        </JFXDatePicker>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="월 예산 : " translateY="3.0" />
+                              <TextField fx:id="text1" promptText="예산을 입력하세요" />
+                           </children>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="월 수익 : " translateY="5.0" />
+                              <TextField fx:id="text2" editable="false" pickOnBounds="false" promptText="Diary에서 입력" />
+                           </children>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="월 지출 : " translateY="5.0" />
+                              <TextField fx:id="text3" editable="false" promptText="Diary에서 입력" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_RIGHT" spacing="20.0">
+                           <children>
+                              <JFXButton fx:id="calc" mnemonicParsing="false" onAction="#MoneyReader" style="-fx-background-color: #326195" text="결산!" textFill="WHITE" />
+                           </children>
+                        </HBox>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label text="월 결산 : " translateY="5.0" />
+                              <TextField fx:id="text4" editable="false" promptText="결산을 눌러주세요" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
          <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="20.0" left="10.0" right="10.0" />
          </padding>
       </HBox>
-    </children>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
-   <padding>
-      <Insets bottom="20.0" left="10.0" right="10.0" />
-   </padding>
-</HBox>
+   </children>
+</StackPane>

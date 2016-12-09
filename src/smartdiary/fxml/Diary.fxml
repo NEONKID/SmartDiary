@@ -13,7 +13,6 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 
-
 <StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.DiaryController">
    <children>
       <VBox fx:id="bgimage" alignment="CENTER" prefHeight="500.0" prefWidth="770.0">
@@ -80,7 +79,7 @@
                            <children>
                               <HBox prefHeight="23.0" prefWidth="388.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="수 입 : ">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="수 입 : " translateY="5.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -89,7 +88,7 @@
                                        </HBox.margin>
                                     </Text>
                                     <TextField fx:id="income" prefHeight="23.0" prefWidth="150.0" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="지 출 : ">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="지 출 : " translateY="5.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

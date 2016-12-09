@@ -1,5 +1,6 @@
 package smartdiary.controller;
 
+import com.jfoenix.controls.JFXButton;
 import smartdiary.Money.Money;
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
+import com.jfoenix.controls.JFXDatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -32,7 +33,8 @@ public class MoneyController implements Initializable {
     @FXML private TableColumn<Money, String> Date;
     @FXML private TableColumn<Money, String> plus;
     @FXML private TableColumn<Money, String> minus;
-    @FXML private DatePicker datepicker;
+    @FXML private JFXButton calc;
+    @FXML private JFXDatePicker datepicker;
     
     private final ObservableList<Money>data = FXCollections.observableArrayList();
     
@@ -71,9 +73,9 @@ public class MoneyController implements Initializable {
         int y = Integer.parseInt(text2.getText());
         int z = Integer.parseInt(text3.getText());
         
-        double calc = x + y - z;
+        double cal = x + y - z;
         DecimalFormat df = new DecimalFormat("#,##0");
-        text4.setText(String.valueOf(df.format(calc)));
+        text4.setText(String.valueOf(df.format(cal)));
     }
        
     @Override
