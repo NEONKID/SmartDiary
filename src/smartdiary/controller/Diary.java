@@ -41,6 +41,10 @@ public class Diary implements Initializable {
     @FXML private TextField expense;
     @FXML private StackPane stackPane;
     private String weather = "맑음";
+
+    @FXML public void settoday() {
+        
+    }
     
     @FXML
     public void imgsun(ActionEvent event){
@@ -70,13 +74,53 @@ public class Diary implements Initializable {
     @FXML
     public void saveFile(ActionEvent event){
         try {
-            String diaryDir = datePicker.getValue().toString().substring(0, 4);
-            String diaryFile = datePicker.getValue().toString().substring(0, 7);
-
+            String diaryDir = datePicker.getValue().toString().substring(0, 4);     // 년
+            String diaryFile = datePicker.getValue().toString().substring(0, 7);    // 월
+            
             File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/"+"/Diary/"+ diaryDir);
             File fileofDiary = new File(dirOfDiary.getPath() + "/" + diaryFile + ".smd");
             String filePath = fileofDiary.getPath();
-
+            
+            // 중복 확인 
+            String temp = "";
+            DiaryFileReader diaryFileReader = new DiaryFileReader();
+            ArrayList<String> lineList = new ArrayList<String>();   // 내용 저장을 위한 ArrayList 정의
+            try {
+            diaryFileReader.readFile(dirOfDiary + "/" + datePicker.getValue().toString().substring(0, 7)+".smd");
+            lineList = diaryFileReader.getList();
+            int lineNum = lineList.size();
+            int i = 0, j;
+            while(i < lineNum) {
+                String a = datePicker.getValue().toString();
+                String b = null;
+                if(lineList.get(i).length() != 0) {
+                    b = lineList.get(i).substring(0, lineList.get(i).length());
+                }
+                if(a.equals(b)) {
+                    System.out.println("중복 발견!");
+                    while(lineList.get(i).length() < 50)
+                    {
+                        i++;
+                    }
+                }
+                else
+                {
+                    if(i == 0){temp = lineList.get(i)+"\n";}
+                    else{temp = temp + lineList.get(i)+"\n";}
+                }
+                i++;
+            }
+            //System.out.println(lineList.get(0));
+            //System.out.println(temp);
+            FileWriter fw = new FileWriter(fileofDiary.getPath());
+            fw.write(temp);
+            fw.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+   }
+            //중복 검출 끝
+            
             AESHelper aesHelper = new AESHelper(UserController.getAESKey());
 
             if(!dirOfDiary.isDirectory()) {
@@ -98,7 +142,7 @@ public class Diary implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
+        
         try {
             String moneyDir = datePicker.getValue().toString().substring(0, 4);
             String moneyFile = datePicker.getValue().toString().substring(0, 7);
@@ -106,7 +150,41 @@ public class Diary implements Initializable {
             File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Money/" + moneyDir);
             File fileofMoney = new File(dirOfMoney.getPath() + "/" + moneyFile + ".smd");
             String filePath2 = fileofMoney.getPath();
-
+            
+            // 중복 확인 
+            String temp2 = "";
+            DiaryFileReader diaryFileReader = new DiaryFileReader();
+            ArrayList<String> lineList = new ArrayList<String>();   // 내용 저장을 위한 ArrayList 정의
+            try {
+            diaryFileReader.readFile(dirOfMoney + "/" + datePicker.getValue().toString().substring(0, 7)+".smd");
+            lineList = diaryFileReader.getList();
+            int lineNum = lineList.size();
+            int i = 0, j;
+            while(i < lineNum) {
+                String a = datePicker.getValue().toString();
+                String b = null;
+                if(lineList.get(i).length() != 0) {
+                    b = lineList.get(i).substring(0, lineList.get(i).length());
+                }
+                if(a.equals(b))
+                {
+                    System.out.println("중복날짜 검출!");
+                    i=i+4;
+                }
+                else {
+                    if(i == 0){temp2 = lineList.get(i)+"\n";}
+                    else{temp2 = temp2 + lineList.get(i)+"\n";}
+                    i++; }
+            }
+            FileWriter fw = new FileWriter(fileofMoney.getPath());
+            fw.write(temp2);
+            fw.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+   }
+            //중복 검출 끝
+            
             AESHelper aesHelper = new AESHelper(UserController.getAESKey());
 
             if(!dirOfMoney.isDirectory()) {
@@ -130,37 +208,34 @@ public class Diary implements Initializable {
     }
     @FXML
     public void clear(ActionEvent event){
-        //  Clear the textarea after checked by user
+        //  clear the textarea after checked by user
         JFXDialogLayout base = new JFXDialogLayout();
-        JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
-        JFXButton clearAgree = new JFXButton("Yes");
-        JFXButton clearCancel = new JFXButton("No");
+                JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
+                JFXButton clearAgree = new JFXButton("Yes");
+                JFXButton clearCancel = new JFXButton("No");
 
-        clearAgree.setId("left-button");
-        clearCancel.setId("right-button");
-        
-        base.setHeading(new Text(null));
-        base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
-        
-        clearAgree.setOnAction((ActionEvent e) -> {
-            checkClear.close();
-            try {
-                 //Clear the Diary
-                title.clear();
-                content.clear();
-                income.clear();
-                expense.clear();
-                img = new Image(getClass().getResource("/smartdiary/images/sunny.png").toString());
-                imgweather.setImage(img);//Default <<sunny
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-        clearCancel.setOnAction((ActionEvent e) -> {
-            checkClear.close(); //Cancel. no action
-        });
-        base.setActions(clearAgree, clearCancel);
-        checkClear.show();
+                clearAgree.setId("left-button");
+                clearCancel.setId("right-button");
+                
+                base.setHeading(new Text("null"));
+                base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
+                clearAgree.setOnAction((ActionEvent e) -> {
+                    checkClear.close();
+                    try {
+                        //Clear the Diary
+                        title.clear();
+                        content.clear();
+                        income.clear();
+                        expense.clear();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                clearCancel.setOnAction((ActionEvent e) -> {
+                    checkClear.close();
+                });
+                base.setActions(clearAgree, clearCancel);
+                checkClear.show();
     }
 
     @FXML
@@ -169,7 +244,7 @@ public class Diary implements Initializable {
         String save = datePicker.getValue().toString().substring(0, 7)+".smd";       //검색결과가 저장된 파일명
         File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
         DiaryFileReader diaryFileReader = new DiaryFileReader();
-        ArrayList<String> lineList;   // 내용 저장을 위한 ArrayList 정의
+        ArrayList<String> lineList = new ArrayList<String>();   // 내용 저장을 위한 ArrayList 정의
 
         if(!dir.isDirectory()) {
             // 디렉토리가 아니거나 없으면 종료
@@ -196,7 +271,12 @@ public class Diary implements Initializable {
                 j = i + 3;
                 while(lineList.get(j).length() < 60)
                 {
-                    content.setText(content.getText()+"\n" + lineList.get(j));
+                    if(content.getText()==""){
+                        content.setText(lineList.get(j) + "\n");
+                        j++;
+                        continue;
+                    }
+                    content.setText(content.getText() + lineList.get(j) + "\n");
                     j++;
                 }
                 break;

@@ -30,3 +30,7 @@
     -fx-text-fill: #FFFFFF;
     -fx-ripppler-fill: #FFFFFF;
 }
+
+#background{
+    -fx-background-color:aaf8ff;
+}

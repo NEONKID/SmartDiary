@@ -15,7 +15,7 @@
 
 <StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.Diary">
    <children>
-      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #ffffff;">
+      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #e7fdff">
          <children>
             <HBox alignment="CENTER">
                <children>
