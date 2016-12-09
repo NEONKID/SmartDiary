@@ -8,6 +8,7 @@ import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -40,6 +40,10 @@ public class DiaryController implements Initializable {
     @FXML private TextField expense;
     @FXML private StackPane stackPane;
     private String weather = "맑음";
+
+    @FXML public void settoday() {
+        
+    }
     
     @FXML
     public void imgsun(ActionEvent event){
@@ -96,8 +100,8 @@ public class DiaryController implements Initializable {
     }
         
     @FXML
-    public void clear(ActionEvent event) {
-        //  Clear the textarea after checked by user
+    public void clear(ActionEvent event){
+        //  clear the textarea after checked by user
         JFXDialogLayout base = new JFXDialogLayout();
         JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
         JFXButton clearAgree = new JFXButton("Yes");
@@ -106,7 +110,7 @@ public class DiaryController implements Initializable {
         clearAgree.setId("left-button");
         clearCancel.setId("right-button");
         
-        base.setHeading(new Text(null));
+        base.setHeading(new Text("null"));
         base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
         
         clearAgree.setOnAction((ActionEvent e) -> {
