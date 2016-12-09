@@ -13,11 +13,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<<<<<<< HEAD
 <StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.DiaryController">
-=======
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.DiaryController">
->>>>>>> f4bc93a5771ac874da5bc7b2c58c8f6c14aced9e
    <children>
       <VBox fx:id="bgimage" alignment="CENTER" prefHeight="500.0" prefWidth="770.0">
          <children>
