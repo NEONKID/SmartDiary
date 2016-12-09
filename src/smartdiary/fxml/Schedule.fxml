@@ -56,7 +56,7 @@
                   <Insets bottom="20.0" top="20.0" />
                </opaqueInsets>
                <children>
-                  <TableView fx:id="tableView" editable="true" onMouseClicked="#getInformation" stylesheets="@../css/main.css">
+                  <TableView fx:id="tableView" editable="true" onMouseClicked="#getInformation" stylesheets="@../css/tableview.css">
                      <columns>
                         <TableColumn fx:id="dateCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" onEditCommit="#dateCol_OnEditCommit" prefWidth="150.0" resizable="false" text="날짜">
                            <cellValueFactory>

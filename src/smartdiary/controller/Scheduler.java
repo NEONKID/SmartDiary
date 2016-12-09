@@ -18,11 +18,9 @@ import smartdiary.SmartDiary;
 import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.paint.Paint;
 
 /**
  * Created by neonkid on 11/23/16.

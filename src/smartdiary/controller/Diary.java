@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package smartdiary.controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -26,7 +21,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import smartdiary.SmartDiary;
 /**
