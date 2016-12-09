@@ -17,10 +17,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.scene.web.HTMLEditor;
 import smartdiary.Diary.DiaryFileReader;
 import smartdiary.SmartDiary;
 import smartdiary.Diary.DiaryFileWriter;
@@ -35,36 +35,32 @@ public class DiaryController implements Initializable {
     @FXML private Image img;
     @FXML private JFXDatePicker datePicker;
     @FXML private TextField title;
-    @FXML private TextArea content;
+    @FXML private HTMLEditor content;
     @FXML private TextField income;
     @FXML private TextField expense;
     @FXML private StackPane stackPane;
-    private String weather = "맑음";
+    private String weather = "";
 
-    @FXML public void settoday() {
-        
-    }
-    
     @FXML
-    public void imgsun(ActionEvent event){
+    public void imgsun(){
         img = new Image(getClass().getResource("/smartdiary/images/sunny.png").toString());
         imgweather.setImage(img);
         weather = "맑음";
     }
     @FXML
-    public void imgcloud(ActionEvent event){
+    public void imgcloud(){
         img = new Image(getClass().getResource("/smartdiary/images/cloudy.png").toString());
         imgweather.setImage(img);
         weather = "구름";
     }
     @FXML
-    public void imgrain(ActionEvent event){
+    public void imgrain(){
         img = new Image(getClass().getResource("/smartdiary/images/rainy.png").toString());
         imgweather.setImage(img);
         weather = "비";
     }
     @FXML
-    public void imgsnow(ActionEvent event){
+    public void imgsnow(){
         img = new Image(getClass().getResource("/smartdiary/images/snowy.png").toString());
         imgweather.setImage(img);
         weather = "눈";
@@ -74,7 +70,7 @@ public class DiaryController implements Initializable {
     public void saveFile(ActionEvent event) { 
         String saveDir = datePicker.getValue().toString().substring(0, 4);
         String saveFile = datePicker.getValue().toString().substring(0, 7);
-        String[] contents_diary = { datePicker.getValue().toString(), weather, title.getText(), content.getText() }; 
+        String[] contents_diary = { datePicker.getValue().toString(), weather, title.getText(), content.getHtmlText() }; 
         String[] contents_money = { datePicker.getValue().toString(), income.getText(), expense.getText() };
             
         File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Diary/"+ saveDir);
@@ -118,11 +114,9 @@ public class DiaryController implements Initializable {
             try {
                  // Clear the Diary
                 title.clear();
-                content.clear();
+                content.setHtmlText("");
                 income.clear();
                 expense.clear();
-                img = new Image(getClass().getResource("/smartdiary/images/sunny.png").toString());
-                imgweather.setImage(img);   // Default <<sunny
             } catch (Exception ex) {
             }
         });
@@ -136,50 +130,83 @@ public class DiaryController implements Initializable {
     @FXML
     public void DiaryReader() throws IOException {
         String baseDir = SmartDiary.getFile().getPath() + "/Contents" + "/Diary/" + datePicker.getValue().toString().substring(0, 4);
+        String moneyDir = SmartDiary.getFile().getPath() + "/Contents" + "/Money/" + datePicker.getValue().toString().substring(0, 4);
         String save = datePicker.getValue().toString().substring(0, 7)+".smd";       //검색결과가 저장된 파일명
+        String Line = "------------------------------------------------------------";
         File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
         DiaryFileReader diaryFileReader = new DiaryFileReader();
-        ArrayList<String> lineList;   // 내용 저장을 위한 ArrayList 정의
+        DiaryFileReader moneyFileReader = new DiaryFileReader();
+        ArrayList<String> diaryLine;   // 내용을 불러오기 위한 ArrayList 정의
+        ArrayList<String> moneyLine;
         
         title.setText("");
-        content.setText("");
+        content.setHtmlText("");
 
         if(!dir.isDirectory()) {
             // 디렉토리가 아니거나 없으면 종료
             System.out.println(baseDir + " is not directory or exist ");
+            return;
         }
+        
         diaryFileReader.readFile(baseDir + "/" + save);
-        lineList = diaryFileReader.getList();
-
+        diaryLine = diaryFileReader.getList();
+        
         // 라인단위 출력(for loop)
-        int lineNum = lineList.size();
+        int lineNum = diaryLine.size();
         int i = 0, j;
         while(i < lineNum) {
-            String a = datePicker.getValue().toString();
-            String b = null;
-            if(lineList.get(i).length() != 0) {
-                b = lineList.get(i).substring(0, lineList.get(i).length());
+            String date = datePicker.getValue().toString();
+            String cp = null;
+            if(diaryLine.get(i).length() != 0) {
+                cp = diaryLine.get(i).substring(0, diaryLine.get(i).length());
+                System.out.println("Output: " + cp);
             }
-            if(a.equals(b))
-            {
-                title.setText(lineList.get(i + 2));
+            if(date.equals(cp)) {
+                switch(diaryLine.get(i + 1)) {
+                    case "맑음":
+                        imgsun();
+                        break;
+                    case "구름":
+                        imgcloud();
+                        break;
+                    case "비":
+                        imgrain();
+                        break;
+                    case "눈":
+                        imgsnow();
+                        break;
+                }               
+                title.setText(diaryLine.get(i + 2));
                 j = i + 3;
-                while(lineList.get(j).length() < 60)
-                {
-                    if(content.getText().equals("")) {
-                        content.setText(lineList.get(j) + "\n");
-                        j++;
-                        continue;
-                    }
-                    content.setText(content.getText() + lineList.get(j) + "\n");
+                
+                while(!diaryLine.get(j).equals(Line)) {
+                    content.setHtmlText(diaryLine.get(j));
                     j++;
                 }
                 break;
             }
             else { i++; }
         }
-        income.setText("0");
-        expense.setText("0");
+        
+        moneyFileReader.readFile(moneyDir + "/" + save);
+        moneyLine = moneyFileReader.getList();
+        lineNum = moneyLine.size();
+        i = 0;
+        while(i < lineNum) {
+            String date = datePicker.getValue().toString();
+            String cp = null;
+            if(moneyLine.get(i).length() != 0) {
+                cp = moneyLine.get(i).substring(0, moneyLine.get(i).length());
+            }
+            if(date.equals(cp)) {
+                income.setText(moneyLine.get(i + 1));
+                expense.setText(moneyLine.get(i + 2));
+                break;
+            }
+            else {
+                i++;
+            }
+        }
     }
 
     @Override
