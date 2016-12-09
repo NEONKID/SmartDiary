@@ -1,5 +1,6 @@
 package smartdiary.controller;
 
+import smartdiary.aesEnDecrypt.AESHelper;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

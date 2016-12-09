@@ -1,4 +1,4 @@
-package smartdiary.controller;
+package smartdiary.Schedule;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 /**
  * Created by neonkid on 12/3/16.
  */
-public class Schedule {
+public final class Schedule {
     private final StringProperty date = new SimpleStringProperty(this, "Date", "");
     private final StringProperty memo = new SimpleStringProperty(this, "Memo", "");
 

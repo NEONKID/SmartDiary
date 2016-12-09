@@ -1,5 +1,7 @@
 package smartdiary.controller;
 
+import smartdiary.Schedule.Schedule;
+import smartdiary.aesEnDecrypt.AESHelper;
 import com.jfoenix.controls.*;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,16 +19,22 @@ import smartdiary.SmartDiary;
 
 import java.io.*;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 /**
  * Created by neonkid on 11/23/16.
  */
-public class Scheduler implements Initializable {
+public class ScheduleController implements Initializable {
     @FXML private StackPane stackPane;
     @FXML private TableView<Schedule> tableView;
     @FXML private JFXTextField newmemo;
@@ -37,6 +45,7 @@ public class Scheduler implements Initializable {
     @FXML private JFXTextField filterbox;
     @FXML private HBox bgimage;
     private final ObservableList<Schedule>data = FXCollections.observableArrayList();
+    private final File dirPath = new File(SmartDiary.getFile().getPath() + "/Schedules");
     private File file;
     
     @FXML
@@ -65,15 +74,9 @@ public class Scheduler implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle) {     
         bgimage.setId("bgimage");
-        File dirPath = new File(SmartDiary.getFile().getPath() + "/Schedules");
-        file = new File(dirPath.getPath() +  "schedules.smd");
-        
-        if(!dirPath.isDirectory()) {
-            dirPath.mkdirs();
-        }
-        
+        file = new File(dirPath.getPath() +  "/schedules_all.smd");       
         readFile(file);
         
         filterbox.textProperty().addListener(new ChangeListener() {
@@ -139,16 +142,14 @@ public class Scheduler implements Initializable {
     }
 
     private void readFile(File file) {
-        try {
-            BufferedReader inReader = new BufferedReader(new FileReader(file));
-            AESHelper aesHelper = new AESHelper(UserController.getAESKey());
+        try (BufferedReader inReader = new BufferedReader(new FileReader(file))) {
             String line = null;
             String[] splited = null;
             while((line = inReader.readLine()) != null) {
+                AESHelper aesHelper = new AESHelper(UserController.getAESKey());
                 try {
                     line = aesHelper.aesDecode(line);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
                 }
                 splited = line.split("\t");
                 for(int i = 0; i < splited.length; i++) {
@@ -158,29 +159,29 @@ public class Scheduler implements Initializable {
             }
             inReader.close();
         } catch(IOException ex) {
-            ex.printStackTrace();
         }
     }
 
     private void saveFile(ObservableList<Schedule> scheduleObservableList, File file) {
         JFXSnackbar jFXSnackbar = new JFXSnackbar(stackPane);
-        try {
-            BufferedWriter outwriter = new BufferedWriter(new FileWriter(file));
+        if(!dirPath.isDirectory()) {
+            dirPath.mkdirs();
+        }
+        
+        try (BufferedWriter outwriter = new BufferedWriter(new FileWriter(file))) {
             AESHelper aesHelper = new AESHelper(UserController.getAESKey());
-            for(Schedule schedules : scheduleObservableList) {
+            scheduleObservableList.forEach((schedules) -> {
                 try {
                     outwriter.write(aesHelper.aesEncode(schedules.toString()));
                     outwriter.newLine();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (IOException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
                 }
-            }
+            });
             System.out.println(" :: " + scheduleObservableList.toString());
             outwriter.close();
             jFXSnackbar.show("성공적으로 저장되었습니다.", 3000);
         } catch (IOException ex) {
             jFXSnackbar.show("죄송합니다. 오류가 발생했습니다.", 3000);
-            ex.printStackTrace();
         }
     }
 
