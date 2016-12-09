@@ -14,9 +14,9 @@
 <?import jfxtras.scene.layout.HBox?>
 <?import jfxtras.scene.layout.VBox?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.ScheduleController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.ScheduleController">
    <children>
-      <HBox fx:id="bgimage" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0">
+      <HBox fx:id="bgimage" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="770.0" spacing="20.0">
          <children>
             <VBox alignment="TOP_CENTER" spacing="10.0">
                <children>
