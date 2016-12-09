@@ -106,7 +106,7 @@ public class DiaryController implements Initializable {
         clearAgree.setId("left-button");
         clearCancel.setId("right-button");
         
-        base.setHeading(new Text("null"));
+        base.setHeading(new Text(null));
         base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
         
         clearAgree.setOnAction((ActionEvent e) -> {

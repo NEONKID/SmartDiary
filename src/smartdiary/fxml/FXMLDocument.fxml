@@ -1,57 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import com.jfoenix.controls.*?>
-<?import jfxtras.scene.layout.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainWindow" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.FXMLDocumentController">
+<VBox fx:id="mainWindow" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.FXMLDocumentController">
    <children>
-         <MenuBar BorderPane.alignment="CENTER">
+         <MenuBar style="-fx-background-color: bfafaf;" BorderPane.alignment="CENTER">
            <menus>
-               <Menu mnemonicParsing="false" text="Menu">
+               <Menu mnemonicParsing="false" style="-fx-background-color: c0a0a0;" text="Menu">
                    <items>
-                       <MenuItem mnemonicParsing="false" text="비밀번호 변경" onAction="#loadUserController"/>
+                       <MenuItem mnemonicParsing="false" onAction="#loadUserController" text="비밀번호 변경" />
                        <MenuItem mnemonicParsing="false" text="About" />
                    </items>
                </Menu>
            </menus>
          </MenuBar>
-         <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <VBox alignment="CENTER" prefWidth="770.0" style="-fx-background-color: b4cde5;" BorderPane.alignment="CENTER">
             <children>
                <HBox alignment="CENTER" fillHeight="false" spacing="100.0">
                   <padding>
                      <Insets bottom="10.0" left="10.0" top="10.0" />
                   </padding>
                <children>
-                  <JFXRadioButton fx:id="diaryButton" selected="true" text="Diary">
-                      <toggleGroup>
-                          <ToggleGroup fx:id="radioGroups" />
-                      </toggleGroup>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </JFXRadioButton>
-                  <JFXRadioButton fx:id="scheduleButton" text="Schedule" toggleGroup="$radioGroups">
+                  <StackPane>
+                     <children>
+                        <JFXRadioButton fx:id="diaryButton" selected="true" style="-fx-selected-color: bfafaf;" text="Diary">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="radioGroups" />
+                            </toggleGroup>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXRadioButton>
+                     </children>
+                  </StackPane>
+                  <JFXRadioButton fx:id="scheduleButton" style="-fx-selected-color: bfafaf;" text="Schedule" toggleGroup="$radioGroups">
                      <font>
                         <Font size="15.0" />
                      </font></JFXRadioButton>
-                  <JFXRadioButton fx:id="moneyButton" text="Money Manager" toggleGroup="$radioGroups">
+                  <JFXRadioButton fx:id="moneyButton" style="-fx-selected-color: bfafaf;" text="Money Manager" toggleGroup="$radioGroups">
                      <font>
                         <Font size="15.0" />
                      </font></JFXRadioButton>
@@ -67,7 +64,7 @@
          </VBox>
       <AnchorPane>
          <children>
-             <AnchorPane fx:id="Diary" cacheShape="false" focusTraversable="true" layoutX="10.0" layoutY="10.0">
+             <AnchorPane fx:id="Diary" cacheShape="false" focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
                  <children>
                      <fx:include source="Diary.fxml" />
                  </children>

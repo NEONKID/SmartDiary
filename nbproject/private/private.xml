@@ -3,8 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/css/main.css</file>
             <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/controller/DiaryController.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/controller/Schedule.java</file>
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/fxml/Login.fxml</file>
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/css/main.css</file>
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/fxml/Diary.fxml</file>
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/controller/DiaryFileReader.java</file>
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/controller/LoginController.java</file>
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/controller/Diary.java</file>
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/fxml/Schedule.fxml</file>
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/controller/Scheduler.java</file>
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/controller/MoneyManager.java</file>
+            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/css/tableview.css</file>
+=======
+            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/controller/UserController.java</file>
+            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/Diary/DiaryFileReader.java</file>
+>>>>>>> b49a5a932edc8e0d04541aeada9fbb04a1cb2433
+>>>>>>> f4bc93a5771ac874da5bc7b2c58c8f6c14aced9e
         </group>
     </open-files>
 </project-private>

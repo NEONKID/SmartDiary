@@ -14,9 +14,9 @@
 <?import jfxtras.scene.layout.HBox?>
 <?import jfxtras.scene.layout.VBox?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.ScheduleController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.ScheduleController">
    <children>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" style="-fx-background-color: #ffffff;">
+      <HBox fx:id="bgimage" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="770.0" spacing="20.0">
          <children>
             <VBox alignment="TOP_CENTER" spacing="10.0">
                <children>
@@ -32,15 +32,15 @@
                         <Insets bottom="10.0" />
                      </padding>
                   </CalendarTextField>
-                  <JFXTextField fx:id="newmemo" focusColor="#09b6bc" promptText="일정 제목" style="-fx-background-color: #ffffff;">
+                  <JFXTextField fx:id="newmemo" focusColor="#09b6bc" promptText="일정 제목">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </JFXTextField>
                   <HBox alignment="TOP_RIGHT" spacing="20.0">
                      <children>
-                        <JFXButton buttonType="RAISED" onAction="#delMemo" ripplerFill="WHITE" style="-fx-background-color: #2196F3;" text="삭제" textFill="WHITE" />
-                        <JFXButton buttonType="RAISED" onAction="#writeMemo" ripplerFill="WHITE" style="-fx-background-color: #2196F3;" text="추가" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" onAction="#delMemo" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="삭제" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" onAction="#writeMemo" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="추가" textFill="WHITE" />
                      </children>
                      <opaqueInsets>
                         <Insets bottom="20.0" />
@@ -80,7 +80,7 @@
                               <Insets right="200.0" />
                            </padding>
                         </JFXTextField>
-                        <JFXButton alignment="CENTER" buttonType="RAISED" onAction="#handleSave" ripplerFill="WHITE" style="-fx-background-color: #2196F3;" text="저장" textFill="WHITE" />
+                        <JFXButton alignment="CENTER" buttonType="RAISED" onAction="#handleSave" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="저장" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>
