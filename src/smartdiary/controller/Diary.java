@@ -22,6 +22,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import smartdiary.SmartDiary;
 /**
@@ -40,11 +41,8 @@ public class Diary implements Initializable {
     @FXML private TextField income;
     @FXML private TextField expense;
     @FXML private StackPane stackPane;
+    @FXML private VBox bgimage;
     private String weather = "맑음";
-
-    @FXML public void settoday() {
-        
-    }
     
     @FXML
     public void imgsun(ActionEvent event){
@@ -217,7 +215,7 @@ public class Diary implements Initializable {
                 clearAgree.setId("left-button");
                 clearCancel.setId("right-button");
                 
-                base.setHeading(new Text("null"));
+                base.setHeading(new Text(null));
                 base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
                 clearAgree.setOnAction((ActionEvent e) -> {
                     checkClear.close();
@@ -287,6 +285,7 @@ public class Diary implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        bgimage.setId("bgimage");
         datePicker.setValue(LocalDate.now());
         try {
             TextReader();

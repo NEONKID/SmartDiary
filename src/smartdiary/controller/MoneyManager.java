@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import smartdiary.SmartDiary;
 
 /**
@@ -27,6 +28,7 @@ public class MoneyManager implements Initializable {
     @FXML private TextField text2;
     @FXML private TextField text3;
     @FXML private TextField text4;
+    @FXML private HBox bgimage;
 
     @FXML
     public void TextReader() throws IOException {
@@ -68,6 +70,7 @@ public class MoneyManager implements Initializable {
     }  
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        bgimage.setId("bgimage");
 
     }
 }

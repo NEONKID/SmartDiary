@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.HBox;
 
 /**
  * Created by neonkid on 11/23/16.
@@ -34,6 +35,7 @@ public class Scheduler implements Initializable {
     @FXML private CalendarPicker calendarPicker;
     @FXML private CalendarTextField lCalendarTextField;
     @FXML private JFXTextField filterbox;
+    @FXML private HBox bgimage;
     private final ObservableList<Schedule>data = FXCollections.observableArrayList();
     private File file;
     
@@ -64,6 +66,7 @@ public class Scheduler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        bgimage.setId("bgimage");
         File dirPath = new File(SmartDiary.getFile().getPath() + "/Schedules");
         file = new File(dirPath.getPath() +  "schedules.smd");
         

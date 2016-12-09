@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.Diary">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.Diary">
    <children>
-      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #e7fdff">
+      <VBox fx:id="bgimage" alignment="CENTER" prefHeight="500.0" prefWidth="750.0">
          <children>
             <HBox alignment="CENTER">
                <children>
@@ -29,7 +29,7 @@
                         <Insets right="10.0" top="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <JFXButton fx:id="sunny" buttonType="RAISED" defaultButton="true" mnemonicParsing="false" onAction="#imgsun" style="-fx-background-color: #2196F3;" text="맑음" textFill="WHITE">
+                  <JFXButton fx:id="sunny" buttonType="RAISED" defaultButton="true" mnemonicParsing="false" onAction="#imgsun" style="-fx-background-color: #326195;" text="맑음" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="10.0" top="5.0" />
                      </HBox.margin>
@@ -37,22 +37,22 @@
                         <Insets />
                      </opaqueInsets>
                   </JFXButton>
-                  <JFXButton fx:id="cloudy" buttonType="RAISED" mnemonicParsing="false" onAction="#imgcloud" style="-fx-background-color: #2196F3;" text="흐림" textFill="WHITE">
+                  <JFXButton fx:id="cloudy" buttonType="RAISED" mnemonicParsing="false" onAction="#imgcloud" style="-fx-background-color: #326195;" text="흐림" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="10.0" top="5.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="rainy" buttonType="RAISED" mnemonicParsing="false" onAction="#imgrain" style="-fx-background-color: #2196F3;" text="비" textFill="WHITE">
+                  <JFXButton fx:id="rainy" buttonType="RAISED" mnemonicParsing="false" onAction="#imgrain" style="-fx-background-color: #326195;" text="비" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="10.0" top="5.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="snowy" buttonType="RAISED" mnemonicParsing="false" onAction="#imgsnow" style="-fx-background-color: #2196F3;" text="눈" textFill="WHITE">
+                  <JFXButton fx:id="snowy" buttonType="RAISED" mnemonicParsing="false" onAction="#imgsnow" style="-fx-background-color: #326195;" text="눈" textFill="WHITE">
                      <HBox.margin>
                         <Insets right="10.0" top="5.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXDatePicker fx:id="datePicker" promptText="날짜를 선택해주세요.">
+                  <JFXDatePicker fx:id="datePicker" defaultColor="#1a64ae" promptText="날짜를 선택해주세요.">
                      <padding>
                         <Insets top="10.0" />
                      </padding>
@@ -109,7 +109,7 @@
                   </VBox>
                   <HBox prefHeight="81.0" prefWidth="139.0">
                      <children>
-                        <JFXButton fx:id="savediary" alignment="CENTER" buttonType="RAISED" mnemonicParsing="false" onAction="#saveFile" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #2196F3;" text="저장" textFill="WHITE">
+                        <JFXButton fx:id="savediary" alignment="CENTER" buttonType="RAISED" mnemonicParsing="false" onAction="#saveFile" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #326195;" text="저장" textFill="WHITE">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -117,7 +117,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="cleardiary" buttonType="RAISED" mnemonicParsing="false" onAction="#clear" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #2196F3;" text="취소" textFill="WHITE" />
+                        <JFXButton fx:id="cleardiary" buttonType="RAISED" mnemonicParsing="false" onAction="#clear" prefHeight="40.0" prefWidth="50.0" style="-fx-background-color: #326195;" text="취소" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>

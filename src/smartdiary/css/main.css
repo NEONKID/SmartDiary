@@ -11,13 +11,13 @@
 }
 
 #left-button {
-    -fx-background-color: #4059a9;
+    -fx-background-color: #326195;
     -fx-text-fill: #FFFFFF;
     -fx-ripppler-fill: #FFFFFF;
 }
 
 #right-button {
-    -fx-background-color: #4059a9;
+    -fx-background-color: #326195;
     -fx-text-fill: #FFFFFF;
     -fx-ripppler-fill: #FFFFFF;
 }
@@ -31,6 +31,6 @@
     -fx-ripppler-fill: #FFFFFF;
 }
 
-#background{
-    -fx-background-color:aaf8ff;
+#bgimage{
+    -fx-background-color: b4cde5;
 }
