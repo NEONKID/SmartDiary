@@ -9,7 +9,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,18 +17,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import smartdiary.Diary.DiaryFileReader;
 import smartdiary.SmartDiary;
+import smartdiary.Diary.DiaryFileWriter;
 /**
  *
  * @author wnsud
  */
-public class Diary implements Initializable {
-    
+public class DiaryController implements Initializable {   
     @FXML private Button savediary;
     @FXML private Button cleardiary;
     @FXML private ImageView imgweather;
@@ -68,68 +67,36 @@ public class Diary implements Initializable {
     }
 
     @FXML
-    public void saveFile(ActionEvent event){
-        try {
-            String diaryDir = datePicker.getValue().toString().substring(0, 4);
-            String diaryFile = datePicker.getValue().toString().substring(0, 7);
+    public void saveFile(ActionEvent event) { 
+        String saveDir = datePicker.getValue().toString().substring(0, 4);
+        String saveFile = datePicker.getValue().toString().substring(0, 7);
+        String[] contents_diary = { datePicker.getValue().toString(), weather, title.getText(), content.getText() }; 
+        String[] contents_money = { datePicker.getValue().toString(), income.getText(), expense.getText() };
+            
+        File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Diary/"+ saveDir);
+        File fileofDiary = new File(dirOfDiary.getPath() + "/" + saveFile + ".smd");
+        String diaryPath = fileofDiary.getPath();
+            
+        File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Money/" + saveDir);
+        File fileofMoney = new File(dirOfMoney.getPath() + "/" + saveFile + ".smd");
+        String moneyPath = fileofMoney.getPath();
 
-            File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/"+"/Diary/"+ diaryDir);
-            File fileofDiary = new File(dirOfDiary.getPath() + "/" + diaryFile + ".smd");
-            String filePath = fileofDiary.getPath();
-
-            AESHelper aesHelper = new AESHelper(UserController.getAESKey());
-
-            if(!dirOfDiary.isDirectory()) {
-                dirOfDiary.mkdirs();
-            }
-
-            try {
-                PrintWriter out = new PrintWriter(new BufferedWriter(
-                        new FileWriter(filePath, true))); // append = false
-                out.println(aesHelper.aesEncode(datePicker.getValue().toString()));
-                out.println(aesHelper.aesEncode(weather));
-                out.println(aesHelper.aesEncode(title.getText()));
-                out.println(aesHelper.aesEncode(content.getText()));
-                out.println(aesHelper.aesEncode("------------------------------------------------------------"));
-                out.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            String moneyDir = datePicker.getValue().toString().substring(0, 4);
-            String moneyFile = datePicker.getValue().toString().substring(0, 7);
-
-            File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Money/" + moneyDir);
-            File fileofMoney = new File(dirOfMoney.getPath() + "/" + moneyFile + ".smd");
-            String filePath2 = fileofMoney.getPath();
-
-            AESHelper aesHelper = new AESHelper(UserController.getAESKey());
-
-            if(!dirOfMoney.isDirectory()) {
-                dirOfMoney.mkdirs();
-            }
-
-            try {
-                PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filePath2, true))); // append = false
-                out.println(aesHelper.aesEncode(datePicker.getValue().toString()));
-                out.println(aesHelper.aesEncode(income.getText()));
-                out.println(aesHelper.aesEncode(expense.getText()));
-                out.println(aesHelper.aesEncode("------------------------------------------------------------"));
-                out.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        DiaryFileWriter diaryFileWriter = new DiaryFileWriter();
+        if(!dirOfDiary.isDirectory()) {
+            dirOfDiary.mkdirs();
+        } 
+        if(!dirOfMoney.isDirectory()) {
+            dirOfMoney.mkdirs();
+        }            
+        diaryFileWriter.checkDiary(diaryPath, datePicker.getValue().toString());
+        diaryFileWriter.writeDiary(diaryPath, contents_diary);
+        
+        diaryFileWriter.checkMoney(moneyPath, datePicker.getValue().toString());
+        diaryFileWriter.writeMoney(moneyPath, contents_money);
     }
+        
     @FXML
-    public void clear(ActionEvent event){
+    public void clear(ActionEvent event) {
         //  Clear the textarea after checked by user
         JFXDialogLayout base = new JFXDialogLayout();
         JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
@@ -145,31 +112,33 @@ public class Diary implements Initializable {
         clearAgree.setOnAction((ActionEvent e) -> {
             checkClear.close();
             try {
-                 //Clear the Diary
+                 // Clear the Diary
                 title.clear();
                 content.clear();
                 income.clear();
                 expense.clear();
                 img = new Image(getClass().getResource("/smartdiary/images/sunny.png").toString());
-                imgweather.setImage(img);//Default <<sunny
+                imgweather.setImage(img);   // Default <<sunny
             } catch (Exception ex) {
-                ex.printStackTrace();
             }
         });
         clearCancel.setOnAction((ActionEvent e) -> {
-            checkClear.close(); //Cancel. no action
+            checkClear.close(); // Cancel. no action
         });
         base.setActions(clearAgree, clearCancel);
         checkClear.show();
     }
 
     @FXML
-    public void TextReader() throws IOException {
+    public void DiaryReader() throws IOException {
         String baseDir = SmartDiary.getFile().getPath() + "/Contents" + "/Diary/" + datePicker.getValue().toString().substring(0, 4);
         String save = datePicker.getValue().toString().substring(0, 7)+".smd";       //검색결과가 저장된 파일명
         File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
         DiaryFileReader diaryFileReader = new DiaryFileReader();
         ArrayList<String> lineList;   // 내용 저장을 위한 ArrayList 정의
+        
+        title.setText("");
+        content.setText("");
 
         if(!dir.isDirectory()) {
             // 디렉토리가 아니거나 없으면 종료
@@ -177,9 +146,6 @@ public class Diary implements Initializable {
         }
         diaryFileReader.readFile(baseDir + "/" + save);
         lineList = diaryFileReader.getList();
-
-        title.setText("");
-        content.setText("");
 
         // 라인단위 출력(for loop)
         int lineNum = lineList.size();
@@ -196,36 +162,34 @@ public class Diary implements Initializable {
                 j = i + 3;
                 while(lineList.get(j).length() < 60)
                 {
-                    content.setText(content.getText()+"\n" + lineList.get(j));
+                    if(content.getText().equals("")) {
+                        content.setText(lineList.get(j) + "\n");
+                        j++;
+                        continue;
+                    }
+                    content.setText(content.getText() + lineList.get(j) + "\n");
                     j++;
                 }
                 break;
             }
             else { i++; }
         }
+        income.setText("0");
+        expense.setText("0");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         datePicker.setValue(LocalDate.now());
         try {
-            TextReader();
+            DiaryReader();
         } catch (IOException ex) {
-            ex.printStackTrace();
         }
-        datePicker.valueProperty().addListener(new ChangeListener<LocalDate>() {
-            @Override
-            public void changed(ObservableValue<? extends LocalDate> observableValue, LocalDate oldDate, LocalDate newDate) {
-                try {
-                    TextReader();
-                    income.setText("0");
-                    expense.setText("0");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+        datePicker.valueProperty().addListener((ObservableValue<? extends LocalDate> observableValue, LocalDate oldDate, LocalDate newDate) -> {
+            try {
+                DiaryReader();
+            } catch (IOException ex) {
             }
         });
-        income.setText("0");
-        expense.setText("0");
     }
 }

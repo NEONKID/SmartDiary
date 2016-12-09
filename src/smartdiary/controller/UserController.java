@@ -1,5 +1,6 @@
 package smartdiary.controller;
 
+import smartdiary.aesEnDecrypt.AESHelper;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXPasswordField;
@@ -17,9 +18,16 @@ import smartdiary.SmartDiary;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import javafx.scene.text.Text;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 /**
  * Created by neonkid on 11/28/16.
@@ -33,7 +41,7 @@ public class UserController implements Initializable {
     @FXML private JFXPasswordField check_field;
     @FXML private StackPane userPane;
     private FXMLDocumentController mainWindow;
-    private static String AESKey = "SDiary of" + System.getProperty("user.name") + " user";
+    private static final String AESKey = "SDiary of" + System.getProperty("user.name") + " user";
 
     public static String getAESKey() {
         return AESKey;
@@ -143,13 +151,16 @@ public class UserController implements Initializable {
         AESHelper aesHelper = new AESHelper(AESKey);
         try {
             enc = aesHelper.aesEncode(password);
-        } catch (Exception ex) {
+        } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
             ex.printStackTrace();
         }
 
-        BufferedWriter out = new BufferedWriter(new FileWriter(shadow));
-        out.write(enc);
-        out.close();
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(shadow))) {
+            out.write(enc);
+            out.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     
     public void setMainWindow(FXMLDocumentController mainWindow) {

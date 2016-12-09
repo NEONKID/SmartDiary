@@ -5,6 +5,7 @@
  */
 package smartdiary.controller;
 
+import smartdiary.Diary.DiaryFileReader;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +23,7 @@ import smartdiary.SmartDiary;
  *
  * @author dell
  */
-public class MoneyManager implements Initializable {
+public class MoneyController implements Initializable {
     @FXML private TextField text1;
     @FXML private TextField text2;
     @FXML private TextField text3;
