@@ -5,6 +5,7 @@
  */
 package smartdiary.controller;
 
+import smartdiary.Money.Money;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -69,7 +70,6 @@ public class MoneyController implements Initializable {
         }
         tableView.setItems(data);
 
-          
         text2.setText(String.valueOf(plus));
         text3.setText(String.valueOf(minus));
         int x = Integer.parseInt(text1.getText());
@@ -81,22 +81,6 @@ public class MoneyController implements Initializable {
         text4.setText(String.valueOf(df.format(calc)));
     }
        
-    @FXML
-    public void Date_OnEditCommit(TableColumn.CellEditEvent<Money, String> event) {
-        Money money = event.getRowValue();
-        money.setDate(event.getNewValue());
-    }
-    @FXML
-    public void plus_OnEditCommit(TableColumn.CellEditEvent<Money, String> event) {
-        Money money = event.getRowValue();
-        money.setPlus(event.getNewValue());
-    }
-    @FXML
-    public void minus_OnEditCommit(TableColumn.CellEditEvent<Money, String> event) {
-        Money money = event.getRowValue();
-        money.setMinus(event.getNewValue());
-    }
-    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         datepicker.setValue(LocalDate.now());

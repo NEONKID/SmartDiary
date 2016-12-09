@@ -21,13 +21,13 @@ import smartdiary.controller.UserController;
 public class DiaryFileWriter {
     private final String Line = "------------------------------------------------------------";
     
-    public void writeDiary(String path, String[] contents) {
+    public void writeDiary(String path, String[] contents) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(path, true)))) {
             AESHelper aesHelper = new AESHelper(UserController.getAESKey());
             for (String content : contents) {
                 try {
                     out.println(aesHelper.aesEncode(content));
-                }catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
+                } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
                     
                 }
             }
@@ -42,7 +42,7 @@ public class DiaryFileWriter {
         }
     }
     
-    public void writeMoney(String path, String[] contents) {
+    public void writeMoney(String path, String[] contents) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(path, true)))) {
             AESHelper aesHelper = new AESHelper(UserController.getAESKey());
             for (String content : contents) {

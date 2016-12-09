@@ -4,8 +4,12 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXSnackbar;
 import java.io.*;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -21,9 +25,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.web.HTMLEditor;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import smartdiary.Diary.DiaryFileReader;
 import smartdiary.SmartDiary;
 import smartdiary.Diary.DiaryFileWriter;
+import smartdiary.aesEnDecrypt.AESHelper;
 /**
  *
  * @author wnsud
@@ -67,7 +75,9 @@ public class DiaryController implements Initializable {
     }
 
     @FXML
-    public void saveFile(ActionEvent event) { 
+    public void saveFile(ActionEvent event) {
+        JFXSnackbar jFXSnackbar = new JFXSnackbar(stackPane);
+        
         String saveDir = datePicker.getValue().toString().substring(0, 4);
         String saveFile = datePicker.getValue().toString().substring(0, 7);
         String[] contents_diary = { datePicker.getValue().toString(), weather, title.getText(), content.getHtmlText() }; 
@@ -87,12 +97,18 @@ public class DiaryController implements Initializable {
         } 
         if(!dirOfMoney.isDirectory()) {
             dirOfMoney.mkdirs();
-        }            
-        diaryFileWriter.checkDiary(diaryPath, datePicker.getValue().toString());
-        diaryFileWriter.writeDiary(diaryPath, contents_diary);
+        }
         
-        diaryFileWriter.checkMoney(moneyPath, datePicker.getValue().toString());
-        diaryFileWriter.writeMoney(moneyPath, contents_money);
+        try {
+            diaryFileWriter.checkDiary(diaryPath, datePicker.getValue().toString());
+            diaryFileWriter.writeDiary(diaryPath, contents_diary);
+        
+            diaryFileWriter.checkMoney(moneyPath, datePicker.getValue().toString());
+            diaryFileWriter.writeMoney(moneyPath, contents_money);
+            jFXSnackbar.show("성공적으로 저장되었습니다.", 3000);
+        } catch (IOException ex) {
+            jFXSnackbar.show("죄송합니다. 오류가 발생했습니다.", 3000);
+        }       
     }
         
     @FXML

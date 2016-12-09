@@ -1,4 +1,4 @@
-package smartdiary.controller;
+package smartdiary.Money;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
