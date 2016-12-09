@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 /**
  * Created by neonkid on 12/3/16.
  */
-public class Money {
+public final class Money {
     private final StringProperty date = new SimpleStringProperty(this, "Date", "");
     private final StringProperty plus = new SimpleStringProperty(this, "Plus", "");
     private final StringProperty minus = new SimpleStringProperty(this, "Minus", "");

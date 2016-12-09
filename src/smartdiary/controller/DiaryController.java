@@ -215,8 +215,17 @@ public class DiaryController implements Initializable {
                 cp = moneyLine.get(i).substring(0, moneyLine.get(i).length());
             }
             if(date.equals(cp)) {
-                income.setText(moneyLine.get(i + 1));
-                expense.setText(moneyLine.get(i + 2));
+                if(moneyLine.get(i + 1) != null || moneyLine.get(i + 2) != null) {
+                    income.setText(moneyLine.get(i + 1));
+                    if(moneyLine.get(i + 2) != null) {
+                        expense.setText(moneyLine.get(i + 2));
+                    } else {
+                        expense.setText("0");
+                    }
+                } else {
+                    income.setText("0");
+                    expense.setText("0");
+                }
                 break;
             }
             else {
