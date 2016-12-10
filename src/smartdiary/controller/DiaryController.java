@@ -208,9 +208,8 @@ public class DiaryController implements Initializable {
         
         moneyFileReader.readFile(moneyDir + "/" + save);
         moneyLine = moneyFileReader.getList();
-        lineNum = moneyLine.size();
         i = 0;
-        while(i < lineNum) {
+        while(i < moneyLine.size()) {
             String date = datePicker.getValue().toString();
             String cp = null;
             if(moneyLine.get(i).length() != 0) {
