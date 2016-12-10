@@ -9,7 +9,6 @@ import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ObservableValue;
@@ -26,7 +25,6 @@ import javafx.scene.web.HTMLEditor;
 import smartdiary.Diary.DiaryFileReader;
 import smartdiary.SmartDiary;
 import smartdiary.Diary.DiaryFileWriter;
-import smartdiary.aesEnDecrypt.AESHelper;
 
 /**
  *

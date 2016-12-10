@@ -44,7 +44,7 @@ public class SmartDiary extends Application {
 
         if(flag) {
             stage = LoginStage;
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("images/pIcontest16.png")));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("images/pIcon.png")));
             stage.setTitle("Welcome to SmartDiary !");
             stage.setScene(new Scene(loginView));
             stage.sizeToScene();

@@ -16,8 +16,15 @@ import smartdiary.SmartDiary;
 
 import java.io.*;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.scene.image.Image;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 /**
  * Created by neonkid on 11/16/16.
@@ -142,9 +149,10 @@ public class LoginController implements Initializable {
         stage.setScene(scene);
         stage.sizeToScene();
         stage.setTitle("SmartDiary");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/smartdiary/images/pIcon.png")));
         stage.setResizable(false);
         stage.show();
-        SmartDiary.getStage().hide();
+        SmartDiary.getStage().close();
     }
 
     public static String readContentFrom(String textFileName) throws IOException {
@@ -159,8 +167,7 @@ public class LoginController implements Initializable {
         AESHelper aesHelper = new AESHelper(UserController.getAESKey());
         try {
             shadow = aesHelper.aesDecode(builder.toString());
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
         }
 
         return shadow;
