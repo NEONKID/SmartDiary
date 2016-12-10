@@ -31,8 +31,6 @@ import smartdiary.Diary.DiaryFileWriter;
  * @author wnsud
  */
 public class DiaryController implements Initializable {   
-    @FXML private Button savediary;
-    @FXML private Button cleardiary;
     @FXML private ImageView imgweather;
     @FXML private Image img;
     @FXML private JFXDatePicker datePicker;
@@ -170,9 +168,8 @@ public class DiaryController implements Initializable {
         diaryLine = diaryFileReader.getList();
         
         // 라인단위 출력(for loop)
-        int lineNum = diaryLine.size();
         int i = 0, j;
-        while(i < lineNum) {
+        while(i < diaryLine.size()) {
             String date = datePicker.getValue().toString();
             String cp = null;
             if(diaryLine.get(i).length() != 0) {
