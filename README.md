@@ -1,5 +1,9 @@
 # SmartDiary
 
+## Overview
+It is a smart diary 
+It's a diary, but it's a useful program that allows you to manage your schedule and add monthly revenue and expenses to your diary.
+
 ### Using Library
 - JFxtras
 
