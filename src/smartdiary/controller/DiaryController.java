@@ -199,6 +199,8 @@ public class DiaryController implements Initializable {
             }
             else {
                 i++;
+                img = null;
+                imgweather.setImage(img);
             }
         }
         
