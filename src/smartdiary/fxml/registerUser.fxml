@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.UserController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" style="-fx-background-color: #b4cde5;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.UserController">
    <children>
-      <Label maxWidth="1.7976931348623157E308" prefHeight="70.0" style="-fx-background-color: #03A9F4;" text="Register User" textFill="WHITE">
+      <Label maxWidth="1.7976931348623157E308" prefHeight="70.0" style="-fx-background-color: #664740;" text="Register User" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
@@ -20,7 +26,10 @@
       </Label>
       <HBox alignment="CENTER" spacing="30.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/signup.png" />
+               </image></ImageView>
             <GridPane alignment="CENTER" hgap="10.0" maxWidth="1.7976931348623157E308" prefWidth="200.0" vgap="20.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -50,8 +59,8 @@
                   </JFXPasswordField>
                   <HBox alignment="CENTER_RIGHT" spacing="20.0" GridPane.rowIndex="4">
                      <children>
-                        <JFXButton buttonType="RAISED" onAction="#clickCancel" ripplerFill="WHITE" style="-fx-background-color: #03A9F4;" text="취소" textFill="WHITE" />
-                        <JFXButton buttonType="RAISED" onAction="#clickOK" ripplerFill="WHITE" style="-fx-background-color: #03A9F4;" text="확인" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" onAction="#clickCancel" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="취소" textFill="WHITE" />
+                        <JFXButton buttonType="RAISED" onAction="#clickOK" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="확인" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>
