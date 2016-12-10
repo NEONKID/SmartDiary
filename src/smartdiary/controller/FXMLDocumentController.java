@@ -66,7 +66,7 @@ public class FXMLDocumentController implements Initializable {
                 moneyLoad();
             }
         });
-        ;
+        
     }
 
     private void diaryLoad() {

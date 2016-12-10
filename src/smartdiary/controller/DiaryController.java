@@ -7,11 +7,9 @@ import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXSnackbar;
 import java.io.*;
 import java.net.URL;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ObservableValue;
@@ -25,13 +23,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.web.HTMLEditor;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import smartdiary.Diary.DiaryFileReader;
 import smartdiary.SmartDiary;
 import smartdiary.Diary.DiaryFileWriter;
 import smartdiary.aesEnDecrypt.AESHelper;
+
 /**
  *
  * @author wnsud
@@ -47,7 +43,7 @@ public class DiaryController implements Initializable {
     @FXML private TextField income;
     @FXML private TextField expense;
     @FXML private StackPane stackPane;
-    private String weather = "";
+    private String weather = "맑음";
 
     @FXML
     public void imgsun(){
@@ -80,7 +76,8 @@ public class DiaryController implements Initializable {
         
         String saveDir = datePicker.getValue().toString().substring(0, 4);
         String saveFile = datePicker.getValue().toString().substring(0, 7);
-        String[] contents_diary = { datePicker.getValue().toString(), weather, title.getText(), content.getHtmlText() }; 
+
+        String[] contents_diary = { datePicker.getValue().toString(), weather, title.getText(), content.getHtmlText() };
         String[] contents_money = { datePicker.getValue().toString(), income.getText(), expense.getText() };
             
         File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Diary/"+ saveDir);
@@ -104,10 +101,10 @@ public class DiaryController implements Initializable {
         
         try {
             diaryFileWriter.checkDiary(diaryPath, datePicker.getValue().toString());
-            diaryFileWriter.writeDiary(diaryPath, contents_diary);
+            diaryFileWriter.writeDiaryMoney(diaryPath, contents_diary);
         
             diaryFileWriter.checkMoney(moneyPath, datePicker.getValue().toString());
-            diaryFileWriter.writeMoney(moneyPath, contents_money);
+            diaryFileWriter.writeDiaryMoney(moneyPath, contents_money);
             jFXSnackbar.show("성공적으로 저장되었습니다.", 3000);
         } catch (IOException ex) {
             jFXSnackbar.show("죄송합니다. 오류가 발생했습니다.", 3000);
@@ -146,8 +143,7 @@ public class DiaryController implements Initializable {
         checkClear.show();
     }
 
-    @FXML
-    public void DiaryReader() throws IOException {
+    private void DiaryReader() throws IOException {
         String baseDir = SmartDiary.getFile().getPath() + "/Contents" + "/Diary/" + datePicker.getValue().toString().substring(0, 4);
         String moneyDir = SmartDiary.getFile().getPath() + "/Contents" + "/Money/" + datePicker.getValue().toString().substring(0, 4);
         String save = datePicker.getValue().toString().substring(0, 7)+".smd";       //검색결과가 저장된 파일명
@@ -178,7 +174,6 @@ public class DiaryController implements Initializable {
             String cp = null;
             if(diaryLine.get(i).length() != 0) {
                 cp = diaryLine.get(i).substring(0, diaryLine.get(i).length());
-                System.out.println("Output: " + cp);
             }
             if(date.equals(cp)) {
                 switch(diaryLine.get(i + 1)) {
@@ -204,7 +199,9 @@ public class DiaryController implements Initializable {
                 }
                 break;
             }
-            else { i++; }
+            else {
+                i++;
+            }
         }
         
         moneyFileReader.readFile(moneyDir + "/" + save);
@@ -224,6 +221,8 @@ public class DiaryController implements Initializable {
             }
             else {
                 i++;
+                income.setText("0");
+                expense.setText("0");
             }
         }
     }

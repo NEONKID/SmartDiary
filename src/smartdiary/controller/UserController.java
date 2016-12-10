@@ -44,7 +44,12 @@ public class UserController implements Initializable {
     private static final String AESKey = "SDiary of" + System.getProperty("user.name") + " user";
 
     public static String getAESKey() {
-        return AESKey;
+        try {
+            AESHelper aesHelper = new AESHelper(AESKey);
+            return aesHelper.getSha512(AESKey);
+        } catch (UnsupportedEncodingException ex) {
+            return null;
+        }
     }
     
     @FXML
@@ -148,7 +153,7 @@ public class UserController implements Initializable {
             SmartDiary.getFile().mkdirs();
         }
 
-        AESHelper aesHelper = new AESHelper(AESKey);
+        AESHelper aesHelper = new AESHelper(getAESKey());
         try {
             enc = aesHelper.aesEncode(password);
         } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {

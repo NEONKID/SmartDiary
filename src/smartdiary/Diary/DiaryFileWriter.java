@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+
+import javafx.scene.layout.Pane;
 import smartdiary.aesEnDecrypt.AESHelper;
 import smartdiary.controller.UserController;
 
@@ -21,43 +23,23 @@ import smartdiary.controller.UserController;
 public class DiaryFileWriter {
     private final String Line = "------------------------------------------------------------";
     
-    public void writeDiary(String path, String[] contents) throws IOException {
+    public void writeDiaryMoney(String path, String[] contents) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(path, true)))) {
             AESHelper aesHelper = new AESHelper(UserController.getAESKey());
             for (String content : contents) {
                 try {
                     out.println(aesHelper.aesEncode(content));
+                    out.flush();
                 } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
                     
                 }
             }
             try {
                 out.println(aesHelper.aesEncode(Line));
+                out.flush();
             } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
                 
             }
-            out.close();
-        } catch (IOException ex) {
-            
-        }
-    }
-    
-    public void writeMoney(String path, String[] contents) throws IOException {
-        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(path, true)))) {
-            AESHelper aesHelper = new AESHelper(UserController.getAESKey());
-            for (String content : contents) {
-                try {
-                    out.println(aesHelper.aesEncode(content));
-                }catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
-                    
-                }
-            }
-            try {
-                out.println(aesHelper.aesEncode(Line));
-            } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
-                
-            }
-            out.close();
         } catch (IOException ex) {
             
         }
@@ -68,32 +50,25 @@ public class DiaryFileWriter {
         fileReader.readFile(path);
        
         ArrayList<String> arrayList = fileReader.getList();
-        int lineNum = arrayList.size();
         int i = 0;
         String b = null;
-        String temp = "";
+        ArrayList<String> temp = new ArrayList<>();
         
-        while(i < lineNum) {
+        while(i < arrayList.size()) {
             if(arrayList.get(i).length() != 0) {
                 b = arrayList.get(i).substring(0, arrayList.get(i).length());
+            } else {
+                return;
             }
             if(date.equals(b)) {
                 System.out.println("중복 감지");
-                while(arrayList.get(i).length() < 50) { i++; }
-            } else {
-                if(i == 0) {
-                    temp = arrayList.get(i) + "\n";
-                } else {
-                    temp += arrayList.get(i) + "\n";
-                }
+                while(!arrayList.get(i).equals(Line)) { i++; }  // 중복 이후에 대한 내용은 패스,,
+            } else {    // 중복되지 않은 나머지 내용을 temp에 저장..
+                temp.add(arrayList.get(i));
             }
             i++;
         }
-        try (FileWriter writer = new FileWriter(path)){
-            AESHelper aesHelper = new AESHelper(UserController.getAESKey());
-            writer.write(aesHelper.aesEncode(temp)); 
-            writer.close(); 
-        } catch (IOException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {}
+        saveFile(temp, path);
     }
     
     public void checkMoney(String path, String date) {
@@ -104,7 +79,7 @@ public class DiaryFileWriter {
         int lineNum = arrayList.size();
         int i = 0;
         String b = null;
-        String temp = "";
+        ArrayList<String>temp = new ArrayList<>();
         
         while(i < lineNum) {
             if(arrayList.get(i).length() != 0) {
@@ -114,18 +89,22 @@ public class DiaryFileWriter {
                 System.out.println("중복 날짜 검출");
                 i += 4;
             } else {
-                if(i == 0) {
-                    temp = arrayList.get(i) + "\n";
-                } else {
-                    temp += arrayList.get(i) + "\n";
-                }
+                temp.add(arrayList.get(i));
                 i++;
             }
         }
-        try (FileWriter writer = new FileWriter(path)) {
+        saveFile(temp, path);
+    }
+
+    private void saveFile(ArrayList<String>temp, String path) {
+        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(path)))) {
             AESHelper aesHelper = new AESHelper(UserController.getAESKey());
-            writer.write(aesHelper.aesEncode(temp)); 
-            writer.close(); 
+            if(!temp.isEmpty()) {
+                for(String str : temp) {
+                    writer.println(aesHelper.aesEncode(str));
+                }
+            }
+            writer.close();
         } catch (IOException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {}
     }
 }
