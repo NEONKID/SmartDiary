@@ -41,7 +41,7 @@ public class SmartDiary extends Application {
         System.out.println("Directory: " + homedir);
         flag = checkOS(osname);
 
-        if(!flag) {
+        if(flag) {
             stage = LoginStage;
             stage.setTitle("Welcome to SmartDiary !");
             stage.setScene(new Scene(loginView));
