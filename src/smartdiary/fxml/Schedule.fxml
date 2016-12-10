@@ -32,7 +32,7 @@
                         <Insets bottom="10.0" />
                      </padding>
                   </CalendarTextField>
-                  <JFXTextField fx:id="newmemo" focusColor="#ff5722" promptText="일정 제목" unFocusColor="#ff5722">
+                  <JFXTextField fx:id="newmemo" focusColor="#1a64ae" promptText="일정 제목" unFocusColor="#1a64ae">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -75,7 +75,7 @@
                   </TableView>
                   <HBox alignment="BOTTOM_RIGHT">
                      <children>
-                        <JFXTextField fx:id="filterbox" focusColor="#ff5722" promptText="Search..." unFocusColor="#ff5722">
+                        <JFXTextField fx:id="filterbox" focusColor="#1a64ae" promptText="Search..." unFocusColor="#1a64ae">
                            <padding>
                               <Insets right="200.0" />
                            </padding>
