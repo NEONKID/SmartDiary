@@ -134,7 +134,6 @@ public class LoginController implements Initializable {
         try {
             FileWriter fw = new FileWriter(logfile, true);
             fw.write(out);
-            fw.flush();
             fw.close();
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -85,6 +85,11 @@ public class DiaryController implements Initializable {
         File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Money/" + saveDir);
         File fileofMoney = new File(dirOfMoney.getPath() + "/" + saveFile + ".smd");
         String moneyPath = fileofMoney.getPath();
+        
+        if(title.getText().equals("")) {
+            jFXSnackbar.show("제목을 입력해주세요.", 3000);
+            return;
+        }
 
         DiaryFileWriter diaryFileWriter = new DiaryFileWriter();
         if(!dirOfDiary.isDirectory()) {

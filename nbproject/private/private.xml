@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/css/main.css</file>
-            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/fxml/Diary.fxml</file>
-            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/controller/ScheduleController.java</file>
-            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/controller/DiaryController.java</file>
-            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/fxml/Schedule.fxml</file>
-            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/controller/MoneyController.java</file>
-            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/fxml/MoneyManager.fxml</file>
-            <file>file:/C:/Users/wnsud/Documents/NetBeansProjects/SmartDiary/src/smartdiary/Diary/DiaryFileReader.java</file>
+            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/controller/UserController.java</file>
+            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/controller/LoginController.java</file>
+            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/fxml/registerUser.fxml</file>
+            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/SmartDiary.java</file>
+            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/controller/DiaryController.java</file>
+            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/fxml/Login.fxml</file>
         </group>
     </open-files>
 </project-private>
