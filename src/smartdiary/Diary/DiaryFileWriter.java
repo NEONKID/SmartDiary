@@ -30,14 +30,14 @@ public class DiaryFileWriter {
                 try {
                     out.println(aesHelper.aesEncode(content));
                     out.flush();
-                } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
+                } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ignored) {
                     
                 }
             }
             try {
                 out.println(aesHelper.aesEncode(Line));
                 out.flush();
-            } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
+            } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ignored) {
                 
             }
         } catch (IOException ex) {
@@ -51,7 +51,7 @@ public class DiaryFileWriter {
        
         ArrayList<String> arrayList = fileReader.getList();
         int i = 0;
-        String b = null;
+        String b;
         ArrayList<String> temp = new ArrayList<>();
         
         while(i < arrayList.size()) {
@@ -76,14 +76,15 @@ public class DiaryFileWriter {
         fileReader.readFile(path);
         
         ArrayList<String> arrayList = fileReader.getList();
-        int lineNum = arrayList.size();
         int i = 0;
-        String b = null;
+        String b;
         ArrayList<String>temp = new ArrayList<>();
         
-        while(i < lineNum) {
+        while(i < arrayList.size()) {
             if(arrayList.get(i).length() != 0) {
                 b = arrayList.get(i).substring(0, arrayList.get(i).length());
+            } else {
+                return;
             }
             if(date.equals(b)) {
                 System.out.println("중복 날짜 검출");

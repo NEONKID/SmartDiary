@@ -39,10 +39,10 @@ public class DiaryController implements Initializable {
     @FXML private Image img;
     @FXML private JFXDatePicker datePicker;
     @FXML private TextField title;
-    @FXML private HTMLEditor content;
     @FXML private TextField income;
     @FXML private TextField expense;
     @FXML private StackPane stackPane;
+    @FXML private HTMLEditor content;
     private String weather = "맑음";
 
     @FXML
@@ -230,6 +230,7 @@ public class DiaryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         datePicker.setValue(LocalDate.now());
+        content.setId("html-editor");
         try {
             DiaryReader();
         } catch (IOException ex) {
