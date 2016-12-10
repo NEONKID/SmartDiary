@@ -61,7 +61,6 @@ public class DiaryFileWriter {
                 return;
             }
             if(date.equals(b)) {
-                System.out.println("중복 감지");
                 while(!arrayList.get(i).equals(Line)) { i++; }  // 중복 이후에 대한 내용은 패스,,
             } else {    // 중복되지 않은 나머지 내용을 temp에 저장..
                 temp.add(arrayList.get(i));
@@ -87,7 +86,6 @@ public class DiaryFileWriter {
                 return;
             }
             if(date.equals(b)) {
-                System.out.println("중복 날짜 검출");
                 i += 4;
             } else {
                 temp.add(arrayList.get(i));

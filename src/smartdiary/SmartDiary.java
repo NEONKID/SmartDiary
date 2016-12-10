@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -43,6 +44,7 @@ public class SmartDiary extends Application {
 
         if(flag) {
             stage = LoginStage;
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("images/pIcontest16.png")));
             stage.setTitle("Welcome to SmartDiary !");
             stage.setScene(new Scene(loginView));
             stage.sizeToScene();
