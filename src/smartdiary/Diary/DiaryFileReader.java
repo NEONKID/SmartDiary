@@ -30,7 +30,6 @@ public class DiaryFileReader {
                 AESHelper aesHelper = new AESHelper(UserController.getAESKey());
                 while((rLine = bufferedReader.readLine()) != null) {
                     arrayList.add(aesHelper.aesDecode(rLine));
-                    System.out.println("rLine: " + aesHelper.aesDecode(rLine));
                 }
             }
             bufferedReader.close();

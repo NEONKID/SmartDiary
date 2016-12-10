@@ -53,5 +53,11 @@
 }
 
 #bgimage{
-    -fx-background-color: #b4cde5;
+    -fx-background-color: b4cde5;
+}
+
+#html-editor {
+    -fx-border-color: cornflowerblue;
+    -fx-border-style: dotted;
+    -fx-border-width: 2;
 }

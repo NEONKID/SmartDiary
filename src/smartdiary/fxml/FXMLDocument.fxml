@@ -17,7 +17,7 @@
    <children>
          <MenuBar style="-fx-background-color: bfafaf;" BorderPane.alignment="CENTER">
            <menus>
-               <Menu mnemonicParsing="false" style="-fx-background-color: c0a0a0; -fx-border-color: c0a0a0;" text="Menu">
+               <Menu mnemonicParsing="false" style="-fx-background-color: c0a0a0;" text="Menu">
                    <items>
                        <MenuItem mnemonicParsing="false" onAction="#loadUserController" text="비밀번호 변경" />
                        <MenuItem mnemonicParsing="false" text="About" />
