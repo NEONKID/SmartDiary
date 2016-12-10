@@ -41,7 +41,7 @@ public class SmartDiary extends Application {
         System.out.println("Directory: " + homedir);
         flag = checkOS(osname);
 
-        if(flag != false) {
+        if(!flag) {
             stage = LoginStage;
             stage.setTitle("Welcome to SmartDiary !");
             stage.setScene(new Scene(loginView));
@@ -82,11 +82,11 @@ public class SmartDiary extends Application {
                 alert.setContentText("프로그램의 기존 정보가 존재하지 않습니다.\n초기 사용자 설정을 진행합니다.");
                 alert.showAndWait();
                 break;
-            case 2:
+            default:
                 alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("프로그램 실행 오류");
-                alert.setHeaderText("지원하지 않는 운영체제입니다.");
-                alert.setContentText("이 프로그램은 Windows, Linux 운영체제에서만 사용 가능합니다.");
+                alert.setTitle("알 수 없는 오류");
+                alert.setHeaderText("오류");
+                alert.setContentText("알 수 없는 오류가 발생했습니다. \n프로그램을 종료합니다.");
                 alert.showAndWait();
                 System.exit(0);
                 break;
