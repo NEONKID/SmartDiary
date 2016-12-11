@@ -3,6 +3,12 @@
 ## Overview
 It's a diary, but it's a useful program that allows you to manage your schedule and add monthly revenue and expenses to your diary.
 
+## Warning
+This program is based on the operating system user account.
+
+
+If you are using the program, reinstalling the operating system, or changing your laptop or desktop, you must retain your existing username to retain the data.
+
 ### Using Library
 - JFxtras
 
