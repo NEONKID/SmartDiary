@@ -149,23 +149,16 @@ public class UserController implements Initializable {
     
     private void setPassword(String password) throws IOException {
         File shadow = new File(SmartDiary.getFile().getPath() + "/shadow");
-        String enc = "";
         
         if(!SmartDiary.getFile().isDirectory()) {
             SmartDiary.getFile().mkdirs();
         }
 
-        AESHelper aesHelper = new AESHelper(getAESKey());
-        try {
-            enc = aesHelper.aesEncode(password);
-        } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
-            ex.printStackTrace();
-        }
-
         try (BufferedWriter out = new BufferedWriter(new FileWriter(shadow))) {
-            out.write(enc);
+            AESHelper aesHelper = new AESHelper(getAESKey());
+            out.write(aesHelper.aesEncode(password));
             out.close();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
