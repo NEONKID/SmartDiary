@@ -42,41 +42,43 @@ public class LoginController implements Initializable {
         String path;
         String flag_pw = "";
         path = SmartDiary.getFile().getPath() + "/shadow";
-       
+
         try {
+            AESHelper aesHelper = new AESHelper(UserController.getAESKey());
             flag_pw = readContentFrom(path);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        if(!flag_id.equals(usernameField.getText())) {
-            showError(0);
-        } else {
-            if(!flag_pw.equals(passwordField.getText())) {
-                showError(1);
-                passwordField.clear();
+
+            if(!flag_id.equals(usernameField.getText())) {
+                showError(0);
             } else {
-                JFXDialogLayout content = new JFXDialogLayout();
-                JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
-                JFXButton button = new JFXButton("OKAY");
+                if(!flag_pw.equals(aesHelper.aesEncode(passwordField.getText()))) {
+                    showError(1);
+                    passwordField.clear();
+                } else {
+                    JFXDialogLayout content = new JFXDialogLayout();
+                    JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+                    JFXButton button = new JFXButton("OKAY");
 
-                button.setRipplerFill(Paint.valueOf("#ffffff"));
-                button.setTextFill(Paint.valueOf("#ffffff"));
-                button.setStyle("-fx-background-color: #4059a9");
+                    button.setRipplerFill(Paint.valueOf("#ffffff"));
+                    button.setTextFill(Paint.valueOf("#ffffff"));
+                    button.setStyle("-fx-background-color: #4059a9");
 
-                content.setHeading(new Text("로그인 성공"));
-                content.setBody(new Text(usernameField.getText() + "님 환영합니다!"));
-                writeLog(0);
-                button.setOnAction((ActionEvent e) -> {
-                    dialog.close();
-                    try {
-                        setScene();
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                });
-                content.setActions(button);
-                dialog.show();
+                    content.setHeading(new Text("로그인 성공"));
+                    content.setBody(new Text(usernameField.getText() + "님 환영합니다!"));
+                    writeLog(0);
+                    button.setOnAction((ActionEvent e) -> {
+                        dialog.close();
+                        try {
+                            setScene();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                    content.setActions(button);
+                    dialog.show();
+                }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -162,14 +164,7 @@ public class LoginController implements Initializable {
         while((shadow = bufferedReader.readLine()) != null) {
             builder.append(shadow);
         }
-
-        AESHelper aesHelper = new AESHelper(UserController.getAESKey());
-        try {
-            shadow = aesHelper.aesDecode(builder.toString());
-        } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
-        }
-
-        return shadow;
+        return builder.toString();
     }
     
     @Override

@@ -61,12 +61,14 @@ public class UserController implements Initializable {
             JFXDialogLayout content = new JFXDialogLayout();
             JFXDialog dialog = new JFXDialog(userPane, content, JFXDialog.DialogTransition.CENTER);
             JFXButton button = new JFXButton("OKAY");
-                
+
+            AESHelper aesHelper = new AESHelper(getAESKey());
+
             button.setId("right-button");
-            
-            if(!old_field.getText().equals(old_pw)) {
+
+            if(!aesHelper.aesEncode(old_field.getText()).equals(old_pw)) {
                 content.setHeading(new Text("변경 실패"));
-                content.setBody(new Text("기존 패스워드가 올바르지 않습니다. \n다시 입력해주세요."));              
+                content.setBody(new Text("기존 패스워드가 올바르지 않습니다. \n다시 입력해주세요."));
                 button.setOnAction((ActionEvent e) -> {
                     allClear();
                     dialog.close();
@@ -84,7 +86,7 @@ public class UserController implements Initializable {
                 dialog.show();
             } else {
                 content.setHeading(new Text("변경 성공"));
-                content.setBody(new Text("패스워드가 변경되었습니다."));              
+                content.setBody(new Text("패스워드가 변경되었습니다."));
                 button.setOnAction((ActionEvent e) -> {
                     try {
                         setPassword(new_field.getText());
@@ -97,7 +99,7 @@ public class UserController implements Initializable {
                 content.setActions(button);
                 dialog.show();
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
