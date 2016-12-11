@@ -50,11 +50,11 @@ public class DiaryFileWriter {
         fileReader.readFile(path);
        
         ArrayList<String> arrayList = fileReader.getList();
-        int i = 0;
-        String b;
         ArrayList<String> temp = new ArrayList<>();
+        int i = 0;
         
         while(i < arrayList.size()) {
+            String b;
             if(arrayList.get(i).length() != 0) {
                 b = arrayList.get(i).substring(0, arrayList.get(i).length());
             } else {
@@ -74,12 +74,12 @@ public class DiaryFileWriter {
         DiaryFileReader fileReader = new DiaryFileReader();
         fileReader.readFile(path);
         
-        ArrayList<String> arrayList = fileReader.getList();
-        int i = 0;
-        String b;
+        ArrayList<String>arrayList = fileReader.getList();
         ArrayList<String>temp = new ArrayList<>();
+        int i = 0;
         
         while(i < arrayList.size()) {
+            String b;
             if(arrayList.get(i).length() != 0) {
                 b = arrayList.get(i).substring(0, arrayList.get(i).length());
             } else {

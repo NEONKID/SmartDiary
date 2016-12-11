@@ -101,7 +101,7 @@ public class ScheduleController implements Initializable {
         memoCol.setCellFactory(TextFieldTableCell.forTableColumn());
     }
     
-    public void filterScheduleList(String oldValue, String newValue) {
+    private void filterScheduleList(String oldValue, String newValue) {
         ObservableList<Schedule> filteredList = FXCollections.observableArrayList();
         if(filterbox == null || (newValue.length() < oldValue.length()) ) {
             tableView.setItems(data);
