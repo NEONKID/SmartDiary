@@ -30,17 +30,12 @@ public class MoneyController implements Initializable {
     @FXML private TextField text3;
     @FXML private TextField text4;
     @FXML private TableView<Money> tableView;
-    @FXML private TableColumn<Money, String> Date;
-    @FXML private TableColumn<Money, String> plus;
-    @FXML private TableColumn<Money, String> minus;
-    @FXML private JFXButton calc;
     @FXML private JFXDatePicker datepicker;
     
     private final ObservableList<Money>data = FXCollections.observableArrayList();
     
     @FXML
     public void MoneyReader() throws IOException {
-        data.clear();
         String month = datepicker.getValue().toString();
     
         String baseDir = SmartDiary.getFile().getPath() + "/Contents" + "/Money/" + month.substring(0,4);
@@ -58,8 +53,9 @@ public class MoneyController implements Initializable {
         diaryFileReader.readFile(baseDir + "/" + save);
         lineList = diaryFileReader.getList();
 
-        int lineNum = lineList.size();  // 라인 단위 저장 및 카운트를 위한 변수 정의
-        while(i < lineNum) {
+        data.clear();
+
+        while(i < lineList.size()) {
             data.add(new Money(lineList.get(i), lineList.get(i + 1), lineList.get(i + 2)));
             plus = plus + Integer.parseInt(lineList.get(i + 1));
             minus = minus + Integer.parseInt(lineList.get(i + 2));
