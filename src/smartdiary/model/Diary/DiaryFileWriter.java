@@ -1,4 +1,4 @@
-package smartdiary.Diary;
+package smartdiary.model.Diary;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -13,8 +13,8 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import javafx.scene.layout.Pane;
-import smartdiary.aesEnDecrypt.AESHelper;
+import smartdiary.model.ExAlert;
+import smartdiary.model.AESHelper;
 import smartdiary.controller.UserController;
 
 /**
@@ -29,19 +29,21 @@ public class DiaryFileWriter {
             for (String content : contents) {
                 try {
                     out.println(aesHelper.aesEncode(content));
-                    out.flush();
-                } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ignored) {
-                    
+                } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
+                    ExAlert alert = new ExAlert(ex);
+                    alert.showAndWait();
                 }
             }
             try {
                 out.println(aesHelper.aesEncode(Line));
                 out.flush();
-            } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ignored) {
-                
+            } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
+                ExAlert alert = new ExAlert(ex);
+                alert.showAndWait();
             }
         } catch (IOException ex) {
-            
+            ExAlert alert = new ExAlert(ex);
+            alert.showAndWait();
         }
     }
     
@@ -104,6 +106,9 @@ public class DiaryFileWriter {
                 }
             }
             writer.close();
-        } catch (IOException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {}
+        } catch (IOException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
+            ExAlert alert = new ExAlert(ex);
+            alert.showAndWait();
+        }
     }
 }

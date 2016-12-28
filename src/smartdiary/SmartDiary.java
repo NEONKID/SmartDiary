@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import smartdiary.model.ExAlert;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +27,6 @@ public class SmartDiary extends Application {
     public static Stage getStage() {
         return stage;
     }
-
     public static File getFile() {
         return file;
     }
@@ -34,7 +34,7 @@ public class SmartDiary extends Application {
     @Override
     public void start(Stage LoginStage) throws Exception {
         LoginStage.resizableProperty().setValue(Boolean.FALSE);
-        Parent loginView = FXMLLoader.load(getClass().getResource("fxml/Login.fxml"));
+        Parent loginView = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
         boolean flag = false;
 
         System.out.println("Username: " + username);
@@ -97,7 +97,7 @@ public class SmartDiary extends Application {
 
     private void registerUser() {
         try {
-            Parent registerView = FXMLLoader.load(getClass().getResource("fxml/registerUser.fxml"));
+            Parent registerView = FXMLLoader.load(getClass().getResource("view/registerUser.fxml"));
 
             Scene scene = new Scene(registerView);
             Stage registerStage = new Stage();
@@ -107,8 +107,13 @@ public class SmartDiary extends Application {
             registerStage.setTitle("사용자 등록");
             registerStage.show();
         } catch (IOException ex) {
+            ExAlert alert = new ExAlert(ex, "파일 저장 중 오류가 발생했습니다. \n다시 시도해주세요.\n문제를 확인할 수 없는 경우, 개발자에게 문의하세요.");
+            alert.show();
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ExAlert alert = new ExAlert(ex);
+            alert.show();
             ex.printStackTrace();
         }
     }
-
 }

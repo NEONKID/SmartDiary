@@ -1,7 +1,7 @@
 package smartdiary.controller;
 
-import smartdiary.Schedule.Schedule;
-import smartdiary.aesEnDecrypt.AESHelper;
+import smartdiary.model.Schedule;
+import smartdiary.model.AESHelper;
 import com.jfoenix.controls.*;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;

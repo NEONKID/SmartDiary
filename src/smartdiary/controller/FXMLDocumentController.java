@@ -37,7 +37,7 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     public void loadUserController() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/fxml/UserController.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/view/UserController.fxml"));
         StackPane newWindow = (StackPane)loader.load();
         UserController controller = loader.getController();
         controller.setMainWindow(this);

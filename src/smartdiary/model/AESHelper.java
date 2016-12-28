@@ -1,4 +1,4 @@
-package smartdiary.aesEnDecrypt;
+package smartdiary.model;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -60,6 +60,8 @@ public class AESHelper {
             md.update(bytes);
             return Base64.encodeBase64String(md.digest());
         } catch (NoSuchAlgorithmException ex) {
+            ExAlert alert = new ExAlert(ex);
+            alert.showAndWait();
             return null;
         }
     }

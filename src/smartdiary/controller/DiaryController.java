@@ -21,9 +21,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.web.HTMLEditor;
-import smartdiary.Diary.DiaryFileReader;
+import smartdiary.model.Diary.DiaryFileReader;
+import smartdiary.model.ExAlert;
 import smartdiary.SmartDiary;
-import smartdiary.Diary.DiaryFileWriter;
+import smartdiary.model.Diary.DiaryFileWriter;
 
 /**
  *
@@ -107,7 +108,7 @@ public class DiaryController implements Initializable {
             diaryFileWriter.writeDiaryMoney(moneyPath, contents_money);
             jFXSnackbar.show("성공적으로 저장되었습니다.", 3000);
         } catch (IOException ex) {
-            jFXSnackbar.show("죄송합니다. 오류가 발생했습니다.", 3000);
+            jFXSnackbar.show("죄송합니다. 오류가 발생했습니다." + ex.toString(), 3000);
         }       
     }
         
@@ -231,15 +232,21 @@ public class DiaryController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         datePicker.setValue(LocalDate.now());
         content.setId("html-editor");
+        readDiary();
+        datePicker.valueProperty().addListener((ObservableValue<? extends LocalDate> observableValue, LocalDate oldDate, LocalDate newDate) -> {
+            readDiary();
+        });
+    }
+
+    private void readDiary() {
         try {
             DiaryReader();
         } catch (IOException ex) {
+            ExAlert alert = new ExAlert(ex, "다이어리 파일을 읽는 중, 오류가 발생했습니다.");
+            alert.showAndWait();
+        } catch(Exception ex) {
+            ExAlert alert = new ExAlert(ex);
+            alert.showAndWait();
         }
-        datePicker.valueProperty().addListener((ObservableValue<? extends LocalDate> observableValue, LocalDate oldDate, LocalDate newDate) -> {
-            try {
-                DiaryReader();
-            } catch (IOException ex) {
-            }
-        });
     }
 }

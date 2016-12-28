@@ -1,4 +1,4 @@
-package smartdiary.Money;
+package smartdiary.model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

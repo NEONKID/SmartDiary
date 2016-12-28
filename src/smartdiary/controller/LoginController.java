@@ -1,6 +1,7 @@
 package smartdiary.controller;
 
-import smartdiary.aesEnDecrypt.AESHelper;
+import smartdiary.model.ExAlert;
+import smartdiary.model.AESHelper;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,15 +17,9 @@ import smartdiary.SmartDiary;
 
 import java.io.*;
 import java.net.URL;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 /**
  * Created by neonkid on 11/16/16.
@@ -70,6 +65,8 @@ public class LoginController implements Initializable {
                         try {
                             setScene();
                         } catch (Exception ex) {
+                            ExAlert alert = new ExAlert(ex);
+                            alert.show();
                             ex.printStackTrace();
                         }
                     });
@@ -138,12 +135,14 @@ public class LoginController implements Initializable {
             fw.write(out);
             fw.close();
         } catch (IOException ex) {
+            ExAlert alert = new ExAlert(ex);
+            alert.show();
             ex.printStackTrace();
         }
     }
 
     private void setScene() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/smartdiary/fxml/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/smartdiary/view/FXMLDocument.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/smartdiary/css/main.css").toExternalForm());
         Stage stage = new Stage();

@@ -1,6 +1,6 @@
-package smartdiary.Diary;
+package smartdiary.model.Diary;
 
-import smartdiary.aesEnDecrypt.AESHelper;
+import smartdiary.model.AESHelper;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

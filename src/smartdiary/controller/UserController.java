@@ -1,6 +1,6 @@
 package smartdiary.controller;
 
-import smartdiary.aesEnDecrypt.AESHelper;
+import smartdiary.model.AESHelper;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXPasswordField;
@@ -20,14 +20,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import javafx.scene.text.Text;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 /**
  * Created by neonkid on 11/28/16.
@@ -51,7 +45,7 @@ public class UserController implements Initializable {
             return null;
         }
     }
-    
+
     @FXML
     public void clickSubmit(ActionEvent event) {
         try {
