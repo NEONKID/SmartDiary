@@ -6,16 +6,20 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXRadioButton;
 import java.io.IOException;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 /**
  *
  * @author wnsud
@@ -33,19 +37,53 @@ public class FXMLDocumentController implements Initializable {
     public static Stage getStage() {
         return stage;
     }
-    
-    
+
     @FXML
-    public void loadUserController() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/view/UserController.fxml"));
+    public void wipeData(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/view/WipeManager.fxml"));
+        DialogPane newWindow = (DialogPane)loader.load();
+        WipeController controller = loader.getController();
+        controller.setMainWindow(this);
+
+        stage = new Stage();
+        stage.setTitle("SmartDiary 초기화");
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        Scene scene = new Scene(newWindow);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void loadUserController(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/view/UserManager.fxml"));
         StackPane newWindow = (StackPane)loader.load();
         UserController controller = loader.getController();
         controller.setMainWindow(this);
         
         stage = new Stage();
         stage.setTitle("비밀번호 변경");
-        stage.initModality(Modality.NONE);
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
         
+        Scene scene = new Scene(newWindow);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void loadLoginHistoryView(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/view/loginHistory.fxml"));
+        VBox newWindow = (VBox)loader.load();
+        HistoryController controller = loader.getController();
+        controller.setMainWindow(this);
+
+        stage = new Stage();
+        stage.setTitle("로그인 기록");
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
+
         Scene scene = new Scene(newWindow);
         stage.setScene(scene);
         stage.show();

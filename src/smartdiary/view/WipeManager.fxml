@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<DialogPane fx:id="wipePane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.WipeController">
+   <buttonTypes>
+      <ButtonType fx:id="cancelButtonType" fx:constant="CANCEL" />
+      <ButtonType fx:id="finishButtonType" fx:constant="FINISH" />
+   </buttonTypes>
+   <content>
+      <VBox alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <Label text="초기화 하시려면 비밀번호를 입력하세요." />
+                  <PasswordField fx:id="passwordField" promptText="비밀번호 입력" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</DialogPane>

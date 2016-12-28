@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.HistoryController">
+   <children>
+      <HBox>
+         <children>
+            <Label alignment="CENTER" text="로그인 기록" />
+         </children>
+      </HBox>
+      <TextArea fx:id="logArea" editable="false" promptText="로그인 기록이 없습니다!" />
+      <HBox alignment="CENTER_RIGHT">
+         <children>
+            <JFXButton onAction="#closeWindow" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="확인" textFill="WHITE" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

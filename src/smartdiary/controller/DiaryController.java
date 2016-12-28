@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXSnackbar;
 import java.io.*;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -30,7 +31,7 @@ import smartdiary.model.Diary.DiaryFileWriter;
  *
  * @author wnsud
  */
-public class DiaryController implements Initializable {   
+public class DiaryController implements Initializable {
     @FXML private ImageView imgweather;
     @FXML private Image img;
     @FXML private JFXDatePicker datePicker;
@@ -69,12 +70,27 @@ public class DiaryController implements Initializable {
     @FXML
     public void saveFile(ActionEvent event) {
         JFXSnackbar jFXSnackbar = new JFXSnackbar(stackPane);
+
+        if(income.getText().equals("")){ income.setText("0"); }
+        if(expense.getText().equals("")){ expense.setText("0"); }
+
+        if(title.getText().equals("")) {
+            jFXSnackbar.show("제목을 입력해주세요.", 3000);
+            return;
+        }
         
         String saveDir = datePicker.getValue().toString().substring(0, 4);
         String saveFile = datePicker.getValue().toString().substring(0, 7);
-
+        String mon_in, mon_ex;
+        try {
+            mon_in = String.valueOf(Integer.parseInt(income.getText().replaceAll("\\p{Z}", "").replaceAll(",","")));
+            mon_ex = String.valueOf(Integer.parseInt(expense.getText().replaceAll("\\p{Z}", "").replaceAll(",","")));
+        } catch (NumberFormatException ex) {
+            jFXSnackbar.show("올바른 금액을 입력하세요.", 3000);
+            return;
+        }
         String[] contents_diary = { datePicker.getValue().toString(), weather, title.getText(), content.getHtmlText() };
-        String[] contents_money = { datePicker.getValue().toString(), income.getText(), expense.getText() };
+        String[] contents_money = { datePicker.getValue().toString(), mon_in, mon_ex };
             
         File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Diary/"+ saveDir);
         File fileofDiary = new File(dirOfDiary.getPath() + "/" + saveFile + ".smd");
@@ -83,11 +99,6 @@ public class DiaryController implements Initializable {
         File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Money/" + saveDir);
         File fileofMoney = new File(dirOfMoney.getPath() + "/" + saveFile + ".smd");
         String moneyPath = fileofMoney.getPath();
-        
-        if(title.getText().equals("")) {
-            jFXSnackbar.show("제목을 입력해주세요.", 3000);
-            return;
-        }
 
         DiaryFileWriter diaryFileWriter = new DiaryFileWriter();
         if(!dirOfDiary.isDirectory()) {
@@ -96,9 +107,6 @@ public class DiaryController implements Initializable {
         if(!dirOfMoney.isDirectory()) {
             dirOfMoney.mkdirs();
         }
-        
-        if(income.getText().equals("")){ income.setText("0"); }
-        if(expense.getText().equals("")){ expense.setText("0"); }
         
         try {
             diaryFileWriter.checkDiary(diaryPath, datePicker.getValue().toString());
@@ -212,12 +220,13 @@ public class DiaryController implements Initializable {
         while(i < moneyLine.size()) {
             String date = datePicker.getValue().toString();
             String cp = null;
+            DecimalFormat df = new DecimalFormat("#,##0");
             if(moneyLine.get(i).length() != 0) {
                 cp = moneyLine.get(i).substring(0, moneyLine.get(i).length());
             }
             if(date.equals(cp)) {
-                income.setText(moneyLine.get(i + 1));
-                expense.setText(moneyLine.get(i + 2));               
+                income.setText(String.valueOf(df.format(Integer.parseInt(moneyLine.get(i + 1)))));
+                expense.setText(String.valueOf(df.format(Integer.parseInt(moneyLine.get(i + 2)))));
                 break;
             }
             else {
@@ -243,10 +252,10 @@ public class DiaryController implements Initializable {
             DiaryReader();
         } catch (IOException ex) {
             ExAlert alert = new ExAlert(ex, "다이어리 파일을 읽는 중, 오류가 발생했습니다.");
-            alert.showAndWait();
+            alert.show();
         } catch(Exception ex) {
             ExAlert alert = new ExAlert(ex);
-            alert.showAndWait();
+            alert.show();
         }
     }
 }

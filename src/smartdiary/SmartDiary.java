@@ -21,7 +21,6 @@ public class SmartDiary extends Application {
     private String username = System.getProperty("user.name");
     private String osname = System.getProperty("os.name");
     private String homedir = System.getProperty("user.home");
-    private Alert alert;
     private static File file;
 
     public static Stage getStage() {
@@ -68,15 +67,18 @@ public class SmartDiary extends Application {
             showError(1);
             return false;
         } else {
-            file = new File(path);
+            File shadow = new File(path + "/shadow");
+            if(!shadow.isFile()) {
+                showError(1);
+                return false;
+            }
             return true;
         }
     }
 
     private void showError(int code) {
+        Alert alert;
         switch(code) {
-            case 0:
-                break;
             case 1:
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("프로그램 알림");

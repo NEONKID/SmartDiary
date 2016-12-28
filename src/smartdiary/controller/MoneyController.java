@@ -1,6 +1,6 @@
 package smartdiary.controller;
 
-import smartdiary.model.ExAlert;
+import javafx.event.ActionEvent;
 import smartdiary.model.Money;
 
 import java.io.File;
@@ -21,7 +21,7 @@ import smartdiary.SmartDiary;
 
 /**
  *
- * @author hmk
+ * @author
  *
  * last modified by neonkid 12/28/16
  */
@@ -36,15 +36,16 @@ public class MoneyController implements Initializable {
     private final ObservableList<Money>data = FXCollections.observableArrayList();
     
     @FXML
-    public void MoneyReader(javafx.event.ActionEvent event) {
+    public void MoneyReader(ActionEvent event) {
         String month = datepicker.getValue().toString();
     
         String baseDir = SmartDiary.getFile().getPath() + "/Contents" + "/Money/" + month.substring(0,4);
-        String save = month.substring(0, 7)+".smd";       //검색결과가 저장된 파일명
+        String save = month.substring(0, 7)+".smd";       // 검색결과가 저장된 파일명
         File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
         
         DiaryFileReader diaryFileReader = new DiaryFileReader();
         ArrayList<String> lineList; // 내용 저장을 위한 ArrayList 정의
+        DecimalFormat df = new DecimalFormat("#,##0");
 
         int plus = 0, minus = 0, i = 0;
 
@@ -54,37 +55,37 @@ public class MoneyController implements Initializable {
         }
         diaryFileReader.readFile(baseDir + "/" + save);
         lineList = diaryFileReader.getList();
-
         data.clear();
 
+        if(!isStringNum(text1.getText().trim().replaceAll(",", ""))) {
+            text1.setText("0");
+        }
         while(i < lineList.size()) {
-            data.add(new Money(lineList.get(i), lineList.get(i + 1), lineList.get(i + 2)));
-            plus = plus + Integer.parseInt(lineList.get(i + 1));
-            minus = minus + Integer.parseInt(lineList.get(i + 2));
-            i = i + 4;
+            data.add(new Money(lineList.get(i), String.valueOf(df.format(Integer.parseInt(lineList.get(i + 1)))),
+                    String.valueOf(df.format(Integer.parseInt(lineList.get(i + 2))))));
+            plus += Integer.parseInt(lineList.get(i + 1));
+            minus += Integer.parseInt(lineList.get(i + 2));
+            i += 4;
         }
         tableView.setItems(data);
+        text2.setText(String.valueOf(df.format(plus)));
+        text3.setText(String.valueOf(df.format(minus)));
 
-        text2.setText(String.valueOf(plus));
-        text3.setText(String.valueOf(minus));
+        int x = Integer.parseInt(text1.getText().trim().replaceAll(",", ""));
+        int y = Integer.parseInt(text2.getText().trim().replaceAll(",", ""));
+        int z = Integer.parseInt(text3.getText().trim().replaceAll(",", ""));
+        double cal = x + y - z;
 
+        text1.setText(String.valueOf(df.format(x)));
+        text4.setText(String.valueOf(df.format(cal)));
+    }
+
+    private boolean isStringNum(String str) {
         try {
-            if(text1.getText().trim().equals("")) {
-                text1.setText("0");
-            }
-            int x = Integer.parseInt(text1.getText().trim().replaceAll(",", ""));
-            int y = Integer.parseInt(text2.getText().trim().replaceAll(",", ""));
-            int z = Integer.parseInt(text3.getText().trim().replaceAll(",", ""));
-
-            double cal = x + y - z;
-            DecimalFormat df = new DecimalFormat("#,##0");
-            text4.setText(String.valueOf(df.format(cal)));
+            Integer.parseInt(str);
+            return true;
         } catch (NumberFormatException ex) {
-            ExAlert alert = new ExAlert(ex, "정확한 숫자를 입력해주세요.");
-            alert.showAndWait();
-        } catch (Exception ex) {
-            ExAlert alert = new ExAlert(ex);
-            alert.showAndWait();
+            return false;
         }
     }
        
