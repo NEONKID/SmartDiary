@@ -50,7 +50,7 @@ public class UserController implements Initializable {
     public void clickSubmit(ActionEvent event) {
         try {
             String old_pw;
-            old_pw = LoginController.readContentFrom(SmartDiary.getFile().getPath() + "/shadow");
+            old_pw = LoginController.readContentFrom(SmartDiary.getFile().getPath() + File.separator + "shadow");
             
             JFXDialogLayout content = new JFXDialogLayout();
             JFXDialog dialog = new JFXDialog(userPane, content, JFXDialog.DialogTransition.CENTER);
@@ -142,7 +142,7 @@ public class UserController implements Initializable {
     }
     
     private void setPassword(String password) throws IOException {
-        File shadow = new File(SmartDiary.getFile().getPath() + "/shadow");
+        File shadow = new File(SmartDiary.getFile().getPath() + File.separator + "shadow");
         
         if(!SmartDiary.getFile().isDirectory()) {
             SmartDiary.getFile().mkdirs();

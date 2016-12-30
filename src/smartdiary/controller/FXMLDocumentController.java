@@ -40,9 +40,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     public void wipeData(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/view/WipeManager.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/view/DataManager.fxml"));
         DialogPane newWindow = (DialogPane)loader.load();
-        WipeController controller = loader.getController();
+        DataController controller = loader.getController();
         controller.setMainWindow(this);
 
         stage = new Stage();

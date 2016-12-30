@@ -20,21 +20,12 @@ import java.util.ResourceBundle;
 /**
  * Created by neonkid on 12/28/16.
  */
-public class WipeController implements Initializable {
+public class DataController implements Initializable {
     @FXML private DialogPane wipePane;
     @FXML private ButtonType cancelButtonType;
     @FXML private ButtonType finishButtonType;
     @FXML private PasswordField passwordField;
     private FXMLDocumentController mainWindow;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        Node cancelButton = wipePane.lookupButton(cancelButtonType);
-        cancelButton.setOnMouseClicked(mouseEvent -> closeWindow());
-
-        Node finishButton = wipePane.lookupButton(finishButtonType);
-        finishButton.setOnMouseClicked(mouseEvent -> passwordCheck());
-    }
 
     public void setMainWindow(FXMLDocumentController mainWindow) { this.mainWindow = mainWindow; }
 
@@ -44,7 +35,6 @@ public class WipeController implements Initializable {
         try {
             String old_pw = LoginController.readContentFrom(SmartDiary.getFile().getPath() + "/shadow");
             AESHelper aesHelper = new AESHelper(UserController.getAESKey());
-
             if(!aesHelper.aesEncode(passwordField.getText()).equals(old_pw)) {
                 showAlert(0);
             } else {
@@ -69,23 +59,23 @@ public class WipeController implements Initializable {
                 alert.setHeaderText("비밀번호가 올바르지 않습니다.");
                 alert.setContentText("정확한 비밀번호를 입력하지 않으면, \n초기화하실 수 없습니다.");
                 alert.show();
-
                 break;
             default:
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("SmartDiary 사용자 데이터 초기화");
                 alert.setHeaderText("정말로 초기화 하시겠습니까?");
                 alert.setContentText("여기서 계속 진행하시면, 취소하실 수 없습니다.");
-
                 Optional<ButtonType>result = alert.showAndWait();
                 if(result.get() == ButtonType.OK) {
                     wipeData(SmartDiary.getFile());
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("초기화 완료");
-                    alert.setHeaderText("모든 데이터가 초기화되었습니다.");
-                    alert.setContentText("프로그램을 종료합니다.");
-                    alert.showAndWait();
-                    System.exit(0);
+                    if(!SmartDiary.getFile().isDirectory()) {
+                        alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("초기화 완료");
+                        alert.setHeaderText("모든 데이터가 초기화되었습니다.");
+                        alert.setContentText("프로그램을 종료합니다.");
+                        alert.showAndWait();
+                        System.exit(0);
+                    }
                 } else {
                     closeWindow();
                 }
@@ -96,6 +86,7 @@ public class WipeController implements Initializable {
     private void wipeData(File userFile) {
         try {
             File[] userallFiles = userFile.listFiles();
+            assert userallFiles != null;
             for (File file : userallFiles) {
                 if(file.isFile()) {
                     file.delete();
@@ -105,9 +96,22 @@ public class WipeController implements Initializable {
                 file.delete();
             }
             userFile.delete();
-        } catch (NullPointerException ex) {
-            ExAlert alert = new ExAlert(ex, "파일이 존재하지 않습니다!");
+        } catch (AssertionError ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("초기화 오류");
+            alert.setHeaderText("Critical Error");
+            alert.setContentText("초기화 하는 중 오류가 발생했습니다. \n" + "개발자에게 문의하세요.");
             alert.show();
+            ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Node cancelButton = wipePane.lookupButton(cancelButtonType);
+        cancelButton.setOnMouseClicked(mouseEvent -> closeWindow());
+
+        Node finishButton = wipePane.lookupButton(finishButtonType);
+        finishButton.setOnMouseClicked(mouseEvent -> passwordCheck());
     }
 }

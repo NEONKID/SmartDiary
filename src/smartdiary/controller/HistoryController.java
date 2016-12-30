@@ -8,6 +8,7 @@ import smartdiary.SmartDiary;
 import smartdiary.model.ExAlert;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.URL;
@@ -19,9 +20,8 @@ import java.util.ResourceBundle;
  */
 public class HistoryController implements Initializable {
     private FXMLDocumentController mainWindow;
-    private final String path = SmartDiary.getFile().getPath() + "/login.log";
+    private final String path = SmartDiary.getFile().getPath() + File.separator + "login.log";
     private final ArrayList<String>arrayList = new ArrayList<>();
-
     @FXML private TextArea logArea;
 
     public void setMainWindow(FXMLDocumentController mainWindow) { this.mainWindow = mainWindow; }

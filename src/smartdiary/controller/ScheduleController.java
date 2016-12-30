@@ -44,8 +44,9 @@ public class ScheduleController implements Initializable {
     @FXML private CalendarTextField lCalendarTextField;
     @FXML private JFXTextField filterbox;
     @FXML private HBox bgimage;
+    @FXML private JFXButton saveButton;
     private final ObservableList<Schedule>data = FXCollections.observableArrayList();
-    private final File dirPath = new File(SmartDiary.getFile().getPath() + "/Schedules");
+    private final File dirPath = new File(SmartDiary.getFile().getPath() + File.separator + "Schedules");
     private File file;
     
     @FXML
@@ -61,7 +62,6 @@ public class ScheduleController implements Initializable {
         } else {
             Schedule currentSchedule = new Schedule(lCalendarTextField.getText(), newmemo.getText());
             data.add(currentSchedule);
-
             lCalendarTextField.setText("");
             newmemo.clear();
         }
@@ -76,13 +76,18 @@ public class ScheduleController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {     
         bgimage.setId("bgimage");
-        file = new File(dirPath.getPath() +  "/schedules_all.smd");       
+        file = new File(dirPath.getPath() + File.separator + "schedules_all.smd");
         readFile(file);
         
         filterbox.textProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 filterScheduleList((String)oldValue, (String)newValue);
+                if(!filterbox.getText().isEmpty()) {
+                    saveButton.setDisable(true);
+                } else {
+                    saveButton.setDisable(false);
+                }
             }
         });
         

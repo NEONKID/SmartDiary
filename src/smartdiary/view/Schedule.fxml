@@ -80,7 +80,7 @@
                               <Insets right="200.0" />
                            </padding>
                         </JFXTextField>
-                        <JFXButton alignment="CENTER" buttonType="RAISED" onAction="#handleSave" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="저장" textFill="WHITE" />
+                        <JFXButton fx:id="saveButton" alignment="CENTER" buttonType="RAISED" onAction="#handleSave" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="저장" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>

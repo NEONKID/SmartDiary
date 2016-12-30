@@ -11,6 +11,8 @@ import smartdiary.model.ExAlert;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileLock;
 
 /**
  *
@@ -41,17 +43,21 @@ public class SmartDiary extends Application {
         System.out.println("Directory: " + homedir);
         flag = checkOS(osname);
 
-        if(flag) {
-            stage = LoginStage;
-            stage.getIcons().add(new Image(getClass().getResourceAsStream("images/pIcon.png")));
-            stage.setTitle("Welcome to SmartDiary !");
-            stage.setScene(new Scene(loginView));
-            stage.sizeToScene();
-            stage.setResizable(false);
-            stage.show();
-            
-        } else {
-            registerUser();
+        try {
+            FileLock lock = new RandomAccessFile(new File("smartDiary.lock"), "rw").getChannel().lock();
+            if(flag) {
+                stage = LoginStage;
+                stage.getIcons().add(new Image(getClass().getResourceAsStream("images/pIcon.png")));
+                stage.setTitle("Welcome to SmartDiary !");
+                stage.setScene(new Scene(loginView));
+                stage.sizeToScene();
+                stage.setResizable(false);
+                stage.show();
+            } else {
+                registerUser();
+            }
+        } catch (Throwable th) {
+            System.exit(-1);
         }
     }
 
@@ -61,13 +67,13 @@ public class SmartDiary extends Application {
 
     private boolean checkOS(String name) {
         String path = "";
-        path = homedir + "/.smartdiary";
+        path = homedir + File.separator + ".smartdiary";
         file = new File(path);
         if(!file.isDirectory()) {
             showError(1);
             return false;
         } else {
-            File shadow = new File(path + "/shadow");
+            File shadow = new File(path + File.separator + "shadow");
             if(!shadow.isFile()) {
                 showError(1);
                 return false;

@@ -92,12 +92,14 @@ public class DiaryController implements Initializable {
         String[] contents_diary = { datePicker.getValue().toString(), weather, title.getText(), content.getHtmlText() };
         String[] contents_money = { datePicker.getValue().toString(), mon_in, mon_ex };
             
-        File dirOfDiary = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Diary/"+ saveDir);
-        File fileofDiary = new File(dirOfDiary.getPath() + "/" + saveFile + ".smd");
+        File dirOfDiary = new File(SmartDiary.getFile().getPath() + File.separator + "Contents" +
+                File.separator + "Diary"+ File.separator + saveDir);
+        File fileofDiary = new File(dirOfDiary.getPath() + File.separator + saveFile + ".smd");
         String diaryPath = fileofDiary.getPath();
             
-        File dirOfMoney = new File(SmartDiary.getFile().getPath() + "/Contents/" + "/Money/" + saveDir);
-        File fileofMoney = new File(dirOfMoney.getPath() + "/" + saveFile + ".smd");
+        File dirOfMoney = new File(SmartDiary.getFile().getPath() + File.separator + "Contents" +
+                File.separator + "Money" + File.separator + saveDir);
+        File fileofMoney = new File(dirOfMoney.getPath() + File.separator + saveFile + ".smd");
         String moneyPath = fileofMoney.getPath();
 
         DiaryFileWriter diaryFileWriter = new DiaryFileWriter();
@@ -153,8 +155,10 @@ public class DiaryController implements Initializable {
     }
 
     private void DiaryReader() throws IOException {
-        String baseDir = SmartDiary.getFile().getPath() + "/Contents" + "/Diary/" + datePicker.getValue().toString().substring(0, 4);
-        String moneyDir = SmartDiary.getFile().getPath() + "/Contents" + "/Money/" + datePicker.getValue().toString().substring(0, 4);
+        String baseDir = SmartDiary.getFile().getPath() + File.separator + "Contents" + File.separator + "Diary" +
+                File.separator + datePicker.getValue().toString().substring(0, 4);
+        String moneyDir = SmartDiary.getFile().getPath() + File.separator + "Contents" + File.separator + "Money" +
+                File.separator + datePicker.getValue().toString().substring(0, 4);
         String save = datePicker.getValue().toString().substring(0, 7)+".smd";       //검색결과가 저장된 파일명
         String Line = "------------------------------------------------------------";
         File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
