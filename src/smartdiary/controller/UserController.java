@@ -58,7 +58,7 @@ public class UserController implements Initializable {
 
             AESHelper aesHelper = new AESHelper(getAESKey());
 
-            button.setId("right-button");
+            button.setId("left-button");
 
             if(!aesHelper.getSha512(old_field.getText()).equals(old_pw)) {
                 content.setHeading(new Text("변경 실패"));

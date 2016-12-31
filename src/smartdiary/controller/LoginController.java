@@ -67,15 +67,19 @@ public class LoginController implements Initializable {
                         } catch (Exception ex) {
                             ExAlert alert = new ExAlert(ex);
                             alert.show();
-                            ex.printStackTrace();
                         }
                     });
                     content.setActions(button);
                     dialog.show();
                 }
             }
+        } catch (FileNotFoundException ex) {
+            ExAlert alert = new ExAlert(ex, "shadow 파일을 찾을 수 없습니다!");
+            alert.show();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ExAlert alert = new ExAlert(ex);
+            alert.showAndWait();
+            System.exit(-1);
         }
     }
 

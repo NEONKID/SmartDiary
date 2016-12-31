@@ -22,7 +22,7 @@
                        <MenuItem mnemonicParsing="false" onAction="#loadUserController" text="비밀번호 변경" />
                   <MenuItem mnemonicParsing="false" onAction="#loadLoginHistoryView" text="로그인 기록 보기" />
                   <MenuItem mnemonicParsing="false" onAction="#wipeData" text="SmartDiary 초기화" />
-                       <MenuItem mnemonicParsing="false" text="About" />
+                       <MenuItem mnemonicParsing="false" onAction="#loadAboutProgram" text="About" />
                    </items>
                </Menu>
            </menus>

@@ -71,8 +71,8 @@ public class DiaryController implements Initializable {
     public void saveFile() {
         JFXSnackbar jFXSnackbar = new JFXSnackbar(stackPane);
 
-        if(income.getText().isEmpty()){ income.setText("0"); }
-        if(expense.getText().isEmpty()){ expense.setText("0"); }
+        if(income.getText().isEmpty()) { income.setText("0"); }
+        if(expense.getText().isEmpty()) { expense.setText("0"); }
 
         if(title.getText().isEmpty()) {
             jFXSnackbar.show("제목을 입력하세요.", 3000);
@@ -127,8 +127,8 @@ public class DiaryController implements Initializable {
         //  clear the textarea after checked by user
         JFXDialogLayout base = new JFXDialogLayout();
         JFXDialog checkClear = new JFXDialog(stackPane, base, JFXDialog.DialogTransition.CENTER);
-        JFXButton clearAgree = new JFXButton("Yes");
-        JFXButton clearCancel = new JFXButton("No");
+        JFXButton clearAgree = new JFXButton("예");
+        JFXButton clearCancel = new JFXButton("아니요");
 
         String saveDir = datePicker.getValue().toString().substring(0, 4);
         String saveFile = datePicker.getValue().toString().substring(0, 7);
@@ -145,7 +145,7 @@ public class DiaryController implements Initializable {
         clearAgree.setId("left-button");
         clearCancel.setId("right-button");
         
-        base.setHeading(new Text(null));
+        base.setHeading(new Text("Diary 삭제"));
         base.setBody(new Text("해당 날짜의 일기를 삭제합니다. 계속 하시겠습니까?"));
         
         clearAgree.setOnAction((ActionEvent e) -> {
@@ -193,7 +193,7 @@ public class DiaryController implements Initializable {
             return;
         }
         
-        diaryFileReader.readFile(baseDir + "/" + save);
+        diaryFileReader.readFile(baseDir + File.separator + save);
         diaryLine = diaryFileReader.getList();
         
         // 라인단위 출력(for loop)
@@ -235,7 +235,7 @@ public class DiaryController implements Initializable {
             }
         }
         
-        moneyFileReader.readFile(moneyDir + "/" + save);
+        moneyFileReader.readFile(moneyDir + File.separator + save);
         moneyLine = moneyFileReader.getList();
         i = 0;
         while(i < moneyLine.size()) {

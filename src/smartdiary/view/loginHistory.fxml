@@ -5,23 +5,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.HistoryController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.HistoryController">
    <children>
-      <HBox>
+      <VBox>
          <children>
-            <Label alignment="CENTER" text="로그인 기록" />
+            <Label maxWidth="1.7976931348623157E308" prefHeight="70.0" style="-fx-background-color: #664740;" text="로그인 기록" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #b4cde5 #b4cde5;">
+               <children>
+                  <TextArea fx:id="logArea" editable="false" promptText="로그인 기록이 없습니다!" style="-fx-background-color: transparent;" />
+                  <HBox alignment="CENTER_RIGHT">
+                     <children>
+                        <JFXButton onAction="#closeWindow" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="확인" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+               </padding>
+            </VBox>
          </children>
-      </HBox>
-      <TextArea fx:id="logArea" editable="false" promptText="로그인 기록이 없습니다!" />
-      <HBox alignment="CENTER_RIGHT">
-         <children>
-            <JFXButton onAction="#closeWindow" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="확인" textFill="WHITE" />
-         </children>
-      </HBox>
+      </VBox>
    </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox>
+</StackPane>

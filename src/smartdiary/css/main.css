@@ -42,6 +42,13 @@
     -fx-text-fill: #FFFFFF;
     -fx-ripppler-fill: #FFFFFF;
 }
+
+#wipe-button {
+    -fx-background-color: #F44336;
+    -fx-text-fill: #FFFFFF;
+    -fx-ripppler-fill: #FFFFFF;
+}
+
 #clearDialog {
     -fx-spacing: 10;
 }

@@ -3,31 +3,51 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<StackPane fx:id="userPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.UserController">
+<StackPane fx:id="userPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="450.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.UserController">
    <children>
       <VBox alignment="CENTER" style="-fx-background-color:#b4cde5">
          <children>
-            <HBox alignment="CENTER">
+            <Label maxWidth="1.7976931348623157E308" prefHeight="70.0" style="-fx-background-color: #664740;" text="비밀번호 변경" textFill="WHITE">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </Label>
+            <HBox alignment="CENTER" spacing="20.0">
                <children>
+                  <ImageView fitHeight="150.0" fitWidth="256.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/passwd_change.png" />
+                     </image>
+                  </ImageView>
                   <VBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <JFXPasswordField fx:id="old_field" promptText="기존 비밀번호" />
-                        <JFXPasswordField fx:id="new_field" promptText="새로운 비밀번호" />
-                        <JFXPasswordField fx:id="check_field" promptText="비밀번호 확인" />
+                        <JFXPasswordField fx:id="old_field" promptText="기존 비밀번호" style="-fx-prompt-text-fill: rgba(0,0,0,0.61);" />
+                        <JFXPasswordField fx:id="new_field" promptText="새로운 비밀번호" style="-fx-prompt-text-fill: rgba(0,0,0,0.61);" />
+                        <JFXPasswordField fx:id="check_field" promptText="비밀번호 확인" style="-fx-prompt-text-fill: rgba(0,0,0,0.61);" />
                         <HBox alignment="CENTER_RIGHT" spacing="20.0">
                            <children>
-                              <JFXButton buttonType="RAISED" onAction="#changeCancel" ripplerFill="WHITE" style="-fx-background-color: #4059a9;" text="취소" textFill="WHITE" />
-                              <JFXButton buttonType="RAISED" onAction="#clickSubmit" ripplerFill="WHITE" style="-fx-background-color: #4059a9;" text="변경" textFill="WHITE" />
+                              <JFXButton buttonType="RAISED" onAction="#changeCancel" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="취소" textFill="WHITE" />
+                              <JFXButton buttonType="RAISED" onAction="#clickSubmit" ripplerFill="WHITE" style="-fx-background-color: #326195;" text="변경" textFill="WHITE" />
                            </children>
                         </HBox>
                      </children>
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
                   </VBox>
                </children>
             </HBox>

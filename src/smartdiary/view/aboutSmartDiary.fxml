@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.AboutController">
+   <children>
+      <VBox alignment="CENTER_LEFT">
+         <children>
+            <Label maxWidth="1.7976931348623157E308" prefHeight="80.0" style="-fx-background-color: linear-gradient(to bottom right, white 0%, cornflowerblue 100% );" text="About SmartDiary">
+               <font>
+                  <Font size="22.0" />
+               </font>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" spacing="30.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label text="SmartDiary v1.2">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="이 프로그램은 2016년 12월 31일, IntelliJ IDEA로 빌드되었습니다." />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Label text="Execution Environment">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="jreLabel" text="JRE: ">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="jdkLabel" text="JVM:" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label text="Developed by.">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Neon K.I.D, ImBlock, hmkwak9483" />
+                        <Label text="Powered by Apache License v2.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox alignment="TOP_RIGHT">
+                     <children>
+                        <Label text="ⓒ 2016 SmartDiary, Supported by Neon K.I.D" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" />
+               </padding>
+            </VBox>
+         </children>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</StackPane>

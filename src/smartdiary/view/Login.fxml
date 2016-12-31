@@ -19,7 +19,7 @@
 
 <StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="700.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smartdiary.controller.LoginController">
    <children>
-      <VBox alignment="CENTER" spacing="30.0" style="-fx-background-color: #ffffff;">
+      <VBox alignment="CENTER" spacing="30.0" style="-fx-background-color: transparent;">
          <children>
             <Label maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="0.0" style="-fx-background-color: #4059a9;" text="Welcome to SmartDiary !" textFill="WHITE">
                <font>
@@ -29,9 +29,9 @@
                   <Insets left="15.0" />
                </padding>
             </Label>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" style="-fx-background-color: transparent;">
                <children>
-                  <ImageView fitHeight="77.0" fitWidth="229.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="77.0" fitWidth="210.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                      <cursor>
                         <Cursor fx:constant="WAIT" />
                      </cursor>
@@ -64,7 +64,7 @@
                         <ColumnConstraints />
                      </columnConstraints>
                      <padding>
-                        <Insets bottom="10" left="25" right="25" top="25" />
+                        <Insets bottom="10.0" left="25.0" right="25.0" top="25.0" />
                      </padding>
                      <rowConstraints>
                         <RowConstraints />
@@ -82,9 +82,9 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT" style="-fx-background-color: transparent;">
                <children>
-                  <Label text="ⓒ 2016 Smart Diary v1.0 ">
+                  <Label text="ⓒ 2016 Smart Diary v1.2 ">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin></Label>

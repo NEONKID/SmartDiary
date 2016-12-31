@@ -42,17 +42,17 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXTextField fx:id="userid" editable="false" promptText="사용자 이름" GridPane.rowIndex="1">
+                  <JFXTextField fx:id="userid" editable="false" promptText="사용자 이름" GridPane.rowIndex="1" style="-fx-prompt-text-fill: rgba(0,0,0,0.61);">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXTextField>
-                  <JFXPasswordField fx:id="field1" promptText="비밀번호 " GridPane.rowIndex="2">
+                  <JFXPasswordField fx:id="field1" promptText="비밀번호 " GridPane.rowIndex="2" style="-fx-prompt-text-fill: rgba(0,0,0,0.61);">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXPasswordField>
-                  <JFXPasswordField fx:id="field2" promptText="비밀번호 확인" GridPane.rowIndex="3">
+                  <JFXPasswordField fx:id="field2" promptText="비밀번호 확인" GridPane.rowIndex="3" style="-fx-prompt-text-fill: rgba(0,0,0,0.61);">
                      <font>
                         <Font size="15.0" />
                      </font>

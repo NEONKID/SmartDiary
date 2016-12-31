@@ -7,18 +7,19 @@ import com.jfoenix.controls.JFXRadioButton;
 import java.io.IOException;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -41,7 +42,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     public void wipeData(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/view/DataManager.fxml"));
-        DialogPane newWindow = (DialogPane)loader.load();
+        StackPane newWindow = (StackPane)loader.load();
         DataController controller = loader.getController();
         controller.setMainWindow(this);
 
@@ -51,6 +52,7 @@ public class FXMLDocumentController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         Scene scene = new Scene(newWindow);
+        scene.getStylesheets().add(getClass().getResource("/smartdiary/css/main.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
@@ -68,6 +70,7 @@ public class FXMLDocumentController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         
         Scene scene = new Scene(newWindow);
+        scene.getStylesheets().add(getClass().getResource("/smartdiary/css/main.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
@@ -75,7 +78,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     public void loadLoginHistoryView(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/view/loginHistory.fxml"));
-        VBox newWindow = (VBox)loader.load();
+        StackPane newWindow = (StackPane) loader.load();
         HistoryController controller = loader.getController();
         controller.setMainWindow(this);
 
@@ -85,6 +88,24 @@ public class FXMLDocumentController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
 
         Scene scene = new Scene(newWindow);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public void loadAboutProgram(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/smartdiary/view/aboutSmartDiary.fxml"));
+        StackPane newWindow = (StackPane) loader.load();
+        AboutController controller = loader.getController();
+        controller.setMainWindow(this);
+
+        stage = new Stage();
+        stage.resizableProperty().setValue(Boolean.FALSE);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        Scene scene = new Scene(newWindow);
+        scene.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> stage.close());
         stage.setScene(scene);
         stage.show();
     }
