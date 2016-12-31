@@ -39,7 +39,7 @@ public class MoneyController implements Initializable {
     public void MoneyReader(ActionEvent event) {
         String month = datepicker.getValue().toString();
     
-        String baseDir = SmartDiary.getFile().getPath() + "/Contents" + "/Money/" + month.substring(0,4);
+        String baseDir = SmartDiary.getFile().getPath() + File.separator + "Contents" + File.separator + "Money" + File.separator + month.substring(0,4);
         String save = month.substring(0, 7)+".smd";       // 검색결과가 저장된 파일명
         File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
         
@@ -53,7 +53,7 @@ public class MoneyController implements Initializable {
             System.out.println(baseDir + " is not directory or exist ");
             dir.mkdirs();
         }
-        diaryFileReader.readFile(baseDir + "/" + save);
+        diaryFileReader.readFile(baseDir + File.separator + save);
         lineList = diaryFileReader.getList();
         data.clear();
 

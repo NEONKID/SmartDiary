@@ -33,9 +33,9 @@ public class DataController implements Initializable {
 
     private void passwordCheck() {
         try {
-            String old_pw = LoginController.readContentFrom(SmartDiary.getFile().getPath() + "/shadow");
+            String old_pw = LoginController.readContentFrom(SmartDiary.getFile().getPath() + File.separator + "shadow");
             AESHelper aesHelper = new AESHelper(UserController.getAESKey());
-            if(!aesHelper.aesEncode(passwordField.getText()).equals(old_pw)) {
+            if(!aesHelper.getSha512(passwordField.getText()).equals(old_pw)) {
                 showAlert(0);
             } else {
                 showAlert(1);

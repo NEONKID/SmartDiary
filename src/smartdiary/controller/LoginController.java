@@ -36,7 +36,7 @@ public class LoginController implements Initializable {
     protected void ClickAction(ActionEvent event) {
         String path;
         String flag_pw = "";
-        path = SmartDiary.getFile().getPath() + "/shadow";
+        path = SmartDiary.getFile().getPath() + File.separator + "shadow";
 
         try {
             AESHelper aesHelper = new AESHelper(UserController.getAESKey());
@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
             if(!flag_id.equals(usernameField.getText())) {
                 showError(0);
             } else {
-                if(!flag_pw.equals(aesHelper.aesEncode(passwordField.getText()))) {
+                if(!flag_pw.equals(aesHelper.getSha512(passwordField.getText()))) {
                     showError(1);
                     passwordField.clear();
                 } else {
@@ -112,7 +112,7 @@ public class LoginController implements Initializable {
     }
 
     private void writeLog(int code) {
-        File logfile = new File(SmartDiary.getFile().getPath() + "/login.log");
+        File logfile = new File(SmartDiary.getFile().getPath() + File.separator + "login.log");
         Date date = new Date();
         String out = "";
         

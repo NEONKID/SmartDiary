@@ -68,14 +68,14 @@ public class DiaryController implements Initializable {
     }
 
     @FXML
-    public void saveFile(ActionEvent event) {
+    public void saveFile() {
         JFXSnackbar jFXSnackbar = new JFXSnackbar(stackPane);
 
-        if(income.getText().equals("")){ income.setText("0"); }
-        if(expense.getText().equals("")){ expense.setText("0"); }
+        if(income.getText().isEmpty()){ income.setText("0"); }
+        if(expense.getText().isEmpty()){ expense.setText("0"); }
 
-        if(title.getText().equals("")) {
-            jFXSnackbar.show("제목을 입력해주세요.", 3000);
+        if(title.getText().isEmpty()) {
+            jFXSnackbar.show("제목을 입력하세요.", 3000);
             return;
         }
         
@@ -91,12 +91,12 @@ public class DiaryController implements Initializable {
         }
         String[] contents_diary = { datePicker.getValue().toString(), weather, title.getText(), content.getHtmlText() };
         String[] contents_money = { datePicker.getValue().toString(), mon_in, mon_ex };
-            
+
         File dirOfDiary = new File(SmartDiary.getFile().getPath() + File.separator + "Contents" +
                 File.separator + "Diary"+ File.separator + saveDir);
         File fileofDiary = new File(dirOfDiary.getPath() + File.separator + saveFile + ".smd");
         String diaryPath = fileofDiary.getPath();
-            
+
         File dirOfMoney = new File(SmartDiary.getFile().getPath() + File.separator + "Contents" +
                 File.separator + "Money" + File.separator + saveDir);
         File fileofMoney = new File(dirOfMoney.getPath() + File.separator + saveFile + ".smd");
@@ -113,7 +113,7 @@ public class DiaryController implements Initializable {
         try {
             diaryFileWriter.checkDiary(diaryPath, datePicker.getValue().toString());
             diaryFileWriter.writeDiaryMoney(diaryPath, contents_diary);
-        
+
             diaryFileWriter.checkMoney(moneyPath, datePicker.getValue().toString());
             diaryFileWriter.writeDiaryMoney(moneyPath, contents_money);
             jFXSnackbar.show("성공적으로 저장되었습니다.", 3000);
@@ -130,21 +130,38 @@ public class DiaryController implements Initializable {
         JFXButton clearAgree = new JFXButton("Yes");
         JFXButton clearCancel = new JFXButton("No");
 
+        String saveDir = datePicker.getValue().toString().substring(0, 4);
+        String saveFile = datePicker.getValue().toString().substring(0, 7);
+        File dirOfDiary = new File(SmartDiary.getFile().getPath() + File.separator + "Contents" +
+                File.separator + "Diary"+ File.separator + saveDir);
+        File fileofDiary = new File(dirOfDiary.getPath() + File.separator + saveFile + ".smd");
+        String diaryPath = fileofDiary.getPath();
+
+        File dirOfMoney = new File(SmartDiary.getFile().getPath() + File.separator + "Contents" +
+                File.separator + "Money" + File.separator + saveDir);
+        File fileofMoney = new File(dirOfMoney.getPath() + File.separator + saveFile + ".smd");
+        String moneyPath = fileofMoney.getPath();
+
         clearAgree.setId("left-button");
         clearCancel.setId("right-button");
         
         base.setHeading(new Text(null));
-        base.setBody(new Text("저장되지 않은 내용이 지워집니다. 지우겠습니까?"));
+        base.setBody(new Text("해당 날짜의 일기를 삭제합니다. 계속 하시겠습니까?"));
         
         clearAgree.setOnAction((ActionEvent e) -> {
             checkClear.close();
             try {
-                 // Clear the Diary
+                DiaryFileWriter fileWriter = new DiaryFileWriter();
                 title.clear();
                 content.setHtmlText("");
                 income.clear();
                 expense.clear();
+
+                fileWriter.checkDiary(diaryPath, datePicker.getValue().toString());
+                fileWriter.checkMoney(moneyPath, datePicker.getValue().toString());
             } catch (Exception ex) {
+                ExAlert alert = new ExAlert(ex);
+                alert.show();
             }
         });
         clearCancel.setOnAction((ActionEvent e) -> {

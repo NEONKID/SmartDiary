@@ -60,7 +60,7 @@ public class UserController implements Initializable {
 
             button.setId("right-button");
 
-            if(!aesHelper.aesEncode(old_field.getText()).equals(old_pw)) {
+            if(!aesHelper.getSha512(old_field.getText()).equals(old_pw)) {
                 content.setHeading(new Text("변경 실패"));
                 content.setBody(new Text("기존 패스워드가 올바르지 않습니다. \n다시 입력해주세요."));
                 button.setOnAction((ActionEvent e) -> {
@@ -150,7 +150,7 @@ public class UserController implements Initializable {
 
         try (BufferedWriter out = new BufferedWriter(new FileWriter(shadow))) {
             AESHelper aesHelper = new AESHelper(getAESKey());
-            out.write(aesHelper.aesEncode(password));
+            out.write(aesHelper.getSha512(password));
             out.close();
         } catch (Exception ex) {
             ex.printStackTrace();
