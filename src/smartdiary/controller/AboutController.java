@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  * Created by neonkid on 12/31/16.
  */
 public class AboutController implements Initializable {
-    @FXML private Label jreLabel, jdkLabel;
+    @FXML private Label jreLabel;
     private FXMLDocumentController mainWindow;
 
     public void setMainWindow(FXMLDocumentController mainWindow) { this.mainWindow = mainWindow; }
@@ -19,6 +19,5 @@ public class AboutController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         jreLabel.setText("JRE: " + System.getProperty("java.runtime.version"));
-        jdkLabel.setText(null);
     }
 }
