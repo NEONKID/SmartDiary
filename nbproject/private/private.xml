@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/controller/UserController.java</file>
             <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/controller/LoginController.java</file>
-            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/fxml/registerUser.fxml</file>
+            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/controller/DataController.java</file>
             <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/SmartDiary.java</file>
-            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/controller/DiaryController.java</file>
-            <file>file:/D:/Users/ubase/Documents/smartdiary/src/smartdiary/fxml/Login.fxml</file>
         </group>
     </open-files>
 </project-private>

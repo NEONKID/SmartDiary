@@ -4,15 +4,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import smartdiary.SmartDiary;
@@ -21,9 +16,7 @@ import smartdiary.model.ExAlert;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -91,6 +84,7 @@ public class DataController implements Initializable {
                     passwordField.clear();
                 });
                 wipeAgree.setOnAction((ActionEvent event) -> {
+                    checkWipe.close();
                     wipeData(SmartDiary.getFile());
                     if(!SmartDiary.getFile().isDirectory()) {
                         JFXDialogLayout findialog = new JFXDialogLayout();
@@ -102,6 +96,16 @@ public class DataController implements Initializable {
                         findialog.setBody(new Text("모든 데이터가 초기화되었습니다. \n프로그램을 종료합니다."));
                         findialog.setActions(exitButton);
                         finWipe.show();
+                    } else {
+                        JFXDialogLayout failDialog = new JFXDialogLayout();
+                        JFXDialog failWipe = new JFXDialog(dataPane, failDialog, JFXDialog.DialogTransition.CENTER);
+                        JFXButton exitButton = new JFXButton("확인");
+                        exitButton.setId("blue-button");
+                        exitButton.setOnAction((ActionEvent e) -> System.exit(0));
+                        failDialog.setHeading(new Text("초기화 실패"));
+                        failDialog.setBody(new Text("데이터 초기화 작업에 일부 오류가 있었습니다. \n몇몇 파일이 삭제되지 않았을 수 있습니다."));
+                        failDialog.setActions(exitButton);
+                        failWipe.show();
                     }
                 });
                 dialog.setActions(wipeAgree, wipeCancel);
@@ -116,7 +120,12 @@ public class DataController implements Initializable {
             assert userallFiles != null;
             for (File file : userallFiles) {
                 if(file.isFile()) {
-                    file.delete();
+                    if(file.delete()) {
+                        System.out.println("Success !");
+                    } else {
+                        System.err.println("Fail !");
+                        return;
+                    }
                 } else {
                     wipeData(file);
                 }
@@ -130,6 +139,9 @@ public class DataController implements Initializable {
             alert.setContentText("초기화 하는 중 오류가 발생했습니다. \n" + "개발자에게 문의하세요.");
             alert.show();
             ex.printStackTrace();
+        } catch (Exception ex) {
+            ExAlert alert = new ExAlert(ex);
+            alert.show();
         }
     }
 

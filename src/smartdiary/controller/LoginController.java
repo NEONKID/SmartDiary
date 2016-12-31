@@ -167,6 +167,7 @@ public class LoginController implements Initializable {
         while((shadow = bufferedReader.readLine()) != null) {
             builder.append(shadow);
         }
+        bufferedReader.close();
         return builder.toString();
     }
     
