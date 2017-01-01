@@ -35,15 +35,11 @@ public class UserController implements Initializable {
     @FXML private JFXPasswordField check_field;
     @FXML private StackPane userPane;
     private FXMLDocumentController mainWindow;
-    private static final String AESKey = "SDiary of" + System.getProperty("user.name") + " user";
 
     public static String getAESKey() {
-        try {
-            AESHelper aesHelper = new AESHelper(AESKey);
-            return aesHelper.getSha512(AESKey);
-        } catch (UnsupportedEncodingException ex) {
-            return null;
-        }
+        String AESKey = "SDiary of" + System.getProperty("user.name");
+        AESHelper aesHelper = new AESHelper();
+        return aesHelper.getSha512(AESKey);
     }
 
     @FXML

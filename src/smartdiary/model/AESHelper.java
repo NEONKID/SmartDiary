@@ -18,7 +18,12 @@ import java.security.*;
 public class AESHelper {
     private final String iv;
     private final Key keySpec;
-
+    
+    public AESHelper() {
+        this.iv = null;
+        this.keySpec = null;
+    }
+    
     public AESHelper(String key) throws UnsupportedEncodingException {
         this.iv = key.substring(0, 16);
 
