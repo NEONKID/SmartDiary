@@ -176,7 +176,7 @@ public class DiaryController implements Initializable {
                 File.separator + datePicker.getValue().toString().substring(0, 4);
         String moneyDir = SmartDiary.getFile().getPath() + File.separator + "Contents" + File.separator + "Money" +
                 File.separator + datePicker.getValue().toString().substring(0, 4);
-        String save = datePicker.getValue().toString().substring(0, 7)+".smd";       //검색결과가 저장된 파일명
+        String save = datePicker.getValue().toString().substring(0, 7)+".smd";       // 검색결과가 저장된 파일명
         String Line = "------------------------------------------------------------";
         File dir = new File(baseDir);   // 읽어들일 디렉토리의 객체
         DiaryFileReader diaryFileReader = new DiaryFileReader();

@@ -54,7 +54,6 @@ public class DataController implements Initializable {
 
     private void showAlert(int flag) {
         JFXDialogLayout dialog = new JFXDialogLayout();
-        final Alert alert;
         switch(flag) {
             case 0:
                 JFXDialog wrongPwd = new JFXDialog(dataPane, dialog, JFXDialog.DialogTransition.CENTER);
