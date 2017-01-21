@@ -44,7 +44,7 @@ public class SmartDiary extends Application {
         flag = checkOS(osname);
 
         try {
-            FileLock lock = new RandomAccessFile(new File("smartDiary.lock"), "rw").getChannel().lock();
+            FileLock lock = new RandomAccessFile(new File(".smartDiary.lock"), "rw").getChannel().lock();
             if(flag) {
                 stage = LoginStage;
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("images/pIcon.png")));
