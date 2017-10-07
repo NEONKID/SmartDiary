@@ -1,0 +1,9 @@
+environment:
+  matrix:
+    - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
+
+install:
+  - cinst ant
+
+build_script:
+  - ant test
